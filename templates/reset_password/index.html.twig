@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier votre mot de passe - Snowtrick{% endblock %}
+
+{% block content %}
+
+    <form method="post">
+
+        <section class="d-flex  justify-content-center p-5 container-fluid" id="picture">
+            <div class=" p-2 p-lg-5">
+
+
+                <h1 class="text-white text-center m-2 h3 mb-3 fw-bold ">Modifier votre mot de passe</h1>
+
+                <label for="inputUsername" class="form-label fw-bold text-dark">Votre pseudo</label>
+                <input name="_username" type="text" class="form-control mb-2 " id="inputUsername">
+
+                <label for="inputPassword" class="fw-bold ">Votre mot de passe </label>
+                <input type="password" name="password" id="inputPassword" class="form-control"
+                       placeholder="Merci de saisir votre mot de passe"
+                       autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <div class="form-groupe m-2 px-5 ">
+
+                    <button class="button bg-danger text-white  m-3 w-100 rounded-1 border border-danger form-control form-control-lg"
+                            type="submit">Se connecter
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+        {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+        #}
+    </form>
+{% endblock %}

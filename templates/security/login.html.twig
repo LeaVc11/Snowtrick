@@ -7,35 +7,32 @@
     <form method="post">
 
         <section class="d-flex  justify-content-center p-5 container-fluid" id="picture">
+            <div class=" p-2 p-lg-5">
 
-            <div class="m-5 rounded-3 bg-secondary ">
-                <div class="login p-5">
-                    <h1 class="text-white text-center m-2 h3 mb-3 font-weight-normal">Connexion</h1>
-                    <label for="inputEmail" class="fw-bold mb-1">Votre email</label>
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
-                           class="form-control mb-2"
-                           placeholder="Merci de saisir votre email"
-                           autocomplete="email" required autofocus>
-                    <label for="inputPassword" class="fw-bold ">Votre mot de passe </label>
-                    <input type="password" name="password" id="inputPassword" class="form-control"
-                           placeholder="Merci de saisir votre mot de passe"
-                           autocomplete="current-password" required>
 
-                    <input type="hidden" name="_csrf_token"
-                           value="{{ csrf_token('authenticate') }}"
-                    >
-                    <hr>
+                        <h1 class="text-white text-center m-2 h3 mb-3 font-weight-normal">Connexion</h1>
 
-                    <div class="form-groupe m-2 px-5 ">
-                        <a href="" class="text-decoration-none m-3 text-white fw-bold ">Mot de passe oublié </a>
-                        <button class="button bg-danger text-white  m-3 w-100 rounded-1 border border-secondary form-control form-control-lg"
-                                type="submit">Se connecter
-                        </button>
+                        <label for="inputUsername" class="form-label fw-bold text-dark">Votre pseudo</label>
+                        <input name="_username" type="text" class="form-control mb-2 " id="inputUsername">
+
+                        <label for="inputPassword" class="fw-bold ">Votre mot de passe </label>
+                        <input type="password" name="password" id="inputPassword" class="form-control"
+                               placeholder="Merci de saisir votre mot de passe"
+                               autocomplete="current-password" required>
+
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+                        <div class="form-groupe m-2 px-5 ">
+                            <a href="{{ path('app_reset_password') }}" class="text-decoration-none m-3 text-dark fw-bold ">Mot de passe oublié </a>
+                            <button class="button bg-danger text-white  m-3 w-100 rounded-1 border border-danger form-control form-control-lg"
+                                    type="submit">Se connecter
+                            </button>
+
+                        </div>
 
                     </div>
 
-                </div>
-            </div>
         </section>
         {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.

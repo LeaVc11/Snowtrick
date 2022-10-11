@@ -4,21 +4,24 @@
 
 {% block content %}
     <section class="   d-flex justify-content-center container" id="picture">
-    <div class=" m-5 rounded-3 bg-secondary ">
-    <div class="register p-5 ">
-    <h1 class="text-white text-center m-2 h3 mb-3 font-weight-normal">Inscription</h1>
-
-    {{ form_start(form) }}
-    <div class="fw-bold ">
-
-        {{ form_row(form.username) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
-    </div>
-    <button class="button bg-danger text-white  m-2 w-100 rounded-1 border border-secondary form-control form-control-lg"
-            type="submit">créer un compte
-    </button>
-    {{ form_end(form) }}
+        <div class=" p-2 p-lg-5">
+            <div class="register p-4 ">
+                <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Inscription</h1>
 
 
+                {{ form_start(form) }}
+                <div class="fw-bold mb-2">
+
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.password) }}
+                </div>
+                <button class="button bg-danger text-white  m-2 w-100 rounded-1 border border-danger form-control form-control-lg"
+                        type="submit">créer un compte
+                </button>
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </section>
 {% endblock %}
