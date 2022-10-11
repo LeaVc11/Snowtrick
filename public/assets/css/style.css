@@ -48,3 +48,11 @@
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
+#picture{
+    width: 100%;
+    background-image: url(../../assets/images/pexels-evgenia-kirpichnikova-1973293.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
