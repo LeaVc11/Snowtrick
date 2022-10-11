@@ -37,11 +37,10 @@
             <div class="navbar-item-custom">
                 {% if app.user %}
 
-                    <a href="" class="text-decoration-none ">Mon compte </a> |
-                    <a href="" class="text-decoration-none p-2">Déconnexion</a>
+                    <a href="{{ path('app_logout') }}" class="text-decoration-none p-2">Déconnexion</a>
                 {% else %}
-                    <a href="" class="text-decoration-none ps-2 ">Connexion</a> | <a
-                        href="" class=" text-decoration-none p-2">Inscription</a>
+                    <a href="{{ path('app_login') }}" class="text-decoration-none ps-2 ">Connexion</a> | <a
+                        href="{{ path('app_register') }}" class=" text-decoration-none p-2">Inscription</a>
                 {% endif %}
             </div>
         </div>
