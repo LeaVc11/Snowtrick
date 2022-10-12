@@ -6,7 +6,7 @@
 
     <form method="post">
 
-        <section class="d-flex  justify-content-center p-5 container-fluid" id="picture">
+        <section class="d-flex  justify-content-end p-5 container-fluid" id="picture">
             <div class=" p-2 p-lg-5">
 
 
@@ -17,14 +17,13 @@
 
                         <label for="inputPassword" class="fw-bold ">Votre mot de passe </label>
                         <input type="password" name="password" id="inputPassword" class="form-control"
-                               placeholder="Merci de saisir votre mot de passe"
                                autocomplete="current-password" required>
 
                         <input type="hidden" name="_csrf_token"
                                value="{{ csrf_token('authenticate') }}"
                         >
                         <div class="form-groupe m-2 px-5 ">
-                            <a href="{{ path('app_reset_password') }}" class="text-decoration-none m-3 text-dark fw-bold ">Mot de passe oublié </a>
+                            <a href="{{ path('app_home') }}" class="text-decoration-none m-3 text-dark fw-bold ">Mot de passe oublié </a>
                             <button class="button bg-danger text-white  m-3 w-100 rounded-1 border border-danger form-control form-control-lg"
                                     type="submit">Se connecter
                             </button>

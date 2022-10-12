@@ -20,6 +20,7 @@ class RegisterType extends AbstractType
             ->add('username', TextType::class,
                 [
                     'label' => 'Votre username',
+
                     'constraints' => new Length([
                         'min' => 2,
                         'max' => 30

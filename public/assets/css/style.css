@@ -50,9 +50,11 @@
 }
 #picture{
     width: 100%;
-    background-image: url(../../assets/images/pexels-evgenia-kirpichnikova-1973293.jpg);
-    background-position: center;
+    min-height: 900px;
+    background-image: url("../../assets/images/pexels-visit-almaty-848599.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-
 }
+
+
+
