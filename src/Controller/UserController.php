@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AccountController extends AbstractController
+class UserController extends AbstractController
 {
     #[Route('/account', name: 'app_account')]
     public function index(): Response

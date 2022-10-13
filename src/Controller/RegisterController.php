@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegisterController extends AbstractController
 {
+    private $entityManager;
+
     #[Route('/register', name: 'app_register')]
     public function index(Request $request, UserPasswordHasherInterface $encoder, EntityManagerInterface $entityManager): Response
     {
@@ -25,13 +27,21 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $password = $encoder->hashPassword($user, $user->getPassword());
+            $search_email = $this->entityManager->getRepository(User::class)->findByEmail($user->getEmail());
 
-            $user->setPassword($password);
+            if (!$search_email){
+                $password = $encoder->hashPassword($user, $user->getPassword());
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-            $notification="Votre inscription a été enregistré. ";
+                $user->setPassword($password);
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $notification="Votre inscription a été enregistré. Vous pouvez vous connecter dès à présent ";
+            }else{
+                $notification="Votre email exite déjà ";
+            }
+
+
 
         }
         return $this->render('register/index.html.twig', [
