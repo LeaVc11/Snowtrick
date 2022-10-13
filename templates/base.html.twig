@@ -11,13 +11,14 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
+
 </head>
 <body>
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
-
+        <img src="{{asset('assets/images/snowboarder.png')}}" class="logo" alt="logo">
         <a class="navbar-brand p-2 fw-bold " href="">Snowtricks </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +27,7 @@
         <div class="collapse navbar-collapse justify-content-end p-3" id="navbarCollapse">
             <ul class="navbar-nav mr-auto fw-bold">
                 <li class="nav-item active">
-                    <a class="nav-link text-end" href="">Accueil</a>
+                    <a class="nav-link text-end" href="{{path('app_home')}}">Accueil</a>
                 </li>
 
                 <li class="nav-item active">
@@ -35,12 +36,13 @@
 
             </ul>
             <div class="navbar-item-custom">
-                {% if app.user %}
 
-                    <a href="{{ path('app_logout') }}" class="text-decoration-none p-2">Déconnexion</a>
+                {% if app.user %}
+                    <a href="{{ path('app_account') }}" >Mon compte <small>({{ app.user.username }} )</small> </a> |
+                    <a href="{{ path('app_logout') }}">Déconnexion</a>
                 {% else %}
-                    <a href="{{ path('app_login') }}" class="text-decoration-none ps-2 ">Connexion</a> | <a
-                        href="{{ path('app_register') }}" class=" text-decoration-none p-2">Inscription</a>
+                    <a href="{{ path('app_login') }}" class=" ps-2 ">Connexion </a> |
+                    <a href="{{ path('app_register') }}" class=" p-2">Inscription</a>
                 {% endif %}
             </div>
         </div>
@@ -73,10 +75,9 @@
 
 </main>
 <!-- FOOTER -->
-<footer class="footer-personnalise mb-auto text-center">
-
+<footer class="footer-custom mb-auto text-center">
     <p class="fw-bold ">
-        &copy;2021-2022 Carine VINAGRE.<br/>
+        &copy;2021-2022 Carine VINAGRE. Snowtrick<br/>
     </p>
 </footer>
 
