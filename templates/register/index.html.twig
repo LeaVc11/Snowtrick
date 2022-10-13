@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire' - Snowtrick{% endblock %}
+
+{% block content %}
+    <section class="   d-flex justify-content-end container" id="picture">
+        <div class=" p-2 p-lg-5">
+            <div class="register p-4 ">
+                <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Inscription</h1>
+
+                {{ form_start(form) }}
+                <div class="fw-bold mb-2">
+
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.password) }}
+                </div>
+                <div class="fw-bold text-center ">
+                    {{ form_end(form) }}
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
