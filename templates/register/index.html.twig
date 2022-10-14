@@ -7,7 +7,9 @@
         <div class=" p-2 p-lg-5">
             <div class="register p-4 ">
                 <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Inscription</h1>
-
+                {% if notification %}
+                    <div class="alert alert-info">{{ notification }}</div>
+                {% endif %}
                 {{ form_start(form) }}
                 <div class="fw-bold mb-2">
 
@@ -18,7 +20,6 @@
                 <div class="fw-bold text-center ">
                     {{ form_end(form) }}
                 </div>
-
 
 
             </div>
