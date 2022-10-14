@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Se connecter - Snowtrick{% endblock %}
+{% block title %}Mot de passe oublié- Snowtrick{% endblock %}
 
 {% block content %}
 
     <form method="post">
-
+{#        {% if error %}#}
+{#            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+{#        {% endif %}#}
+{#        {% if app.user %}#}
+{#            <div class="mb-3">#}
+{#                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>#}
+{#            </div>#}
+{#        {% endif %}#}
         <section class="d-flex  justify-content-end p-5 container-fluid" id="picture">
             <div class=" p-2 p-lg-5">
 
@@ -19,11 +26,11 @@
                 <input type="password" name="password" id="inputPassword" class="form-control mb-2"
                        autocomplete="current-password" required>
 
-                <input type="hidden" name="_csrf_token"
-                       value="{{ csrf_token('authenticate') }}"
-                >
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
                 <div class="form-groupe m-2 px-5 ">
-                    <a href="" class="text-decoration-none m-3 text-dark fw-bold ">Mot de passe oublié </a>
+                    <p class="text-center"><a href="{{ path('app_reset_password') }} " class="text-decoration-none m-3 text-dark fw-bold ">Mot de passe oublié </a></p>
+                    <p class="text-center"><a href="{{ path('app_register') }}" class="text-decoration-none m-3 text-center text-dark fw-bold">Créer un compte</a></p>
                     <button class="button bg-primary text-white  m-3 w-100 rounded-1 border border-primary form-control form-control-lg"
                             type="submit">Se connecter
                     </button>
@@ -33,15 +40,5 @@
             </div>
 
         </section>
-        {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-        #}
     </form>
 {% endblock %}

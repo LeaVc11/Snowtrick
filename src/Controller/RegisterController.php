@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Classe\Mail;
 use App\Entity\User;
 use App\Form\RegisterType;
+use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +46,7 @@ class RegisterController extends AbstractController
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
-                $mail = new Mail();
+                $mail = new MailService();
                 $content = "Bonjour ".$user->getUsername()."<br/>Bienvenue sur .";
                 $mail->send($user->getEmail(), $user->getUsername(), 'Bienvenue ', $content);
 

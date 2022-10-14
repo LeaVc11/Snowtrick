@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Classe;
+namespace App\Service;
 
 use Mailjet\Client;
 use Mailjet\Resources;
 
-class Mail
+class MailService
 {
-    private string $api_key = '868db4bf670a70a99116f4aa36f22792';
-    private string $api_key_secret = '71d6df0f477c35e1cb02248604a32599';
 
+    public function __construct()
+    {
+
+    }
     public function send($to_email, $to_name, $subject,$content): void
     {
         $mj = new Client($this->api_key, $this->api_key_secret, true, ['version' => 'v3.1']);
