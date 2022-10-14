@@ -25,7 +25,6 @@ class RegisterController extends AbstractController
     public function index(Request $request, UserPasswordHasherInterface $encoder): Response
     {
 
-
         $notification = null;
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -35,9 +34,9 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $recherche_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
 
-            if(!$recherche_email)
+            if(!$search_email)
             {
                 $password = $encoder->hashPassword($user, $user->getPassword());
 
