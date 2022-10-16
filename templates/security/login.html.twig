@@ -29,9 +29,11 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                 <div class="form-groupe m-2 px-5 ">
-                    <p class="text-center"><a href="{{ path('app_reset_password') }} " class="text-decoration-none m-3 text-dark fw-bold ">Mot de passe oublié </a></p>
-                    <p class="text-center"><a href="{{ path('app_register') }}" class="text-decoration-none m-3 text-center text-dark fw-bold">Créer un compte</a></p>
-                    <button class="button bg-primary text-white  m-3 w-100 rounded-1 border border-primary form-control form-control-lg"
+                    <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100 ">
+                        <a href="{{ path('app_reset_password') }} " class="text-decoration-none m-3 text-primary fw-bold ">Mot de passe oublié </a></p>
+                    <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
+                        <a href="{{ path('app_register') }}" class="text-decoration-none m-3 text-center text-primary fw-bold">Créer un compte</a></p>
+                    <button class="button bg-primary text-white  m-1 w-100 rounded-1 border border-primary form-control form-control-lg"
                             type="submit">Se connecter
                     </button>
 
