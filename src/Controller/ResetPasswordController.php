@@ -35,10 +35,10 @@ class ResetPasswordController extends AbstractController
                 $reset_password->setUser($user);
                 $reset_password->setToken(uniqid());
                 $reset_password->setCreatedAt(new DateTime());
-                $this->entityManager->persist($reset_password)
-                $this->entityManager->flush();
+/*                $this->entityManager->persist($reset_password)
+                $this->entityManager->flush();*/
 
-                $mail
+
 
             }
         }
