@@ -5,18 +5,13 @@
 {% block content %}
 
     <form method="post">
-{#        {% if error %}#}
-{#            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
-{#        {% endif %}#}
-{#        {% if app.user %}#}
-{#            <div class="mb-3">#}
-{#                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>#}
-{#            </div>#}
-{#        {% endif %}#}
         <section class="d-flex  justify-content-end p-5 container-fluid" id="picture">
             <div class=" p-2 p-lg-5">
 
-                <h1 class="text-white text-center m-2 h3 mb-3 font-weight-normal">Connexion</h1>
+                <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Connexion</h1>
+                {% for message in app.flashes('notice') %}
+                    <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
                 <label for="inputEmail" class="fw-bold mb-2">Votre email</label>
                 <input type="email" name="email" id="inputEmail"
                        class="form-control mb-2"

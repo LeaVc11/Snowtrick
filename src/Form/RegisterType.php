@@ -21,7 +21,10 @@ class RegisterType extends AbstractType
             ->add('username', TextType::class,
                 [
                     'label' => 'Votre username',
+                    'attr' => [
+                        'class' => 'form-control-lg'
 
+                    ],
                     'constraints' => new Length([
                         'min' => 2,
                         'max' => 30
@@ -29,6 +32,10 @@ class RegisterType extends AbstractType
                 ])
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
+                'attr' => [
+                    'class' => 'form-control-lg'
+
+                ],
                 'constraints' => new Length([
                     'min' => 2,
                     'max' => 55
@@ -37,13 +44,21 @@ class RegisterType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Votre mot de passe',
+                'attr' => [
+                    'class' => 'form-control-lg'
+
+                ],
                 'required' => true,
 
             ])
-            ->add('submit', SubmitType::class,
-                [
-                    'label' => "Créer une compte"
-                ]);
+            ->add('submit', SubmitType::class, [
+                'label' => "Créer une compte",
+                'attr' => [
+                    'class' => ' btn-primary'
+                ]
+            ])
+        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
