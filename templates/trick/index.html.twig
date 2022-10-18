@@ -1,45 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Trick index{% endblock %}
+{% block title %}Create Trick - Snowtrick{% endblock %}
 
-{% block body %}
-    <h1>Trick index</h1>
+{% block content %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Slug</th>
-                <th>Description</th>
-                <th>Content</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for trick in tricks %}
-            <tr>
-                <td>{{ trick.id }}</td>
-                <td>{{ trick.title }}</td>
-                <td>{{ trick.slug }}</td>
-                <td>{{ trick.description }}</td>
-                <td>{{ trick.content }}</td>
-                <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
-                    <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
+        <div class=" p-2 p-lg-5">
 
-    <a href="{{ path('app_trick_new') }}">Create new</a>
+            <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Créer un Trick</h1>
+{#            {% if notification %}#}
+{#                <div class="alert alert-info">{{ notification }}</div>#}
+{#            {% endif %}#}
+            {{ form_start(form) }}
+            <div class="fw-bold mb-2">
+                {{ form_row(form.title) }}
+                {{ form_row(form.slug) }}
+                {{ form_row(form.description) }}
+            </div>
+            <div class="fw-bold text-center ">
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </section>
 {% endblock %}
