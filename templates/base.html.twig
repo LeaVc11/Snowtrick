@@ -67,8 +67,9 @@
     <div class="album py-5 bg-light">
         <div class="container {% if block('album') is not defined %}mt-5{% endif %}">
 
-            {% block content %}
-            {% endblock %}
+            {% include "_message_flash.html.twig" %}
+
+            {% block content %}{% endblock %}
 
         </div>
     </div>

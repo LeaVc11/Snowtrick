@@ -51,12 +51,7 @@ class RegisterType extends AbstractType
                 'required' => true,
 
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => "Créer une compte",
-                'attr' => [
-                    'class' => ' btn-primary'
-                ]
-            ])
+
         ;
 
     }

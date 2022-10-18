@@ -7,9 +7,6 @@
         <div class=" p-2 p-lg-5">
 
             <h1 class="text-white text-center m-2 h3 mb-3 font-weight-normal">Réinitialiser mon mot de passe.</h1>
-            {% for message in app.flashes('notice') %}
-                <div class="alert alert-info">{{ message }}</div>
-            {% endfor %}
 
             {{ form_start(form) }}
             <div class="fw-bold mb-2">

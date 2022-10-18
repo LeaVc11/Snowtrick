@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
-use App\Service\Mail;
+use App\Service\AlertServiceInterface;
+use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ class RegisterController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function index(Request $request, UserPasswordHasherInterface $encoder): Response
+    public function index(Request $request, UserPasswordHasherInterface $encoder, MailService $mailService, AlertServiceInterface $alertService): Response
     {
 
         $notification = null;
@@ -34,33 +35,23 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
+            $password = $encoder->hashPassword($user, $user->getPassword());
 
-            if(!$search_email)
-            {
-                $password = $encoder->hashPassword($user, $user->getPassword());
+            $user->setPassword($password);
 
-                $user->setPassword($password);
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
 
+            $content = "Bonjour " . $user->getUsername() . "<br/>Bienvenue sur .";
+            $mailService->send($user->getEmail(), $user->getUsername(), 'Bienvenue ', $content);
 
-                $this->entityManager->persist($user);
-                $this->entityManager->flush();
+            $alertService->success('Votre inscription s\'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.');
 
-                $mail = new Mail();
-                $content = "Bonjour ".$user->getUsername()."<br/>Bienvenue sur .";
-                $mail->send($user->getEmail(), $user->getUsername(), 'Bienvenue ', $content);
-
-                $notification = "Votre inscription s'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.";
-            } else {
-                $notification = "L'email que vous avez renseigné existe déjà.";
-            }
-
+            return $this->redirectToRoute('app_home');
         }
-        return $this->render('register/index.html.twig',
-            [
-                'form' => $form->createView(),
-                'notification' => $notification,
 
-            ]);
+        return $this->render('register/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

@@ -5,7 +5,8 @@ namespace App\Controller;
 use App\Entity\ResetPassword;
 use App\Entity\User;
 use App\Form\ResetPasswordType;
-use App\Service\Mail;
+use App\Service\AlertServiceInterface;
+use App\Service\MailService;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,7 @@ class ResetPasswordController extends AbstractController
     }
 
     #[Route('/reset/password', name: 'app_reset_password')]
-    public function index(Request $request): Response
+    public function index(Request $request, MailService $mailService, AlertServiceInterface $alertService): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
@@ -47,21 +48,19 @@ class ResetPasswordController extends AbstractController
                 $content = "Bonjour, " . $user->getUsername() .
                     "<br/> Vous avez demandé à réinitialiser votre mot de passe sur le site Snowtrick.<br/><br/>";
                 $content .= "Merci de bien vouloir cliquer sur le lien suivant pour <a href=" . $url . "> mettre à jour votre mot de passe.</a>";
-                $mail = new Mail();
-                $mail->send($user->getEmail(), $user->getUsername(), 'Réinitialiser votre mot de passe', $content);
 
-                $this->addFlash('notice', "Vous allez recevoir dans quelques secondes un mail avec la procédure pour réinitialiser votre mot de passe.");
+                $mailService->send($user->getEmail(), $user->getUsername(), 'Réinitialiser votre mot de passe', $content);
 
-            }else{
-                $this->addFlash('notice', "Cette adresse email est inconnue.");
-
+                $alertService->warning('Vous allez recevoir dans quelques secondes un mail avec la procédure pour réinitialiser votre mot de passe.');
+            } else {
+                $alertService->warning('Cette adresse email est inconnue.');
             }
         }
         return $this->render('reset_password/index.html.twig');
     }
 
     #[Route('/edit/password/{token}', name: 'app_update_password')]
-    public function update(Request $request,$token,UserPasswordHasherInterface $encoder): Response
+    public function update(Request $request, $token, UserPasswordHasherInterface $encoder): Response
     {
         $reset_password = $this->entityManager->getRepository(ResetPassword::class)->findOneByToken($token);
 
@@ -77,9 +76,9 @@ class ResetPasswordController extends AbstractController
         $form = $this->createForm(ResetPasswordType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $new_pwd = $form->get('new_password')->getData();
-            $password=$encoder->hashPassword($reset_password->getUser(),$new_pwd);
+            $password = $encoder->hashPassword($reset_password->getUser(), $new_pwd);
 
             $reset_password->getUser()->setPassword($password);
             $this->entityManager->flush();

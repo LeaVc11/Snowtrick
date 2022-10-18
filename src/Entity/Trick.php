@@ -37,10 +37,6 @@ class Trick
     #[ORM\ManyToOne(inversedBy: 'tricks')]
     private ?User $user = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Media $media = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -130,17 +126,6 @@ class Trick
         return $this;
     }
 
-    public function getMedia(): ?Media
-    {
-        return $this->media;
-    }
-
-    public function setMedia(?Media $media): self
-    {
-        $this->media = $media;
-
-        return $this;
-    }
 
 
 
