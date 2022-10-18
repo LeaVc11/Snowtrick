@@ -28,12 +28,6 @@ class ResetPasswordType extends AbstractType
                         'label' => 'Confirmez votre nouveau mot de passe',
                     ],
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => "Mettre à jour mon mot de passe",
-                'attr' => [
-                    'class' => ' btn-primary'
-                ]
-            ])
         ;
     }
 

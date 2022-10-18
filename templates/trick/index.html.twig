@@ -3,24 +3,33 @@
 {% block title %}Create Trick - Snowtrick{% endblock %}
 
 {% block content %}
+    <form method="post">
 
-    <section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
-        <div class=" p-2 p-lg-5">
+        <section class="d-flex  justify-content-end p-5 container" id="picture">
+            <div class=" p-2 p-lg-5">
+                {% for message in app.flashes('notice') %}
+                    <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+                <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Créer une nouvelle figure.</h1>
+                <div class="form-group">
+                    <label for="title"  class="mb-2 fw-bold" >Entrez un titre</label>
+                    <input type="text" class="form-control" id="title">
+                </div>
+                <div class="form-group">
+                    <label for="slug" class="mb-2 fw-bold">Entrez un slug</label>
+                    <input type="text" class="form-control" id="slug">
+                </div>
 
-            <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Créer un Trick</h1>
-{#            {% if notification %}#}
-{#                <div class="alert alert-info">{{ notification }}</div>#}
-{#            {% endif %}#}
-            {{ form_start(form) }}
-            <div class="fw-bold mb-2">
-                {{ form_row(form.title) }}
-                {{ form_row(form.slug) }}
-                {{ form_row(form.description) }}
+                <div class="form-group">
+                    <label for="description" class="mb-2 fw-bold">Description</label>
+                    <textarea class="form-control" id="description" rows="3"></textarea>
+                </div>
+                <div class="form-groupe my-3 px-5 ">
+                    <button class="button bg-primary text-white  m-2 w-100 rounded-1 border border-primary form-control form-control-lg"
+                            type="submit">Enregistrer
+                    </button>
+                </div>
             </div>
-            <div class="fw-bold text-center ">
-                {{ form_end(form) }}
-            </div>
-
-        </div>
-    </section>
+        </section>
+    </form>
 {% endblock %}

@@ -17,10 +17,11 @@ class TrickType extends AbstractType
             ->add('title', TextType::class,[
                 'label' => 'Titre'
             ])
-            ->add('slug')
-            ->add('description')
-            ->add('save', SubmitType::class, [
-                'label' => 'Enregistrer'
+            ->add('slug',TextType::class,[
+                'label' => 'Slug'
+            ])
+            ->add('description',TextType::class,[
+                'label' => 'description'
             ])
         ;
     }
