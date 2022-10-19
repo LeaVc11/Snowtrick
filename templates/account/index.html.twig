@@ -3,14 +3,24 @@
 {% block title %}Mon compte - Snowtrick {% endblock %}
 
 {% block content%}
-    <h1 class="text-center">Mon compte</h1>
-    <br>
-    Bienvenue {{( app.user.username)}} dans votre compte.<br/>
-    C'est dans cet espace que vous allez pouvoir gérer toutes vos informations personnelles.
-    <hr>
-    <br>
-    <a href="{{ path('app_account_password') }}">Modifier mon mot de passe</a><br/>
-    <a href="{{ path('app_trick_new') }}">Créer un Trick</a><br/>
+    <section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
+        <div class=" p-2 p-lg-5">
 
-    <hr>
+             <h1 class="text-center text-white fw-bold">Mon compte</h1>
+            <br>
+            <p class="text-center fw-bold" >Bienvenue {{( app.user.username)}} dans votre compte.<br/></p>
+            <hr>
+
+            <div class="form-groupe m-2 px-5 ">
+                <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100 ">
+                    <a href="{{ path('app_account_password') }} " class="text-decoration-none m-3 text-primary fw-bold ">Modifier mon mot de passe</a></p>
+                <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
+                    <a href="{{ path('app_trick_new') }}}" class="text-decoration-none m-3 text-center text-primary fw-bold">Créer un Trick</a></p>
+
+
+            </div>
+
+        </div>
+    </section>
+
 {% endblock %}

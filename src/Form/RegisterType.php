@@ -51,7 +51,6 @@ class RegisterType extends AbstractType
                 'required' => true,
 
             ])
-
         ;
 
     }
