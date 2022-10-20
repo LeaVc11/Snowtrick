@@ -34,3 +34,7 @@ services:
             $mailjetApiVersion: '%mailjet.api.version%'
             $emailFrom: '%email.from%'
             $emailName: '%email.name%'
+    App\Service\FileUploader:
+        arguments:
+            $publicDirectory: '%kernel.project_dir%/public'
+            $imgRelativeDirectory: 'upload'

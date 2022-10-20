@@ -1,10 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'trick/index.html.twig' %}
 
-{% block title %}Nouvelle Trick{% endblock %}
+{% set title  = "Nouvelle Trick"%}
 
 {% block content %}
+    <div class="card-title-band">
+        <h1 class="card-title trick-title">{{trick.title}}</h1>
+    </div>
+    {{ form_start(form)}}
 
-    {{ include('trick/_form.html.twig') }}
-
-    <a href="{{ path('app_trick') }}">Retour</a>
+    {% block form %}
+        {% include "/trick/_form.html.twig" %}
+    {% endblock %}
+    {{ form_end(form)}}
 {% endblock %}

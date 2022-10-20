@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Trick;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,15 @@ class TrickType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('medias', CollectionType::class, [
+                'entry_type' => MediaType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'required' => false,
+                'by_reference' => false,
+            ])
             ->add('description')
+            ->add('content')
 
         ;
     }

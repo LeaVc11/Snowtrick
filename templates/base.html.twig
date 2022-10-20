@@ -18,7 +18,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
-        <img src="{{asset('assets/images/snowboarder.png')}}" class="logo" alt="logo">
+        <img src="{{ asset('assets/images/snowboarder.png') }}" class="logo" alt="logo">
         <a class="navbar-brand p-2 fw-bold " href="">Snowtricks </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,18 +27,18 @@
         <div class="collapse navbar-collapse justify-content-end p-3" id="navbarCollapse">
             <ul class="navbar-nav mr-auto fw-bold">
                 <li class="nav-item active">
-                    <a class="nav-link text-end" href="{{path('app_home')}}">Accueil</a>
+                    <a class="nav-link text-end" href="{{ path('app_home') }}">Accueil</a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link " href="{{path('app_trick')}}">Figures</a>
+                    <a class="nav-link " href="{{ path('app_trick') }}">Figures</a>
                 </li>
 
             </ul>
             <div class="navbar-item-custom">
 
                 {% if app.user %}
-                    <a href="{{ path('app_account') }}" >Mon compte <small>({{ app.user.username }} )</small> </a> |
+                    <a href="{{ path('app_account') }}">Mon compte <small>({{ app.user.username }} )</small> </a> |
                     <a href="{{ path('app_logout') }}">Déconnexion</a>
                 {% else %}
                     <a href="{{ path('app_login') }}" class=" ps-2 ">Connexion </a> |
@@ -51,15 +51,15 @@
 
 <main role="main">
     {% if block('album') is defined %}
-        <section class=" d-flex justify-content-start container-fluide" id="picture" >
-            <div class="row py-lg-5">
-                <div class="col-lg-6  mx-auto">
-                    <h1 class="fw-bold m-5 p-5 text-white text-start">Snowtrick</h1>
+        <section class="d-flex  justify-content-end p-5 container-fluid" id="picture">
+            <div class=" p-2 p-lg-5">
+                <h1 class="fw-bold m-5 p-1 text-white text-center">Snowtrick</h1>
 
-
-                </div>
+                <h5 class="fw-bold m-5 p-1  text-white text-center">La communauté pour découvrir le snowboard et ses
+                    figures</h5>
             </div>
         </section>
+
     {% endif %}
     <div class="album py-5 bg-light">
         <div class="container {% if block('album') is not defined %}mt-5{% endif %}">

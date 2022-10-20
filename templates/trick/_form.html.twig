@@ -6,17 +6,16 @@
             {{ form_widget(form.title,{'attr': {'placeholder':'Nom du trick'}})}}
             <br>
             {{ form_widget(form.description,{'attr':{ 'placeholder':'Description', 'rows':8}})}}
+            <br>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Image</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
             <div class="form-groupe m-2 px-5 ">
 
-                <button class="button bg-primary text-white  m-1 w-100 rounded-1 border border-primary form-control form-control-lg"
-                        type="submit">Se connecter
+                <button class="btn btn-primary  text-white  m-1 w-100 rounded-1 border border-primary form-control form-control-lg"
+                        type="submit">Enregistrer
                 </button>
-
-                <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100 ">
-                    <a href="{#{{ path('app_trick_edit') }}#} " class="text-decoration-none m-3 text-primary fw-bold ">Modifier une figure </a></p>
-                <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
-                    <a href="{#{{ app_trick_delete') }}#}" class="text-decoration-none m-3 text-center text-primary fw-bold">Supprimer une figure</a></p>
-
             </div>
             {{ form_end(form) }}
     </section>
