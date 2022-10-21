@@ -28,7 +28,9 @@ class Trick
     #[ORM\ManyToOne(inversedBy: 'tricks')]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class, orphanRemoval: true)]
+    /**
+     * @ORM\OneToMany(targetEntity=Media::class, mappedBy="trick", cascade={"persist"})
+     */
     private Collection $medias;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'tricks', cascade: ['persist'])]

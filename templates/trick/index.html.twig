@@ -4,30 +4,48 @@
 
 {% block content %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-            <div class="card shadow-sm">
-{#                {% for trick in tricks %}#}
-{#                    <li>{{ trick.title }}</li>#}
-{#                    <li>{{ trick.slug }}</li>#}
-{#                    <li>{{ trick.category }}</li>#}
-{#                    <li>{{ trick.description }}</li>#}
-{#                {% endfor %}#}
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        {% for trick in tricks %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top"
+                         width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img"
+                         aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                         focusable="false">
+                        <title>{{ trick.title }}</title>
+                        <rect width="100%" height="100%" fill="#55595c"/>
+                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+{#                            {% if trick.medias.last.image %}#}
+{#                            <img src="{{ asset('assets/upload/tricks/'~trick.medias.last.image) }}" alt="picture trick">#}
+{#                            {% endif %}#}
+                        </text>
 
-                <div class="card-body">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <div class="btn-group text-center">
-                            <a href="" class="btn btn-sm btn-outline-secondary"><img src="{{ asset('assets/images/logoView.png') }}"  height="18px" alt="Voir trick"></a>
-                            <a href="" class="btn btn-sm btn-outline-secondary"><img src="{{ asset('assets/images/logoEdit.png') }}"  height="18px" alt="Modifier trick"></a>
+                    </svg>
 
-                            <a href="" class="btn btn-sm btn-outline-secondary"><img src="{{ asset('assets/images/logoDelete.png') }}"  height="18px" alt="Supprimer trick"></a>
+                    <div class="card-body">
+                        <p class="card-text">{{ trick.description }}</p>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="btn-group text-center">
+                                {% if is_granted('ROLE_USER') %}
+                                    <a href="" class="btn btn-sm btn-outline-secondary"><img
+                                                src="{{ asset('assets/images/logoView.png') }}" height="18px"
+                                                alt="Voir trick"></a>
+                                    <a href="" class="btn btn-sm btn-outline-secondary"><img
+                                                src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
+                                                alt="Modifier trick"></a>
+
+                                    <a href="" class="btn btn-sm btn-outline-secondary"><img
+                                                src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
+                                                alt="Supprimer trick"></a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
+
+        {% endfor %}
     </div>
+
 
 {% endblock %}

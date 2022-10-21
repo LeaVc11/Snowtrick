@@ -31,7 +31,7 @@ class TrickController extends AbstractController
     {
 //        $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
         $tricks = $this->repository->findAll();
-
+//dd($tricks);
         return $this->render('trick/index.html.twig', [
             'tricks' => $tricks
         ]);
@@ -43,7 +43,9 @@ class TrickController extends AbstractController
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+//        dd($form->isValid());
         if ($form->isSubmitted() && $form->isValid()) {
+
             $imageFiles = $form->get('medias')->getData();
             foreach ($imageFiles as $imageFile) {
                 if ($file = $imageFile->getFile()) {
@@ -54,7 +56,7 @@ class TrickController extends AbstractController
             $slugger = new AsciiSlugger();
             $slug = $slugger->slug($trick->getTitle());
             $trick->setSlug($slug);
-
+//dd($trick);
             $this->entityManager->persist($trick);
             $this->entityManager->flush();
 
