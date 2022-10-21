@@ -15,11 +15,9 @@ class TrickType extends AbstractType
         $builder
             ->add('title')
             ->add('medias', FileType::class, [
-                'entry_type' => MediaType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
                 'required' => false,
-                'by_reference' => false,
+                'multiple' => true,
+                'label' => 'Ajouter une image:'
             ])
             ->add('description')
 

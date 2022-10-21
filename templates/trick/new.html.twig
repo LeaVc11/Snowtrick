@@ -1,13 +1,11 @@
-{% extends 'trick/index.html.twig' %}
-
-{% set title  = "Nouvelle Trick"%}
+{% extends 'base.html.twig' %}
 
 {% block content %}
+    <h1 class="text-dark text-center fw-bold mb-2">Créer un trick</h1>
     <div class="card-title-band">
         <h1 class="card-title trick-title">{{trick.title}}</h1>
     </div>
     {{ form_start(form)}}
-
     {% block form %}
         {% include "/trick/_form.html.twig" %}
     {% endblock %}

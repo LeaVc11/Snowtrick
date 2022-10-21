@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
@@ -13,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 #[Route('/trick')]
 class TrickController extends AbstractController
@@ -69,33 +72,37 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}/show', name: 'app_trick_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_trick_show', methods: ['GET'])]
     #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
-    public function show(Trick $trick): Response
+
+    public function show(Request $request,Trick $trick): Response
     {
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
         ]);
     }
 
-    #[Route('/{slug}/edit', name: 'app_trick_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_trick_edit', methods: ['GET', 'POST'])]
     #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
-    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository): Response
+    public function edit(Request $request, Trick $trick, FileUploader $fileUploader): Response
     {
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $trickRepository->save($trick, true);
 
+            $imgFiles = $form->get('medias')->getData();
+
+            foreach ($imgFiles as $imgFile) {
+                if ($file = $imgFile->getFile()) {
+                    $imgFileName = $fileUploader->upload($file);
+                    $imgFile->setUrl($imgFileName);
+                }
+            }
+            $this->addFlash('success', "Modifications enregistrées avec succès!");
             return $this->redirectToRoute('app_trick', [], Response::HTTP_SEE_OTHER);
         }
-        $slugger = new AsciiSlugger();
-        $slug = $slugger->slug($trick->getTitle());
-        $trick->setSlug($slug);
-
-
         return $this->render('trick/edit.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
