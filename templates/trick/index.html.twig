@@ -31,24 +31,24 @@
                         <title>{{ trick.title }}</title>
                         <rect width="100%" height="100%" fill="#55595c"/>
                         <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-{#                            {% if trick.medias.last.image %}#}
-{#                            <img src="{{ asset('assets/upload/tricks/'~trick.medias.last.image) }}" alt="picture trick">#}
-{#                            {% endif %}#}
+                            {% if trick.medias.last.media %}
+                            <img src="{{ asset('assets/upload/tricks/'~trick.medias.last.image) }}" alt="picture trick">
+                            {% endif %}
                         </text>
                     </svg>
                     <div class="card-body">
                         <p class="card-text">{{ trick.description }}</p>
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="btn-group text-center">
-                                <a href="{{ path('app_trick_show') }}" class="btn btn-sm btn-outline-secondary"><img
-                                            src="{{ asset('assets/images/logoView.png') }}" height="18px"
+                                <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}" class="btn btn-sm btn-outline-secondary">
+                                    <img src="{{ asset('assets/images/logoView.png') }}" height="18px"
                                             alt="Voir trick"></a>
                                 {% if is_granted('ROLE_USER') %}
-                                    <a href="{{ path('app_trick_edit') }}" class="btn btn-sm btn-outline-secondary"><img
+                                    <a href="{{ path('app_trick_edit', {'id': trick.slug }) }}" class="btn btn-sm btn-outline-secondary"><img
                                                 src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
                                                 alt="Modifier trick"></a>
 
-                                    <a href="{{ path('app_trick_delete') }}" class="btn btn-sm btn-outline-secondary"><img
+                                    <a href="{{ path('app_trick_delete', {'slug': trick.slug }) }}" class="btn btn-sm btn-outline-secondary"><img
                                                 src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
                                                 alt="Supprimer trick"></a>
                                 {% endif %}

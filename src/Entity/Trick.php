@@ -122,6 +122,17 @@ class Trick
     {
         return $this->medias;
     }
+    public function setMedia($media): self
+    {
+
+        foreach ($medias as $media) {
+            $media = new Media();
+            $media->setImage((string)$media);
+            $this->addMedia($media);
+        }
+        $this->medias = $media;
+        return $this;
+    }
 
     public function addMedia(Media $media): self
     {
@@ -132,6 +143,8 @@ class Trick
 
         return $this;
     }
+
+
 
     public function removeMedia(Media $media): self
     {
