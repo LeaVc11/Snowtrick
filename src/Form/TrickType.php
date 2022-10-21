@@ -23,7 +23,7 @@ class TrickType extends AbstractType
                 'by_reference' => false,
             ])
             ->add('description')
-            ->add('content')
+
 
         ;
     }

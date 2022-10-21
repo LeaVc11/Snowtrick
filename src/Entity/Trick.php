@@ -25,7 +25,6 @@ class Trick
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-
     #[ORM\ManyToOne(inversedBy: 'tricks')]
     private ?User $user = null;
 
@@ -56,7 +55,6 @@ class Trick
 
         return $this;
     }
-
     public function getSlug(): ?string
     {
         return $this->slug;

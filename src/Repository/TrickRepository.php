@@ -39,6 +39,7 @@ class TrickRepository extends ServiceEntityRepository
         }
     }
 
+
 //    /**
 //     * @return Trick[] Returns an array of Trick objects
 //     */

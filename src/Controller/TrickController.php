@@ -17,17 +17,20 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 #[Route('/trick')]
 class TrickController extends AbstractController
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
+    private TrickRepository $repository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, TrickRepository $repository)
     {
         $this->entityManager = $entityManager;
+        $this->repository = $repository;
     }
 
     #[Route('/', name: 'app_trick', methods: ['GET'])]
     public function index(): Response
     {
-        $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
+//        $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
+        $tricks = $this->repository->findAll();
 
         return $this->render('trick/index.html.twig', [
             'tricks' => $tricks
@@ -51,8 +54,6 @@ class TrickController extends AbstractController
             $slugger = new AsciiSlugger();
             $slug = $slugger->slug($trick->getTitle());
             $trick->setSlug($slug);
-
-            $trick->setUser($this->getUser());
 
             $this->entityManager->persist($trick);
             $this->entityManager->flush();
