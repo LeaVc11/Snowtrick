@@ -31,14 +31,14 @@ class Trick
 //    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class, orphanRemoval: true)]
 //    private Collection $medias;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'tricks', cascade: ['persist'])]
-    private ?string $category;
-
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Image::class)]
     private Collection $images;
 
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Video::class)]
     private Collection $videos;
+
+    private \DateTimeInterface $createdAt;
+    private \DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -170,18 +170,6 @@ class Trick
 //        return $this;
 //    }
 
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Image>
      */
@@ -241,6 +229,9 @@ class Trick
 
         return $this;
     }
+
+
+
 
 
 
