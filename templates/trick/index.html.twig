@@ -31,8 +31,8 @@
                         <title>{{ trick.title }}</title>
                         <rect width="100%" height="100%" fill="#55595c"/>
                         <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                            {% if trick.medias.last.media %}
-                            <img src="{{ asset('assets/upload/tricks/'~trick.medias.last.image) }}" alt="picture trick">
+                            {% if trick.images %}
+                            <img src="{{ asset('assets/upload/tricks/'~trick.images) }}" alt="picture trick">
                             {% endif %}
                         </text>
                     </svg>

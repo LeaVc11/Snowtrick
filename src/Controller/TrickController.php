@@ -32,7 +32,7 @@ class TrickController extends AbstractController
     #[Route('/', name: 'app_trick', methods: ['GET'])]
     public function index(): Response
     {
-//        $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
+
         $tricks = $this->repository->findAll();
 //dd($tricks);
         return $this->render('trick/index.html.twig', [
@@ -49,7 +49,7 @@ class TrickController extends AbstractController
 //        dd($form->isValid());
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $imageFiles = $form->get('medias')->getData();
+            $imageFiles = $form->get('images')->getData();
             foreach ($imageFiles as $imageFile) {
                 if ($file = $imageFile->getFile()) {
                     $imageFileName = $fileUploader->upload($file);
