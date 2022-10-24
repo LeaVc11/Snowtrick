@@ -21,14 +21,15 @@ class TrickController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager, TrickRepository $repository)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
+
     #[Route('/', name: 'app_trick', methods: ['GET'])]
     public function index(): Response
     {
-                $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
+        $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
         return $this->render('trick/index.html.twig', [
             'tricks' => $tricks
         ]);
@@ -67,17 +68,17 @@ class TrickController extends AbstractController
     }
 
     #[Route('/{slug}/show', name: 'app_trick_show', methods: ['GET'])]
-//    #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
-
+    #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
     public function show(Trick $trick): Response
     {
+
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_trick_edit', methods: ['GET', 'POST'])]
-//    #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
+    #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
     public function edit(Request $request, Trick $trick, FileUploader $fileUploader): Response
     {
 
