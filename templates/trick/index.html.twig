@@ -39,22 +39,31 @@
                 <p class="card-text"></p>
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="btn-group text-center">
-{#                        <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"#}
-{#                           class="btn btn-sm btn-outline-secondary">#}
-{#                            <img src="{{ asset('assets/images/logoView.png') }}"#}
-{#                                 height="18px"#}
-{#                                 alt="Voir trick"></a>#}
-                        {% if is_granted('ROLE_USER') %}
-                            <a href="{{ path('app_trick_edit', {'id': trick.slug }) }}"
-                               class="btn btn-sm btn-outline-secondary"><img
-                                        src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
-                                        alt="Modifier trick"></a>
+                        {% for trick in tricks %}
+{#                            {{ dump(trick) }}#}
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    <h4>{{ trick.title }}</h4>
 
-                            <a href="{{ path('app_trick_delete') }}"
-                               class="btn btn-sm btn-outline-secondary"><img
-                                        src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
-                                        alt="Supprimer trick"></a>
-                        {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {#                        <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}" #}
+                        {#                           class="btn btn-sm btn-outline-secondary"> #}
+                        {#                            <img src="{{ asset('assets/images/logoView.png') }}" #}
+                        {#                                 height="18px" #}
+                        {#                                 alt="Voir trick"></a> #}
+                        {#                        {% if is_granted('ROLE_USER') %} #}
+                        {#                            <a href="{{ path('app_trick_edit', {'id': trick.slug }) }}" #}
+                        {#                               class="btn btn-sm btn-outline-secondary"><img #}
+                        {#                                        src="{{ asset('assets/images/logoEdit.png') }}" height="18px" #}
+                        {#                                        alt="Modifier trick"></a> #}
+
+                        {#                            <a href="{{ path('app_trick_delete') }}" #}
+                        {#                               class="btn btn-sm btn-outline-secondary"><img #}
+                        {#                                        src="{{ asset('assets/images/logoDelete.png') }}" height="18px" #}
+                        {#                                        alt="Supprimer trick"></a> #}
+                        {#                        {% endif %} #}
                     </div>
                 </div>
             </div>
