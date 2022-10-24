@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
-use App\Entity\Comment;
+
 use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
@@ -15,26 +14,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
-use Symfony\Component\Validator\Constraints\DateTime;
+
 
 #[Route('/trick')]
 class TrickController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
-    private TrickRepository $repository;
 
     public function __construct(EntityManagerInterface $entityManager, TrickRepository $repository)
     {
         $this->entityManager = $entityManager;
-        $this->repository = $repository;
     }
-
     #[Route('/', name: 'app_trick', methods: ['GET'])]
     public function index(): Response
     {
-
-        $tricks = $this->repository->findAll();
-//dd($tricks);
+                $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
         return $this->render('trick/index.html.twig', [
             'tricks' => $tricks
         ]);
@@ -72,10 +66,10 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'app_trick_show', methods: ['GET'])]
-    #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
+    #[Route('/{slug}/show', name: 'app_trick_show', methods: ['GET'])]
+//    #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
 
-    public function show(Request $request,Trick $trick): Response
+    public function show(Trick $trick): Response
     {
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
@@ -83,7 +77,7 @@ class TrickController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_trick_edit', methods: ['GET', 'POST'])]
-    #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
+//    #[ParamConverter('trick', Trick::class, ['mapping' => ['slug' => 'slug']])]
     public function edit(Request $request, Trick $trick, FileUploader $fileUploader): Response
     {
 
