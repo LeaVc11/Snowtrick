@@ -184,10 +184,8 @@ class Trick
             $this->images->add($image);
             $image->setTrick($this);
         }
-
         return $this;
     }
-
     public function removeImage(Image $image): self
     {
         if ($this->images->removeElement($image)) {
@@ -196,7 +194,6 @@ class Trick
                 $image->setTrick(null);
             }
         }
-
         return $this;
     }
 
@@ -217,7 +214,6 @@ class Trick
 
         return $this;
     }
-
     public function removeVideo(Video $video): self
     {
         if ($this->videos->removeElement($video)) {
@@ -226,7 +222,6 @@ class Trick
                 $video->setTrick(null);
             }
         }
-
         return $this;
     }
 

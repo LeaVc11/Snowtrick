@@ -48,34 +48,50 @@
 /*    white-space: nowrap;*/
 /*    -webkit-overflow-scrolling: touch;*/
 /*}*/
-#picture{
+#picture {
     width: 100%;
     min-height: 900px;
     background-image: url("../../upload/tricks/pexels-visit-almaty-848599.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
-body{
+
+body {
     position: relative;
 }
+
 .navbar-item-custom, .navbar-item-custom a {
     color: white;
-    text-decoration:none;
+    text-decoration: none;
 }
+
 .footer-custom {
     text-align: center;
     position: fixed;
     bottom: 0;
-    width:100%;
+    width: 100%;
     background-color: #dfeaff;
     padding-top: 25px;
     margin-top: 25px;
 
 }
-.logo{
+
+.logo {
     width: 55px;
     height: 55px;
     margin-left: 50px;
+}
+
+.trick-item h5 {
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-bottom: 1px;
+}
+
+.trick-item span {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 
