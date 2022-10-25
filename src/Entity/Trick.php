@@ -40,6 +40,7 @@ class Trick
     private \DateTimeInterface $createdAt;
     private \DateTimeInterface $updatedAt;
 
+
     public function __construct()
     {
 //        $this->medias = new ArrayCollection();
@@ -173,6 +174,7 @@ class Trick
     /**
      * @return Collection<int, Image>
      */
+
     public function getImages(): Collection
     {
         return $this->images;
@@ -225,7 +227,10 @@ class Trick
         return $this;
     }
 
-
+    public function getFirstImage() : ?Image
+    {
+        return $this->images->first() ?: null;
+    }
 
 
 

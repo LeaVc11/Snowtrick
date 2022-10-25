@@ -1,28 +1,30 @@
+<section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
+    <div class=" p-2 p-lg-5">
 
-    <section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
-        <div class=" p-2 p-lg-5">
+        {{ form_start(form) }}
+        <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Créer une nouvelle figure</h1>
 
-            {{ form_start(form) }}
-            <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Créer une nouvelle figure</h1>
+        {{ form_widget(form.title,{'attr': {'placeholder':'Nom du trick', 'class':'fw-bold'}}) }}
+        <br>
+        {{ form_widget(form.description,{'attr':{ 'placeholder':'Description', 'class':'fw-bold', 'rows':8}}) }}
+        <br>
+        {#            <div class="mb-3"> #}
+        {#                <label for="formFile" class="form-label fw-bold">Image : </label> #}
+        {#                <input class="form-control" type="file" id="formFile"> #}
+        {#            </div> #}
+        {#            <div class="mb-3"> #}
+        {#                <label for="formFile" class="form-label fw-bold">Vidéo : </label> #}
+        {#                <input class="form-control" type="file" id="formFile"> #}
+        {#            </div> #}
+{#        <div class="form-groupe m-2 px-5 ">#}
 
-            {{ form_widget(form.title,{'attr': {'placeholder':'Nom du trick'}})}}
-            <br>
-            {{ form_widget(form.description,{'attr':{ 'placeholder':'Description', 'rows':8}})}}
-            <br>
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Image : </label>
-                <input class="form-control" type="file" id="formFile">
-            </div>
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Vidéo : </label>
-                <input class="form-control" type="file" id="formFile">
-            </div>
-            <div class="form-groupe m-2 px-5 ">
+{#            <button class="btn btn-primary  text-white  m-1 w-100 rounded-1 border border-primary form-control form-control-lg"#}
+{#                    type="submit">Enregistrer#}
+{#            </button>#}
 
-                <button class="btn btn-primary  text-white  m-1 w-100 rounded-1 border border-primary form-control form-control-lg"
-                        type="submit">Enregistrer
-                </button>
-            </div>
-            {{ form_end(form) }}
-    </section>
+{#        </div>#}
+        {{ form_end(form) }}
+    </div>
+
+</section>
 

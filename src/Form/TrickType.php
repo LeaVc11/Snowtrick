@@ -6,9 +6,9 @@ use App\Entity\Trick;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +24,7 @@ class TrickType extends AbstractType
                 'mapped' => false,
                 'required' => false
             ])
-            ->add('videos', UrlType::class, [
+            ->add('videos', FileType::class, [
                 'label' => false,
                 'mapped' => false,
                 'required' => false
@@ -32,11 +32,14 @@ class TrickType extends AbstractType
             ->add('description', TextareaType::class, [
                 'attr' => ['class' => 'tinymce'],
                 ])
-
+            ->add('save', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-primary'],
+                'label' => 'Enregistrer',
+                'row_attr' => ['class' => 'd-grid']
+            ])
 
         ;
     }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

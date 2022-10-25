@@ -17,7 +17,7 @@ class HomeController extends AbstractController
     {
         $tricks = $repository->findAll();
         $mailService->send('snowtrick42@gmail.com', "johndoe", "Mon premier mail", "Bonjour");
-        return $this->render('trick/index.html.twig', [
+        return $this->render('home/index.html.twig', [
             'tricks' => $tricks
         ]);
     }

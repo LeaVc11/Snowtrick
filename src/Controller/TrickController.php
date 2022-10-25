@@ -13,17 +13,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 #[Route('/trick')]
 class TrickController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private SluggerInterface $slugger;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, SluggerInterface $slugger)
     {
         $this->entityManager = $entityManager;
+        $this->slugger = $slugger;
     }
 
     #[Route('/', name: 'app_trick', methods: ['GET'])]
@@ -31,34 +33,35 @@ class TrickController extends AbstractController
     {
         $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
 //        dd($tricks);
+
         return $this->render('trick/index.html.twig', [
             'tricks' => $tricks
         ]);
     }
 
     #[Route('/new', name: 'app_trick_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, FileUploader $fileUploader): Response
+    public function new(Request $request): Response
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 //        dd($form->isValid());
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $imageFiles = $form->get('images')->getData();
-            foreach ($imageFiles as $imageFile) {
-                if ($file = $imageFile->getFile()) {
-                    $imageFileName = $fileUploader->upload($file);
-                    $imageFile->setUrl($imageFileName);
-                }
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('images')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $this->slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('image_directory'),
+                    $newFilename
+                );
+                $trick->setImage($imageFile);
             }
-            $slugger = new AsciiSlugger();
-            $slug = $slugger->slug($trick->getTitle());
-            $trick->setSlug($slug);
-//dd($trick);
+            $trick->setUser($this->getUser());
             $this->entityManager->persist($trick);
             $this->entityManager->flush();
-
             $this->addFlash('success', 'Nouveau trick ajouté avec succès!');
             return $this->redirectToRoute('app_home');
         }
