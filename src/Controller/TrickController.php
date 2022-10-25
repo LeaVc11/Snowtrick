@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
@@ -20,12 +21,11 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class TrickController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
-    private SluggerInterface $slugger;
 
-    public function __construct(EntityManagerInterface $entityManager, SluggerInterface $slugger)
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->slugger = $slugger;
     }
 
     #[Route('/', name: 'app_trick', methods: ['GET'])]
@@ -47,23 +47,14 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 //        dd($form->isValid());
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $imageFile */
-            $imageFile = $form->get('images')->getData();
-            if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $this->slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-                $imageFile->move(
-                    $this->getParameter('image_directory'),
-                    $newFilename
-                );
-                $trick->setImage($imageFile);
-            }
-            $trick->setUser($this->getUser());
+            $trick = $form->getData();
+//            dd($trick);
             $this->entityManager->persist($trick);
+
             $this->entityManager->flush();
             $this->addFlash('success', 'Nouveau trick ajouté avec succès!');
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_add_image_to_trick', [
+                'slug' => $trick->getSlug()]);
         }
         return $this->render('trick/new.html.twig', [
             'trick' => $trick,

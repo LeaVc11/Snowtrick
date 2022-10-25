@@ -6,23 +6,10 @@
 
         {{ form_widget(form.title,{'attr': {'placeholder':'Nom du trick', 'class':'fw-bold'}}) }}
         <br>
+        {{ form_widget(form.slug,{'attr': {'placeholder':'Slug', 'class':'fw-bold'}}) }}
+        <br>
         {{ form_widget(form.description,{'attr':{ 'placeholder':'Description', 'class':'fw-bold', 'rows':8}}) }}
         <br>
-        {#            <div class="mb-3"> #}
-        {#                <label for="formFile" class="form-label fw-bold">Image : </label> #}
-        {#                <input class="form-control" type="file" id="formFile"> #}
-        {#            </div> #}
-        {#            <div class="mb-3"> #}
-        {#                <label for="formFile" class="form-label fw-bold">Vidéo : </label> #}
-        {#                <input class="form-control" type="file" id="formFile"> #}
-        {#            </div> #}
-{#        <div class="form-groupe m-2 px-5 ">#}
-
-{#            <button class="btn btn-primary  text-white  m-1 w-100 rounded-1 border border-primary form-control form-control-lg"#}
-{#                    type="submit">Enregistrer#}
-{#            </button>#}
-
-{#        </div>#}
         {{ form_end(form) }}
     </div>
 

@@ -4,8 +4,6 @@ namespace App\Form;
 
 use App\Entity\Trick;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,22 +15,14 @@ class TrickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'title'])
-            ->add('images', FileType::class, [
-                'label' => false,
-                'multiple' => true,
-                'mapped' => false,
-                'required' => false
-            ])
-            ->add('videos', FileType::class, [
-                'label' => false,
-                'mapped' => false,
-                'required' => false
-            ])
+            ->add('title', TextType::class, [
+                'label' => 'title'])
+            ->add('slug', TextType::class, [
+                'label' => 'slug'])
             ->add('description', TextareaType::class, [
                 'attr' => ['class' => 'tinymce'],
                 ])
-            ->add('save', SubmitType::class, [
+            ->add('enregistrer', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-primary'],
                 'label' => 'Enregistrer',
                 'row_attr' => ['class' => 'd-grid']
