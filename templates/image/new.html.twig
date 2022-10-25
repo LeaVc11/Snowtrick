@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
-
-{% block content %}
-    <div class=" p-2 p-lg-5">
-
-    {{ form_start(form)}}
-
-    {% block form %}
-        {% include "/trick/_form.html.twig" %}
-    {% endblock %}
-    {{ form_end(form)}}
-
+{% block body %}
+    <section class="container vh-65 text-center my-3">
+        <div class="text-start">
+            <a href="" role="button" class="btn btn-dark mt-3"><i class="bi bi-arrow-left"></i></a>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 my-5">
+                <h1 class="display-3 mb-5"></h1>
+                {{ include('image/_form.html.twig') }}
+            </div>
+        </div>
+    </section>
 {% endblock %}

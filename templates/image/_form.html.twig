@@ -1,17 +1,4 @@
-<section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
-    <div class=" p-2 p-lg-5">
+{{ form_start(form) }}
 
-        {{ form_start(form) }}
-        <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Créer une nouvelle figure</h1>
-
-        {{ form_widget(form.title,{'attr': {'placeholder':'Nom du trick', 'class':'fw-bold'}}) }}
-        <br>
-        {{ form_widget(form.slug,{'attr': {'placeholder':'Slug', 'class':'fw-bold'}}) }}
-        <br>
-        {{ form_widget(form.description,{'attr':{ 'placeholder':'Description', 'class':'fw-bold', 'rows':8}}) }}
-        <br>
-        {{ form_end(form) }}
-    </div>
-
-</section>
-
+<button class="btn btn-dark"></button>
+{{ form_end(form) }}

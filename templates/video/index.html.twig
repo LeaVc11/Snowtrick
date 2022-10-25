@@ -1,19 +1,30 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Ajouter les médias' - Snowtrick{% endblock %}
-
-{% block content %}
-    <section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
-        <div class=" p-2 p-lg-5">
-
-            {{ form_start(form) }}
-            <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Ajouter une image</h1>
-            {{ form_widget(form.fileName,{'attr': {'placeholder':'Image', 'class':'fw-bold'}}) }}
-            <br>
-            {{ form_widget(form.link,{'attr': {'placeholder':'Image', 'class':'fw-bold'}}) }}
-            <br>
-            {{ form_end(form) }}
+{% block body %}
+    <aside class="text-center mt-2" data-controller="video">
+        <div class="medias d-flex justify-content-center flex-wrap flex-xl-nowrap"
+        >
+            {% for video in videos %}
+                <div>
+                    <iframe
+                            width="560"
+                            height="315"
+                            src="{{video.link}}"
+                            title="Video Player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                    >
+                    </iframe>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        {{ include('video/_delete_form.html.twig') }}
+                    {% endif %}
+                </div>
+            {% else %}
+                <div></div>
+            {% endfor %}
         </div>
-    </section>
-
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a href="" role="button" class="btn btn-success my-5 add_item_link" data-collection-holder-class="videos">
+                <i class="fa fa-youtube" aria-hidden="true"></i></a>
+        {% endif %}
+    </aside>
 {% endblock %}
