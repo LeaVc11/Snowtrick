@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class=" p-2 p-lg-5">
+
+    {{ form_start(form)}}
+
+    {% block form %}
+        {% include "/trick/_form.html.twig" %}
+    {% endblock %}
+    {{ form_end(form)}}
+
+{% endblock %}
