@@ -35,14 +35,14 @@
         </div>
     </section>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
-        {% for trick in tricks %}
+        {% for index, trick in tricks %}
             <div class="col">
                 <div class="card shadow-sm">
-
+                    {% if tricks in trick %}
+                    <img src="{{ asset('upload/tricks/images/'~ trick.images.fileName) }}" alt="picture trick">
+                    {% endif %}
                     <div class="card-body">
-                        {% for tricks in trick %}
-                            <img src="{{ asset('upload/tricks/images/'~trick.image.fileName) }}" alt="picture trick">
-                        {% endfor %}
+
                         <p class="card-text">{{ trick.title}}</p>
                         <p class="card-text">{{ trick.slug }}</p>
                         <p class="card-text">{{ trick.description }}</p>
