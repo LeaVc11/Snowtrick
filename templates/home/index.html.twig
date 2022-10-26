@@ -35,12 +35,13 @@
         </div>
     </section>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
-        {% for index, trick in tricks %}
+        {% for trick in tricks %}
             <div class="col">
                 <div class="card shadow-sm">
-                    {% if tricks in trick %}
-                    <img src="{{ asset('upload/tricks/images/'~ trick.images.fileName) }}" alt="picture trick">
+                    {% if trick.images %}
+                        <img src="{{ asset('/upload/tricks/images/'~ trick.firstImage) }}" alt="picture trick">
                     {% endif %}
+
                     <div class="card-body">
 
                         <p class="card-text">{{ trick.title}}</p>
@@ -50,11 +51,7 @@
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="btn-group text-center">
                                 <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"
-                                   class="btn btn-sm btn-outline-secondary">
-                                    <img src="{{ asset('assets/images/logoView.png') }}"
-                                         height="18px"
-
-                                         alt="Voir trick"></a>
+                                   class="btn btn-sm btn-outline-secondary">{{trick.title}}</a>
                                 {% if is_granted('ROLE_USER') %}
                                     <a href="{{ path('app_trick_edit', {'id': trick.slug }) }}"
                                        class="btn btn-sm btn-outline-secondary"><img

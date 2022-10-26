@@ -61,7 +61,7 @@ class AddMediaToTrickController extends AbstractController
             $imageData->setTrick($trick);
             // * Sauvegarder l'image en BDD
 //            dd($imageData,$imageFile);
-            $this->imageRepository->save($imageData);
+            $this->imageRepository->save($imageData, true);
             // L'image est ajoutéee et on retourne à la page home
             return $this->redirectToRoute('app_home');
         }

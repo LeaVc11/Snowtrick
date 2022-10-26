@@ -26,16 +26,17 @@
         {% for trick in tricks %}
             <div class="col">
                 <div class="card shadow-sm">
-                    {% if trick.firstImage %}
-                        {% dump trick.firstImage %}
-{#                        <img src="{{ asset('assets/upload/tricks/' ~ trick.firstImage) }}" alt="picture trick">#}
-                        <img src="{{ asset('upload/tricks/snowMute.jpg') }}" alt="picture trick">
+                    {% if trick.images %}
+                        <img src="{{ asset('/upload/tricks/images/'~ trick.firstImage) }}" alt="picture trick">
                     {% endif %}
                     <div class="card-body">
+                        <p class="card-text">{{ trick.title}}</p>
+                        <p class="card-text">{{ trick.slug }}</p>
                         <p class="card-text">{{ trick.description }}</p>
+
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="btn-group text-center">
-                                <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"
+                                <a href="{{ path('app_trick_show', {'slug': trick.title }) }}"
                                    class="btn btn-sm btn-outline-secondary">
                                     <img src="{{ asset('assets/images/logoView.png') }}"
                                          height="18px" alt="Voir trick"></a>
