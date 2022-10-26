@@ -9,6 +9,7 @@ use App\Form\VideoType;
 use App\Repository\ImageRepository;
 use App\Repository\TrickRepository;
 use App\Repository\VideoRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,13 +21,15 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AddMediaToTrickController extends AbstractController
 {
     private TrickRepository $trickRepository;
-    private ImageRepository $imageRepository;
-    private VideoRepository $videoRepository;
+    private EntityManagerInterface $entityManager;
+//    private ImageRepository $imageRepository;
+//    private VideoRepository $videoRepository;
 
-    public function __construct( TrickRepository $trickRepository, ImageRepository $imageRepository, VideoRepository $videoRepository) {
+    public function __construct( TrickRepository $trickRepository,EntityManagerInterface $entityManager/*ImageRepository $imageRepository, VideoRepository $videoRepository*/) {
         $this->trickRepository = $trickRepository;
-        $this->imageRepository = $imageRepository;
-        $this->videoRepository = $videoRepository;
+        $this->entityManager = $entityManager;
+//        $this->imageRepository = $imageRepository;
+//        $this->videoRepository = $videoRepository;
 
 
     }
@@ -58,8 +61,11 @@ class AddMediaToTrickController extends AbstractController
             // * Un setTrick($trick);
             $imageData->setTrick($trick);
             // * Sauvegarder l'image en BDD
-//            dump($imageData,$imageFile);
-            $this->imageRepository->save($imageData, true);
+//            dd($imageData,$imageFile);
+//            dd($imageData);
+            $this->entityManager->persist($imageData);
+            $this->entityManager->flush();
+//            $imageRepository->save($imageData);
             // L'image est ajoutéee et on retourne à la page home
             return $this->redirectToRoute('app_home');
         }

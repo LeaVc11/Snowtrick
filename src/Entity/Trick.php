@@ -44,13 +44,13 @@ class Trick
 //    #[ORM\JoinColumn(nullable: false)]
 //    private ?Category $category = null;
 
-
-    public function __construct()
-    {
-//        $this->medias = new ArrayCollection();
-        $this->images = new ArrayCollection();
-        $this->videos = new ArrayCollection();
-    }
+//
+//    public function __construct()
+//    {
+////        $this->medias = new ArrayCollection();
+//        $this->images = new ArrayCollection();
+//        $this->videos = new ArrayCollection();
+//    }
 
     public function getId(): ?int
     {

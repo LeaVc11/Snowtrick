@@ -11,7 +11,8 @@
         Mais également de montrer, de faire découvrir ce sport.
         Ci-dessous vous pouvez trouver la liste des différentes figures écrites par les membres inscrits.</p>
 
-    <p>Que ce soit pour le partage ou la découverte ( ou bien même les deux ) : <a href="{{ path('app_register') }}" class=" p-2">Inscrivez-vous</a></p>
+    <p>Que ce soit pour le partage ou la découverte ( ou bien même les deux ) : <a href="{{ path('app_register') }}"
+                                                                                   class=" p-2">Inscrivez-vous</a></p>
 
 
     <section class="jumbotron jumbotron-fluid vh-25 position-relative">
@@ -38,14 +39,14 @@
             <div class="col">
                 <div class="card shadow-sm">
 
-                    {% if trick.images %}
-{#                        {% dump trick.image %}#}
-                        {#                        <img src="{{ asset('assets/upload/tricks/' ~ trick.firstImage) }}" alt="picture trick">#}
-                        <img src="{{ asset('upload/tricks/images/'~trick.images) }}" alt="picture trick">
-                    {% endif %}
-
                     <div class="card-body">
+                        {% for tricks in trick %}
+                            <img src="{{ asset('upload/tricks/images/'~trick.image.fileName) }}" alt="picture trick">
+                        {% endfor %}
+                        <p class="card-text">{{ trick.title}}</p>
+                        <p class="card-text">{{ trick.slug }}</p>
                         <p class="card-text">{{ trick.description }}</p>
+
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="btn-group text-center">
                                 <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"
