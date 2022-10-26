@@ -9,7 +9,8 @@ parameters:
     mailjet.api.version: 'v3.1'
     email.from: 'snowtrick42@gmail.com'
     email.name: 'Snowtrick'
-    image_directory: '%kernel.project_dir%/public/upload/tricks'
+    image_directory: '%kernel.project_dir%/public/upload/tricks/images'
+    video_directory: '%kernel.project_dir%/public/upload/tricks/videos'
 
 services:
     # default configuration for services in *this* file

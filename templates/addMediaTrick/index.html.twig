@@ -14,6 +14,10 @@
             {{ form_widget(form.link,{'attr': {'placeholder':'Image', 'class':'fw-bold'}}) }}
             <br>
             {{ form_end(form) }}
+            <div class="form-groupe m-2 px-5 ">
+                <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
+                    <a href="{{ path('app_add_video_to_trick') }}" class="text-decoration-none m-3 text-center text-primary fw-bold">Créer un Trick</a></p>
+            </div>
         </div>
     </section>
 

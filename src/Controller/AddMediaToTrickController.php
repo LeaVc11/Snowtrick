@@ -10,12 +10,14 @@ use App\Repository\ImageRepository;
 use App\Repository\TrickRepository;
 use App\Repository\VideoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
-class AddVideoToTrickController extends AbstractController
+class AddMediaToTrickController extends AbstractController
 {
     private TrickRepository $trickRepository;
     private ImageRepository $imageRepository;
@@ -29,79 +31,68 @@ class AddVideoToTrickController extends AbstractController
 
     }
     #[Route('/add/image/to/{slug}', name: 'app_add_image_to_trick')]
-    public function __invoke(Request $request,string $slug): Response
+    public function __invoke(Request $request,string $slug, ImageRepository $imageRepository): Response
     {
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
         if ($trick === null) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Impossible de trouver ce trick');
         }
         // On prépare le formulaire
-        $image = new Image();
-        $form = $this->createForm(ImageType::class, $image);
+        $imageData = new Image();
+        $form = $this->createForm(ImageType::class, $imageData);
         $form->handleRequest($request);
-
         // Si le formulaire est valide
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imageFile */
-            $image= $form->get('image')->getData();
+//            dd($imageData);
+            $imageFile= $form->get('fileName')->getData();
             //Ici il faut copier l'image dans le bon répertoire
-            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+//            dd($imageFile);
             $newFilename = uniqid() . '.' . $imageFile->guessExtension();
             $imageFile->move(
                 $this->getParameter('image_directory'),
                 $newFilename
             );
             // * Un setFilename pour mettre le bon chemin local)
-            $image->setFileName($newFilename);
-
+            $imageData->setFilename($newFilename);
             // * Un setTrick($trick);
-            $image->setTrick($trick);
+            $imageData->setTrick($trick);
             // * Sauvegarder l'image en BDD
-            $this->imageRepository->save($image);
-
+//            dump($imageData,$imageFile);
+            $this->imageRepository->save($imageData, true);
             // L'image est ajoutéee et on retourne à la page home
             return $this->redirectToRoute('app_home');
         }
-        // Sinon on affiche la page et le formulaire
-
-//        return $this->renderForm('addMediaTrick/index.html.twig', [
-//            'form' => $form,
-//        ]);
         return $this->renderForm('image/index.html.twig', [
             'form' => $form,
         ]);
     }
 
     #[Route('/add/video/to/{slug}', name: 'app_add_video_to_trick')]
-    public function index(Request $request,string $slug): Response
+    public function index(Request $request,string $slug, VideoRepository $videoRepository,SluggerInterface $slugger): Response
     {
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
         if ($trick === null) {
             throw new NotFoundHttpException('Impossible de trouver ce trick');
         }
         // On prépare le formulaire
-        $video = new Video();
-        $form = $this->createForm(VideoType::class, $image);
+        $videoFile = new Video();
+        $form = $this->createForm(VideoType::class, $videoFile);
         $form->handleRequest($request);
-
         // Si le formulaire est valide
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $videoFile */
-            $video= $form->get('video')->getData();
+            $videoFile= $form->get('video')->getData();
             //Ici il faut copier l'image dans le bon répertoire
             $originalFilename = pathinfo($videoFile->getClientOriginalName(), PATHINFO_FILENAME);
             $newFilename = uniqid() . '.' . $videoFile->guessExtension();
             $videoFile->move(
-                $this->getParameter('image_directory'),
+                $this->getParameter('video_directory'),
                 $newFilename
             );
-
-            $video->setLink($newFilename);
-
-
-            $video->setTrick($trick);
-
-            $this->videoRepository->save($video);
+            $videoFile->setLink($newFilename);
+            $videoFile->setTrick($trick);
+            $this->videoRepository->save($videoFile);
 
             // L'image est ajoutéee et on retourne à la page home
             return $this->redirectToRoute('app_home');

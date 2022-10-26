@@ -24,7 +24,7 @@ class ImageRepository extends ServiceEntityRepository
     public function save(Image $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
-
+        $this->save($imageData, true);
         if ($flush) {
             $this->getEntityManager()->flush();
         }

@@ -1,0 +1,33 @@
+{% block title %}Category index{% endblock %}
+
+{% block body %}
+    <h1>Catégorie</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td></td>
+                <td>{</td>
+                <td>
+                    <a href="">Voir</a>
+                    <a href="">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="">Créer</a>
+{% endblock %}

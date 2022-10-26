@@ -39,6 +39,10 @@ class Trick
 
     private \DateTimeInterface $createdAt;
     private \DateTimeInterface $updatedAt;
+//
+//    #[ORM\ManyToOne(inversedBy: 'tricks')]
+//    #[ORM\JoinColumn(nullable: false)]
+//    private ?Category $category = null;
 
 
     public function __construct()
@@ -231,6 +235,18 @@ class Trick
     {
         return $this->images->first() ?: null;
     }
+
+//    public function getCategory(): ?Category
+//    {
+//        return $this->category;
+//    }
+//
+//    public function setCategory(?Category $category): self
+//    {
+//        $this->category = $category;
+//
+//        return $this;
+//    }
 
 
 

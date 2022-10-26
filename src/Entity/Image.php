@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -19,6 +20,7 @@ class Image
     #[ORM\ManyToOne(inversedBy: 'images')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Trick $trick = null;
+
 
     public function getId(): ?int
     {
@@ -52,4 +54,5 @@ class Image
     {
         return $this->fileName;
     }
+
 }

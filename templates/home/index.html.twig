@@ -38,10 +38,10 @@
             <div class="col">
                 <div class="card shadow-sm">
 
-                    {% if trick.firstImage %}
-                        {% dump trick.firstImage %}
+                    {% if trick.images %}
+{#                        {% dump trick.image %}#}
                         {#                        <img src="{{ asset('assets/upload/tricks/' ~ trick.firstImage) }}" alt="picture trick">#}
-                        <img src="{{ asset('upload/tricks/snowMute.jpg') }}" alt="picture trick">
+                        <img src="{{ asset('upload/tricks/images/'~trick.images) }}" alt="picture trick">
                     {% endif %}
 
                     <div class="card-body">
