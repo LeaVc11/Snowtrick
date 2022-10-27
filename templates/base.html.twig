@@ -12,7 +12,7 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
 </head>
-<body>
+<body  >
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -52,6 +52,7 @@
     {% if block('album') is defined %}
         <section class="d-flex  justify-content-end p-5 container-fluid" id="picture">
             <div class=" p-2 p-lg-5">
+                <p class="text-animation text-center "></p>
                 <h1 class="fw-bold m-5 p-1 text-white text-center">Snowtrick</h1>
 
                 <h5 class="fw-bold m-5 p-1  text-white text-center">La communauté pour découvrir le snowboard et ses
@@ -60,7 +61,7 @@
         </section>
 
     {% endif %}
-    <div class="album py-5 bg-light">
+    <div class="album py-5">
         <div class="container {% if block('album') is not defined %}mt-5{% endif %}">
 
             {% include "_message_flash.html.twig" %}
@@ -78,6 +79,8 @@
     </p>
 </footer>
 
+<script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+<script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
 </body>
 </html>

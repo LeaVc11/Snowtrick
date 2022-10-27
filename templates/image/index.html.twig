@@ -11,8 +11,12 @@
             {{ form_widget(form.fileName,{'attr': {'placeholder':'Image', 'class':'fw-bold'}}) }}
             <br>
             {{ form_end(form) }}
-            <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
-                <a href="">Ajouter une vidéo</a>
+            <div class="d-flex justify-content-end align-items-center mt-3">
+                <a href="{{ path('app_trick') }}"
+                   class="btn btn-sm btn-outline-secondary"><img
+                            src="{{ asset('assets/images/logoReturn.png') }}" height="18px"
+                            alt="Return"></a>
+            </div>
 
 
 

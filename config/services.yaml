@@ -40,3 +40,4 @@ services:
         arguments:
             $publicDirectory: '%kernel.project_dir%/public'
             $imgRelativeDirectory: 'upload'
+

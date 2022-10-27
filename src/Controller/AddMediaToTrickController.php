@@ -63,7 +63,8 @@ class AddMediaToTrickController extends AbstractController
 //            dd($imageData,$imageFile);
             $this->imageRepository->save($imageData, true);
             // L'image est ajoutéee et on retourne à la page home
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_add_video_to_trick', [
+                'slug' => $trick->getSlug()]);
         }
         return $this->renderForm('image/index.html.twig', [
             'form' => $form,
@@ -83,16 +84,13 @@ class AddMediaToTrickController extends AbstractController
         $form->handleRequest($request);
         // Si le formulaire est valide
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $videoFile */
-            $videoFile= $form->get('video')->getData();
-            //Ici il faut copier l'image dans le bon répertoire
-            $newFilename = uniqid() . '.' . $videoFile->guessExtension();
-            $videoFile->move(
-                $this->getParameter('video_directory'),
-                $newFilename
-            );
-            $videoData->setLink($newFilename);
+            /** @var UploadedFile $video */
+            $video= $form->get('link')->getData();
+//            dd($videoData);
+            $videoData->setLink($video);
+//                        dd($videoData);
             $videoData->setTrick($trick);
+//                        dd($videoData);
             $this->videoRepository->save($videoData);
 
             // L'image est ajoutéee et on retourne à la page home
@@ -100,7 +98,7 @@ class AddMediaToTrickController extends AbstractController
         }
         // Sinon on affiche la page et le formulaire
 
-        return $this->renderForm('video/_form.html.twig', [
+        return $this->renderForm('video/index.html.twig', [
             'form' => $form,
         ]);
     }

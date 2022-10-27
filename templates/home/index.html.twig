@@ -44,22 +44,30 @@
 
                     <div class="card-body">
 
-                        <p class="card-text">{{ trick.title}}</p>
-                        <p class="card-text">{{ trick.slug }}</p>
+                        <p class="card-text fw-bold text-center text-uppercase">{{ trick.title}}</p>
+                        <p class="card-text text-center">{{ trick.slug }}</p>
                         <p class="card-text">{{ trick.description }}</p>
 
                         <div class="d-flex justify-content-center align-items-center">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="btn-group text-center m-2 text-uppercase ">
+                                        <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"
+                                           class="btn btn-sm btn-outline-info text-info fw-bold">{{trick.title}}</a>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="btn-group text-center">
-                                <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"
-                                   class="btn btn-sm btn-outline-secondary">{{trick.title}}</a>
+
                                 {% if is_granted('ROLE_USER') %}
-                                    <a href="{{ path('app_trick_edit', {'id': trick.slug }) }}"
-                                       class="btn btn-sm btn-outline-secondary"><img
+                                    <a href="{{ path('app_trick_edit', {'slug': trick.slug }) }}"
+                                       class="btn btn-sm btn-outline-secondary "><img
                                                 src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
                                                 alt="Modifier trick"></a>
 
                                     <a href="{{ path('app_trick_delete', {'slug': trick.slug }) }}"
-                                       class="btn btn-sm btn-outline-secondary"><img
+                                       class="btn btn-sm btn-outline-secondary "><img
                                                 src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
                                                 alt="Supprimer trick"></a>
                                 {% endif %}

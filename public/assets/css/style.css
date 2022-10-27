@@ -48,6 +48,11 @@
 /*    white-space: nowrap;*/
 /*    -webkit-overflow-scrolling: touch;*/
 /*}*/
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 #picture {
     width: 100%;
     min-height: 900px;
@@ -58,6 +63,12 @@
 
 body {
     position: relative;
+    font-family: 'Roboto', sans-serif;
+    background: #dcdde1;
+
+}
+.text-animation{
+    margin: 20px 0 0 80px;
 }
 
 .navbar-item-custom, .navbar-item-custom a {

@@ -1,17 +1,37 @@
-<section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
-    <div class=" p-2 p-lg-5">
+<section class="container-fluid background-layout-stairs">
+    <div class="row justify-content-center">
+        <div class="col-md-8 ">
+            <div class="card shadow-lg rounded my-5">
+                <div class="jumbotron vh-100card-img-top">
+                    <div class="p-1 p-md-4 mb-2 text-white rounded">
+                        <div class="row justify-content-center">
+                            {{ form_start(form) }}
+                            <p class="text-primary fw-bold text-decoration-underline"> Titre :</p>
+                            {{ form_widget(form.title,{'attr': {'placeholder':'Nom du trick', 'class':'fw-bold mb-4'}}) }}
+                            <br>
+                            <p class="text-primary fw-bold text-decoration-underline"> Slug :</p>
+                            {{ form_widget(form.slug,{'attr': {'placeholder':'Slug', 'class':'fw-bold mb-4'}}) }}
+                            <br>
+                            <p class="text-primary fw-bold text-decoration-underline"> Description :</p>
+                            {{ form_widget(form.description,{'attr':{ 'placeholder':'Description', 'class':'fw-bold mb-4', 'rows':8}}) }}
+                            <br>
 
-        {{ form_start(form) }}
-        <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Créer une nouvelle figure</h1>
-
-        {{ form_widget(form.title,{'attr': {'placeholder':'Nom du trick', 'class':'fw-bold'}}) }}
-        <br>
-        {{ form_widget(form.slug,{'attr': {'placeholder':'Slug', 'class':'fw-bold'}}) }}
-        <br>
-        {{ form_widget(form.description,{'attr':{ 'placeholder':'Description', 'class':'fw-bold', 'rows':8}}) }}
-        <br>
-        {{ form_end(form) }}
+                            {{ form_end(form) }}
+{
+                            <div class="d-flex justify-content-end align-items-center mt-3">
+                                <a href="{{ path('app_trick') }}"
+                                   class="btn btn-sm btn-outline-secondary"><img
+                                            src="{{ asset('assets/images/logoReturn.png') }}" height="18px"
+                                            alt="Return"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </section>
+
+
+
 

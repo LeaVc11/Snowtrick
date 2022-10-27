@@ -31,7 +31,7 @@ class Trick
 //    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class, orphanRemoval: true)]
 //    private Collection $medias;
 
-    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Image::class)]
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Image::class, orphanRemoval:true)]
     private Collection $images;
 
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Video::class)]
@@ -44,13 +44,13 @@ class Trick
 //    #[ORM\JoinColumn(nullable: false)]
 //    private ?Category $category = null;
 
-//
-//    public function __construct()
-//    {
-////        $this->medias = new ArrayCollection();
+
+    public function __construct()
+    {
+//        $this->medias = new ArrayCollection();
 //        $this->images = new ArrayCollection();
-//        $this->videos = new ArrayCollection();
-//    }
+        $this->videos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {

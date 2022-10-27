@@ -14,6 +14,11 @@ class VideoType extends AbstractType
     {
         $builder
             ->add('link')
+            ->add('enregistrer', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-primary'],
+                'label' => 'Enregistrer',
+                'row_attr' => ['class' => 'd-grid']
+            ])
 
         ;
     }
