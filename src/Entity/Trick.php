@@ -39,16 +39,13 @@ class Trick
 
     private \DateTimeInterface $createdAt;
     private \DateTimeInterface $updatedAt;
-//
-//    #[ORM\ManyToOne(inversedBy: 'tricks')]
-//    #[ORM\JoinColumn(nullable: false)]
-//    private ?Category $category = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tricks')]
+    private ?Category $category = null;
 
     public function __construct()
     {
-//        $this->medias = new ArrayCollection();
-//        $this->images = new ArrayCollection();
+
         $this->videos = new ArrayCollection();
     }
 
@@ -132,48 +129,6 @@ class Trick
         return $this;
     }
 
-//    /**
-//     * @return Collection<int, Media>
-//     */
-//    public function getMedias(): Collection
-//    {
-//        return $this->medias;
-//    }
-//    public function setMedia($media): self
-//    {
-//
-//        foreach ($medias as $media) {
-//            $media = new Media();
-//            $media->setImage((string)$media);
-//            $this->addMedia($media);
-//        }
-//        $this->medias = $media;
-//        return $this;
-//    }
-//
-//    public function addMedia(Media $media): self
-//    {
-//        if (!$this->medias->contains($media)) {
-//            $this->medias->add($media);
-//            $media->setTrick($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//
-//
-//    public function removeMedia(Media $media): self
-//    {
-//        if ($this->medias->removeElement($media)) {
-//            // set the owning side to null (unless already changed)
-//            if ($media->getTrick() === $this) {
-//                $media->setTrick(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
 
     /**
      * @return Collection<int, Image>
@@ -240,17 +195,18 @@ class Trick
         return $this->videos->first() ?: null;
     }
 
-//    public function getCategory(): ?Category
-//    {
-//        return $this->category;
-//    }
-//
-//    public function setCategory(?Category $category): self
-//    {
-//        $this->category = $category;
-//
-//        return $this;
-//    }
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
 
 
 
