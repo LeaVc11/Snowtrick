@@ -91,7 +91,7 @@ class AddMediaToTrickController extends AbstractController
 //                        dd($videoData);
             $videoData->setTrick($trick);
 //                        dd($videoData);
-            $this->videoRepository->save($videoData);
+            $this->videoRepository->save($videoData,true);
 
             // L'image est ajoutéee et on retourne à la page home
             return $this->redirectToRoute('app_home');

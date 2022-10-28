@@ -95,9 +95,9 @@ class TrickController extends AbstractController
             $slug = $slugger->slug($trick->getSlug());
             // On remet le slug altéré si nécessaire
             $trick->setSlug($slug);
-            foreach ($images as $image){
-                $images->getImages($image);
-            }
+//            foreach ($images as $image){
+//                $images->getImages($image);
+//            }
             // On sauvegarde en BDD
             $this->entityManager->persist($trick);
             $this->entityManager->flush();

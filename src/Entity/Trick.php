@@ -235,6 +235,10 @@ class Trick
     {
         return $this->images->first() ?: null;
     }
+    public function getFirstVideo() : ?Video
+    {
+        return $this->videos->first() ?: null;
+    }
 
 //    public function getCategory(): ?Category
 //    {
