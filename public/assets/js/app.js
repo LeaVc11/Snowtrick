@@ -9,11 +9,12 @@ let typewriter = new Typewriter(txtAnim,{
 typewriter
     .pauseFor(1800)
     .changeDelay(50)
-    .typeString('<strong style="font-size: 34px "> SnowTrick</strong> <br>')
-    .pauseFor(300)
-    .deleteChars(14)
-    .typeString('<span style="color:#f1c40f"> La communauté pour découvrir le snowboard et ses figures</span> ')
+    .typeString('<span style="color:#487eb0;font-weight:bold"> La communauté pour découvrir</span><br><br> ')
+
     .pauseFor(1000)
+    .typeString('<span style="color: #EA39ff; font-weight:bold "> le snowboard et ses figures</span> ')
+    .pauseFor(1000)
+
 
     .start()
 

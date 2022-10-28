@@ -67,8 +67,9 @@ body {
     background: #dcdde1;
 
 }
-.text-animation{
+.text-ani{
     margin: 20px 0 0 80px;
+    color: black;
 }
 
 .navbar-item-custom, .navbar-item-custom a {
