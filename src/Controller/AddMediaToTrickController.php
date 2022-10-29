@@ -9,6 +9,7 @@ use App\Form\VideoType;
 use App\Repository\ImageRepository;
 use App\Repository\TrickRepository;
 use App\Repository\VideoRepository;
+use App\Service\EmbedVideoLink\VideoLinkSorterService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -72,7 +73,7 @@ class AddMediaToTrickController extends AbstractController
     }
 
     #[Route('/add/video/to/{slug}', name: 'app_add_video_to_trick')]
-    public function index(Request $request,string $slug): Response
+    public function new(Request $request,string $slug,VideoLinkSorterService $videoLink): Response
     {
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
         if ($trick === null) {
@@ -84,10 +85,9 @@ class AddMediaToTrickController extends AbstractController
         $form->handleRequest($request);
         // Si le formulaire est valide
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $video */
-            $video= $form->get('link')->getData();
+          $link = $videoLink->trimUrl($form->get('link')->getData());
 //            dd($videoData);
-            $videoData->setLink($video);
+            $videoData->setLink($link);
 //                        dd($videoData);
             $videoData->setTrick($trick);
 //                        dd($videoData);
