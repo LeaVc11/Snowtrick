@@ -1,33 +1,36 @@
-{% block title %}Category index{% endblock %}
+{% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Catégorie</h1>
+{% block album %}{% endblock %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td></td>
-                <td>{</td>
-                <td>
-                    <a href="">Voir</a>
-                    <a href="">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+{% block content %}
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
+        {% for category in categories  %}
+            <div class="col">
+                <div class="card shadow-sm">
+
+                    <div class="card-body">
+                        <p class="card-text">{{ category.name}}</p>
+                        <p class="card-text">{{ category.slug }}</p>
+
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="btn-group text-center">
+                                <a href="{{ path('app_category_show', {'slug': category.id }) }}">
+                                    <img src="{{ asset('assets/images/logoView.png') }}"
+                                         height="18px" alt="Voir trick"></a>
+
+                                    <a href="{{ path('app_category_edit', {'slug': category.slug }) }}"
+                                       class="btn btn-sm btn-outline-secondary"><img
+                                                src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
+                                                alt="Modifier trick"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 
-    <a href="">Créer</a>
+
 {% endblock %}

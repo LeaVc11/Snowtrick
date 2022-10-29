@@ -1,9 +1,14 @@
-{% block title %}New Category{% endblock %}
+{% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Créer une nouvelle catégorie</h1>
+{% block album %}{% endblock %}
+{% block content %}
 
-    {{ include('category/_form.html.twig') }}
+    {{ form_start(form)}}
 
-    <a href="">Retour à la liste</a>
+    {% block form %}
+        {% include "/category/_form.html.twig" %}
+    {% endblock %}
+
+    {{ form_end(form)}}
+
 {% endblock %}

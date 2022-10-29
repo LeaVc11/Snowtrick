@@ -7,7 +7,6 @@ use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,7 +63,6 @@ class TrickController extends AbstractController
 //metre slug = id
 //    #[Route('/{id}/{slug}/show', name: 'app_trick_show', methods: ['GET'])]
     #[Route('/{slug}/show', name: 'app_trick_show', methods: ['GET'])]
-
     public function show(Trick $trick): Response
     {
         return $this->render('trick/show.html.twig', [

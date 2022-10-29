@@ -93,12 +93,10 @@ class AddMediaToTrickController extends AbstractController
 //                        dd($videoData);
             $this->videoRepository->save($videoData,true);
 
-            // L'image est ajoutéee et on retourne à la page home
             return $this->redirectToRoute('app_home');
         }
-        // Sinon on affiche la page et le formulaire
-
         return $this->renderForm('video/index.html.twig', [
+            'video'=> $videoData,
             'form' => $form,
         ]);
     }
