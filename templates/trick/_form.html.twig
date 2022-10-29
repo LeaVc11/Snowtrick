@@ -1,11 +1,28 @@
 <section class="container-fluid background-layout-stairs">
     <div class="row justify-content-center">
         <div class="col-md-8 ">
+
+
             <div class="card shadow-lg rounded my-5">
+
                 <div class="jumbotron vh-100card-img-top">
+
                     <div class="p-1 p-md-4 mb-2 text-white rounded">
+
                         <div class="row justify-content-center">
+
                             {{ form_start(form) }}
+                            <div class="d-flex justify-content-center align-items-center mt-3">
+                                <div class="row">
+                                    <div class="col m-6">
+
+                                        <a href="{{ path('app_category_new') }}"
+                                           class="btn btn-sm btn-outline-info border border-info border-3 ">Catégorie
+                                            <img src="{{ asset('assets/images/logoCategory.png') }}" height="18px"
+                                                 alt="Modifier trick" class="m-1"></a>
+                                    </div>
+                                </div>
+                            </div>
                             <p class="text-primary fw-bold text-decoration-underline"> Titre :</p>
                             {{ form_widget(form.title,{'attr': {'placeholder':'Nom du trick', 'class':'fw-bold mb-4'}}) }}
                             <br>
@@ -20,13 +37,21 @@
                             <br>
 
                             {{ form_end(form) }}
-{
-                            <div class="d-flex justify-content-end align-items-center mt-3">
-                                <a href="{{ path('app_trick') }}"
-                                   class="btn btn-sm btn-outline-secondary"><img
-                                            src="{{ asset('assets/images/logoReturn.png') }}" height="18px"
-                                            alt="Return"></a>
+                            <div class="d-flex justify-content-center align-items-center mt-3">
+                                <div class="row">
+
+                                    <div class="col m-6">
+                                        <a href="{{ path('app_trick') }}"
+                                           class="btn btn-sm btn-outline-warning border border-info border-3"><img
+                                                    src="{{ asset('assets/images/logoReturn.png') }}" height="18px"
+                                                    alt="Return"></a>
+                                    </div>
+
+                                </div>
+
                             </div>
+
+
                         </div>
                     </div>
                 </div>

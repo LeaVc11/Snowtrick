@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 #[Route('/category')]
 class CategoryController extends AbstractController
@@ -40,8 +41,14 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->getData();
 //            dd($trick);
+            $name = $category->getName();
+            // On instancie un slugger ascii
+            $slugger = new AsciiSlugger();
+            // On récupère le slug saisit dans le formulaire et on le reconvertit
+            $slug = $slugger->slug($name);
+            // On remet le slug altéré si nécessaire
+            $category->setSlug($slug);
             $this->entityManager->persist($category);
-
             $this->entityManager->flush();
             $this->addFlash('success', 'Nouvelle catégorie a été ajouté avec succès!');
             return $this->redirectToRoute('app_category', [

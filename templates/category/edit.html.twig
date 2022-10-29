@@ -1,11 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block album %}{% endblock %}
 {% block title %}Modifier Catégorie du trick{% endblock %}
 
-{% block body %}
-    <h1>Modifier Catégorie du trick</h1>
+{% block content %}
+    <h1 class="text-dark text-center fw-bold">Modifier Catégorie du trick</h1>
 
-    {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ form_start(form) }}
+    {% block form %}
+        {% include "/category/_form.html.twig" %}
+    {% endblock %}
 
-    <a href="{{ path('app_category') }}">Retour</a>
-
-    {{ include('category/_delete_form.html.twig') }}
+    {{ form_end(form) }}
 {% endblock %}

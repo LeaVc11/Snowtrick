@@ -15,14 +15,7 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->orderBy('c.name', 'ASC');
-                },
-            ])
+            ->add('name')
             ->add('enregistrer', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-primary'],
                 'label' => 'Enregistrer',
