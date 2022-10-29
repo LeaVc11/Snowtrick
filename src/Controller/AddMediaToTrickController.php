@@ -72,7 +72,7 @@ class AddMediaToTrickController extends AbstractController
     }
 
     #[Route('/add/video/to/{slug}', name: 'app_add_video_to_trick')]
-    public function index(Request $request,string $slug, VideoRepository $videoRepository,SluggerInterface $slugger): Response
+    public function index(Request $request,string $slug): Response
     {
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
         if ($trick === null) {
@@ -98,6 +98,7 @@ class AddMediaToTrickController extends AbstractController
         return $this->renderForm('video/index.html.twig', [
             'video'=> $videoData,
             'form' => $form,
+            'trick' => $trick,
         ]);
     }
 }
