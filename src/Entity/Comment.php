@@ -14,47 +14,46 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    private ?Trick $trick = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $message = null;
 
     #[ORM\Column(length: 255)]
     private ?string $author = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $content = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Trick $trick = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTrick(): ?Trick
     {
-        return $this->title;
+        return $this->trick;
     }
 
-    public function setTitle(string $title): self
+    public function setTrick(?Trick $trick): self
     {
-        $this->title = $title;
+        $this->trick = $trick;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getMessage(): ?string
     {
-        return $this->createdAt;
+        return $this->message;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setMessage(string $message): self
     {
-        $this->createdAt = $createdAt;
+        $this->message = $message;
 
         return $this;
     }
@@ -71,26 +70,26 @@ class Comment
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->content;
+        return $this->createdAt;
     }
 
-    public function setContent(string $content): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->content = $content;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getTrick(): ?Trick
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->trick;
+        return $this->updatedAt;
     }
 
-    public function setTrick(?Trick $trick): self
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
-        $this->trick = $trick;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
