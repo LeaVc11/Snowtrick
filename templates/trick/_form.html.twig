@@ -13,15 +13,6 @@
 
                             {{ form_start(form) }}
                             <div class="d-flex justify-content-center align-items-center mt-3">
-                                <div class="row">
-                                    <div class="col m-6">
-
-                                        <a href="{{ path('app_category_new') }}"
-                                           class="btn btn-sm btn-outline-info border border-info border-3 ">Catégorie
-                                            <img src="{{ asset('assets/images/logoCategory.png') }}" height="18px"
-                                                 alt="Modifier trick" class="m-1"></a>
-                                    </div>
-                                </div>
                             </div>
                             <p class="text-primary fw-bold text-decoration-underline"> Titre :</p>
                             {{ form_widget(form.title,{'attr': {'placeholder':'Nom du trick', 'class':'fw-bold mb-4'}}) }}
@@ -35,7 +26,6 @@
                             <p class="text-primary fw-bold text-decoration-underline"> Description :</p>
                             {{ form_widget(form.description,{'attr':{ 'placeholder':'Description', 'class':'fw-bold mb-4', 'rows':8}}) }}
                             <br>
-
                             {{ form_end(form) }}
                             <div class="d-flex justify-content-center align-items-center mt-3">
                                 <div class="row">

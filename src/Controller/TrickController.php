@@ -101,7 +101,7 @@ class TrickController extends AbstractController
             $this->entityManager->flush();
             // On renvoie l'utilisateur avec le message flash
             $this->addFlash('success', "Modifications enregistrées avec succès!");
-            return $this->redirectToRoute('app_trick', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_edit_image_to_trick', ['slug' => $trick->getSlug()]);
         }
         // Sinon on affiche la page et le formulaire
         return $this->renderForm('trick/edit.html.twig', [

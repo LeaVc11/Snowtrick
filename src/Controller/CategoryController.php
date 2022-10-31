@@ -95,7 +95,7 @@ class CategoryController extends AbstractController
         $this->entityManager->flush();
 
         $this->addFlash('success', "La catégorie a été supprimé avec succès!");
-        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_category', [], Response::HTTP_SEE_OTHER);
     }
 
 }

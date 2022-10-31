@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{#{% block album %}{% endblock %}#}
+{# {% block album %}{% endblock %} #}
 
 {% block content %}
     <section class="container-fluid background-layout-stairs">
@@ -12,33 +12,45 @@
                             <div class="row justify-content-center mb-3">
                                 {% if trick.images %}
                                     {% for image in trick.images %}
-                                        <img src="{{ asset('/upload/tricks/images/'~ image) }}" alt="picture trick">
+                                        <img src="{{ asset('/upload/tricks/images/'~ image) }}" alt="picture trick"
+                                             class="mb-2">
                                     {% endfor %}
-
+                                    <br>
                                 {% endif %}
                                 {% if trick.videos %}
                                     {% for video in trick.videos %}
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/j6uAv1vFP_8" title="YouTube video player"
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/j6uAv1vFP_8"
+                                                title="YouTube video player"
                                                 frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    {%endfor%}
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
+                                    {% endfor %}
                                 {% endif %}
+                                {%if trick.comments%}
+                                {%for comment in trick.comments%}
+                                    {%in%}
+                                    {%endfor%}
+                                {%endif %}
                             </div>
 
-                                <div class="d-flex justify-content-end align-items-center mt-3">
-                                    <div class="btn-group ">
-                                        {% if is_granted('ROLE_USER') %}
-                                            <a href="{{ path('app_trick_edit', {'slug': trick.slug }) }}"
-                                               class="btn btn-sm btn-outline-secondary"><img
-                                                        src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
-                                                        alt="Modifier trick"></a>
+                            <div class="d-flex justify-content-end align-items-center mt-3">
+                                <div class="btn-group ">
+                                    {% if is_granted('ROLE_USER') %}
+                                        <a href="{{ path('app_trick_edit', {'slug': trick.slug }) }}"
+                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
+                                                    src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
+                                                    alt="Modifier trick"></a>
 
-                                            <a href="{{ path('app_trick_delete', {'slug': trick.slug }) }}"
-                                               class="btn btn-sm btn-outline-secondary"><img
-                                                        src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
-                                                        alt="Supprimer trick"></a>
-                                        {% endif %}
-                                    </div>
+                                        <a href="{{ path('app_trick_delete', {'slug': trick.slug }) }}"
+                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
+                                                    src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
+                                                    alt="Supprimer trick"></a>
+                                    {% endif %}
+                                    <a href="{{ path('app_trick') }}"
+                                       class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
+                                                src="{{ asset('assets/images/logoReturn.png') }}" height="18px"
+                                                alt="Return"></a>
+                                </div>
                             </div>
                         </div>
 

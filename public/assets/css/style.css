@@ -101,6 +101,28 @@ body {
     display: block;
     margin-bottom: 10px;
 }
+ul{
+    list-style: none;
+}
+.timeline {
+    padding: 30px 10px;
+    position: relative;
+}
+.timeline-panel-container{
+    width: 100%;
+
+}
+.timeline-panel{
+    width: 90%;
+    float: right;
+    margin-right: 40px;
+    border: 1px solid #d4d4d4;
+    border-radius: 7px;
+    padding: 20px 50px;
+    position: relative;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.175);
+    background-color: #e9ecef;
+}
 
 
 

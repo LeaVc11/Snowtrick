@@ -15,10 +15,10 @@
         <a href="{{ path('app_register') }}"
            class=" p-2">Inscrivez-vous</a></p>
     <br>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
+    <div class="row row-cols-1  row-cols-md-3 g-3 mb-5">
         {% for trick in tricks %}
             <div class="col">
-                <div class="card shadow-sm">
+                <div class="card shadow">
                     {% if trick.images %}
                         <img src="{{ asset('/upload/tricks/images/'~ trick.firstImage) }}" alt="picture trick">
                     {% endif %}
@@ -34,7 +34,10 @@
                                 <div class="col">
                                     <div class="btn-group text-center m-2 text-uppercase ">
                                         <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"
-                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold">{{ trick.title }}</a>
+                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold">
+                                            <img src="{{ asset('assets/images/logoView.png') }}" height="18px"
+                                                 alt="Modifier trick">
+                                        </a>
                                     </div>
                                 </div>
 

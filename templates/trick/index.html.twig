@@ -3,7 +3,10 @@
 {% block album %}{% endblock %}
 
 {% block content %}
-
+    <h1 class="fw-bold text-center"> Tricks</h1>
+    <br>
+    <p>Le panel de figures faisables en l'air augmente de jour en jour à mesure que les freestyleurs progressent. On peut néanmoins classer les tricks en plusieurs catégories.</p>
+    <br>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
         {% for trick in tricks %}
             <div class="col">
@@ -12,8 +15,7 @@
                         <img src="{{ asset('/upload/tricks/images/'~ trick.firstImage) }}" alt="picture trick">
                     {% endif %}
                     <div class="card-body">
-                        <p class="card-text">{{ trick.title}}</p>
-                        <p class="card-text">{{ trick.slug }}</p>
+                        <p class="card-text text-center text-uppercase">{{ trick.title}}</p>
                         <p class="card-text">{{ trick.description }}</p>
 
 
@@ -22,7 +24,10 @@
                                 <div class="col">
                                     <div class="btn-group text-center m-2 text-uppercase ">
                                         <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"
-                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold">{{ trick.title }}</a>
+                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold">
+                                            <img src="{{ asset('assets/images/logoView.png') }}" height="18px"
+                                                    alt="Modifier trick">
+                                        </a>
                                     </div>
                                 </div>
 
