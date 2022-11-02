@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use App\Repository\TrickRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,42 +18,62 @@ class CommentController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private CommentRepository $commentRepository;
+    private TrickRepository $trickRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, CommentRepository $commentRepository)
+
+    public function __construct(EntityManagerInterface $entityManager, CommentRepository $commentRepository, TrickRepository $trickRepository)
     {
         $this->entityManager = $entityManager;
         $this->commentRepository = $commentRepository;
+        $this->trickRepository = $trickRepository;
     }
+
     #[Route('/', name: 'app_comment', methods: ['GET'])]
-    public function index(): Response
+    public function index(CommentRepository $commentRepository): Response
     {
-        $comments = $this->entityManager->getRepository(Comment::class)->findAll();
         return $this->render('comment/index.html.twig', [
-            'comments' => $comments
+            'comments' => $commentRepository->findAll(),
         ]);
     }
-    #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+
+    #[Route('/new/trick/{slug}', name: 'app_comment_new', methods: ['GET', 'POST'])]
+    public function __invoke(Request $request, string $slug, CommentRepository $commentRepository, TrickRepository $trickRepository): Response
     {
+        // On récupère le slug tu trick et on vérifie qu'il existe
+        $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
+        if ($trick === null) {
+            //S'il n'existe pas, erreur 404
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Impossible de trouver ce commentaire');
+        }
+        // On crée le formulaire
         $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
+        $form = $this->createForm(CommentType::class, $comment, [
+            'action' => $this->generateUrl('app_comment_new', [
+                'slug'=> $trick->getSlug(),
+                'trick' => $trick->getId()])]);
+        // On associe la requête
         $form->handleRequest($request);
-
+        // Si le formulaire est soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
+            // On récupère notre commentaire
             $comment = $form->getData();
-
+            $now = new DateTimeImmutable();
+            // On associe le Trick
+            $comment->setTrick($trick);
+            $comment->setUser($this->getUser());
+            $comment->setCreatedAt($now);
+            $comment->setUpdatedAt($now);
+            // On sauvegarde en BDD
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
-
+            // On renvoie l'utilisateur avec le message flash
             $this->addFlash('success', 'Votre commentaire a été ajouté avec succès!');
-
-            return $this->redirectToRoute('app_comment_show', [
-                'slug' => $comment->getSlug()
-            ]);
+            return $this->redirectToRoute('app_trick_show',
+                ['slug' => $trick->getSlug()]);
         }
-
+//        dd($comment);
+        // Sinon on affiche la page et le formulaire
         return $this->renderForm('comment/new.html.twig', [
-            'comment' => $comment,
             'form' => $form,
         ]);
     }
@@ -75,12 +96,12 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment
-                ->setUpdatedAt(new \DateTimeImmutable('now'))
-            ;
+                ->setUpdatedAt(new \DateTimeImmutable('now'));
             $commentRepository->save($comment, true);
             $this->addFlash('success', 'Votre commentaire a été modifié avec succès!');
 
-            return $this->redirectToRoute('app_trick_show', ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trick_show', [
+                'slug' => $trick->getSlug()]);
         }
 
         return $this->renderForm('comment/edit.html.twig', [
@@ -93,7 +114,7 @@ class CommentController extends AbstractController
     public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
         $trick = $comment->getTrick();
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
             $commentRepository->remove($comment, true);
             $this->addFlash('success', 'Votre commentaire a été supprimé avec succès!');
         }
