@@ -81,9 +81,8 @@
                                 <div class="timeline-heading">
                                     {% if trick.comments %}
                                         {% for comment in trick.comments %}
-                                            {{ include('/comment/_form.html.twig') }}
                                         {% endfor %}
-                                    {% endif %}                                 <h5>{{ comment.message }}</h5>#}
+                                    {% endif %}
                                 </div>
                                 <div class="timeline-body">
                                     <div class="d-flex justify-content-end align-items-center mt-3">
