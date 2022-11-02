@@ -114,7 +114,7 @@ ul{
 }
 .timeline-panel{
     width: 90%;
-    float: right;
+    float: left;
     margin-right: 40px;
     border: 1px solid #d4d4d4;
     border-radius: 7px;
@@ -122,6 +122,24 @@ ul{
     position: relative;
     box-shadow: 0 1px 6px rgba(0,0,0,0.175);
     background-color: #e9ecef;
+}
+
+.timeline-panel:after{
+    position: absolute;
+    top: 27px;
+    left: -14px;
+    display: inline-block;
+    border-top: 14px solid transparent;
+    border-left: 14px solid #e9ecef;
+    border-right: 0 solid #e9ecef;
+    border-bottom: 14px solid transparent;
+    content: " ";
+}
+.timeline-panel-container-inverted .timeline-panel:after {
+    border-left-width: 14px;
+    border-right-width: 0;
+    right: -14px;
+    left: auto;
 }
 
 

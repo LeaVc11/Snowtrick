@@ -26,11 +26,11 @@
                                                 allowfullscreen></iframe>
                                     {% endfor %}
                                 {% endif %}
-                                {%if trick.comments%}
-                                {%for comment in trick.comments%}
-                                    {%in%}
-                                    {%endfor%}
-                                {%endif %}
+                                {% if trick.comments %}
+                                    {% for comment in trick.comments %}
+                                        {{ include('/category/_form.html.twig') }}
+                                    {% endfor %}
+                                {% endif %}
                             </div>
 
                             <div class="d-flex justify-content-end align-items-center mt-3">

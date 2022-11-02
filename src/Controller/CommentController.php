@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Entity\Trick;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,32 +15,40 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/comment')]
 class CommentController extends AbstractController
 {
-    #[Route('/', name: 'app_comment', methods: ['GET'])]
-    public function index(CommentRepository $commentRepository): Response
+    private EntityManagerInterface $entityManager;
+    private CommentRepository $commentRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, CommentRepository $commentRepository)
     {
+        $this->entityManager = $entityManager;
+        $this->commentRepository = $commentRepository;
+    }
+    #[Route('/', name: 'app_comment', methods: ['GET'])]
+    public function index(): Response
+    {
+        $comments = $this->entityManager->getRepository(Comment::class)->findAll();
         return $this->render('comment/index.html.twig', [
-            'comments' => $commentRepository->findAll(),
+            'comments' => $comments
         ]);
     }
-
-    #[Route('/new/{trick}', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CommentRepository $commentRepository, Trick $trick): Response
+    #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
+    public function new(Request $request): Response
     {
         $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment,
-            ['action' => $this->generateUrl('app_comment_new', ['trick' => $trick->getId()])]);
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $now = new DateTimeImmutable();
-            $comment->setTrick($trick)
-                ->setCreatedAt($now)
-                ->setAuthor($this->getUser())
-                ->setUpdatedAt($now);
-            $commentRepository->save($comment, true);
+            $comment = $form->getData();
+
+            $this->entityManager->persist($comment);
+            $this->entityManager->flush();
+
             $this->addFlash('success', 'Votre commentaire a été ajouté avec succès!');
 
-            return $this->redirectToRoute('app_trick_show', ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_comment_show', [
+                'slug' => $comment->getSlug()
+            ]);
         }
 
         return $this->renderForm('comment/new.html.twig', [

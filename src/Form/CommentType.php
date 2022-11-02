@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,11 +14,16 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('message')
-            ->add('author')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('trick')
+            ->add('message', TextareaType::class,[
+                'attr' => [
+                    'class' => 'tinymce'
+                ]
+            ])
+            ->add('enregistrer', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-primary'],
+                'label' => 'Enregistrer',
+                'row_attr' => ['class' => 'd-grid']
+            ]);
         ;
     }
 
