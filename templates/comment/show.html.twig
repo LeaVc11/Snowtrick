@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Comment{% endblock %}
+    {% block album %}{% endblock %}
 
-{% block body %}
+    {% block content %}
+
+        {{ form_start(form)}}
+        {% block form %}
+            {% include "/comment/_form.html.twig" %}
+        {% endblock %}
+
+        {{ form_end(form)}}
+    {% endblock %}
+
     <h1>Comment</h1>
 
     <table class="table">

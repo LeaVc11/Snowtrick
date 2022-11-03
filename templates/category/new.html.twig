@@ -2,13 +2,26 @@
 
 {% block album %}{% endblock %}
 {% block content %}
-
-    {{ form_start(form)}}
-
-    {% block form %}
-        {% include "/category/_form.html.twig" %}
-    {% endblock %}
-
-    {{ form_end(form)}}
+    <h1 class="text-dark text-center fw-bold">Créer une catégorie du trick</h1>
+    <section class="container-fluid background-layout-stairs">
+        <div class="row justify-content-center">
+            <div class="col-md-8 ">
+                <div class="card shadow-lg rounded my-5">
+                    <div class="jumbotron vh-100card-img-top">
+                        <div class="p-1 p-md-4 mb-2 text-white rounded">
+                            <div class="row justify-content-center">
+                                <p class="text-primary fw-bold text-decoration-underline"> Nouvelle catégorie :</p>
+                                <br>
+                                {{ form_start(form) }}
+                                {% block form %}
+                                {% endblock %}
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

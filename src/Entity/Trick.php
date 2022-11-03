@@ -235,7 +235,6 @@ class Trick
                 $comment->setTrick(null);
             }
         }
-
         return $this;
     }
 

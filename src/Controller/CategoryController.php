@@ -59,7 +59,7 @@ class CategoryController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/{slug}/show', name: 'app_category_show', methods: ['GET'])]
+    #[Route('/{id}/show/{slug}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
         return $this->render('category/show.html.twig', [

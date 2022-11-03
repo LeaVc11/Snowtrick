@@ -37,7 +37,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/new/trick/{slug}', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    public function __invoke(Request $request, string $slug, CommentRepository $commentRepository, TrickRepository $trickRepository): Response
+    public function new(Request $request, string $slug, CommentRepository $commentRepository, TrickRepository $trickRepository): Response
     {
         // On récupère le slug tu trick et on vérifie qu'il existe
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
@@ -78,7 +78,7 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_comment_show', methods: ['GET'])]
+    #[Route('/{id}/show', name: 'app_comment_show', methods: ['GET'])]
     public function show(Comment $comment): Response
     {
         return $this->render('comment/show.html.twig', [
@@ -99,8 +99,7 @@ class CommentController extends AbstractController
                 ->setUpdatedAt(new \DateTimeImmutable('now'));
             $commentRepository->save($comment, true);
             $this->addFlash('success', 'Votre commentaire a été modifié avec succès!');
-
-            return $this->redirectToRoute('app_trick_show', [
+            return $this->redirectToRoute('app_comment', [
                 'slug' => $trick->getSlug()]);
         }
 
@@ -110,7 +109,7 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_comment_delete', methods: ['POST'])]
     public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
         $trick = $comment->getTrick();
@@ -119,6 +118,7 @@ class CommentController extends AbstractController
             $this->addFlash('success', 'Votre commentaire a été supprimé avec succès!');
         }
 
-        return $this->redirectToRoute('app_trick_show', ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_show',
+            ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
     }
 }

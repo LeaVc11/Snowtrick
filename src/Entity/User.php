@@ -41,6 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $comments;
 
 
+
     public function __construct()
     {
         $this->tricks = new ArrayCollection();
@@ -188,5 +189,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
+    public function __toString(): string
+    {
+        return $this->user;
+    }
 }

@@ -61,8 +61,7 @@ class TrickController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-//metre slug = id
-//    #[Route('/{id}/{slug}/show', name: 'app_trick_show', methods: ['GET'])]
+
     #[Route('/{slug}/show', name: 'app_trick_show', methods: ['GET'])]
     public function show(Trick $trick): Response
     {

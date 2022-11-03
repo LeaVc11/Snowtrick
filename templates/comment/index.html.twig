@@ -7,10 +7,6 @@
     <section id="comment ">
         <h2 class="fw-bold text-center"> Commentaires</h2>
         <br>
-{#        <a href="{{ path('app_comment_new')}}"#}
-{#           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold ">Créer un commentaire<img#}
-{#                    src="{{ asset('assets/images/logoCommentaire.png') }}" height="18px"#}
-{#                    alt="Created comment" class="m-3"></a>#}
         <ul class="timeline">
             <li>
                 <div class="timeline-panel-container ">
@@ -24,15 +20,14 @@
                             <div class="col-10">
                                 <div class="timeline-heading">
 
-{#                                    {%for comment in comments %}#}
                                     <h5>Message</h5>
-                                    {%include '/comment/_form.html.twig'%}
+
                                 </div>
                                 <div class="timeline-body">
                                     <div class="d-flex justify-content-end align-items-center mt-3">
                                         <div class="row">
                                             <div class="col-6">
-                                                <p class="text-muted">createdAt </p>
+                                                <p class="text-muted">{{ comments.createdAt }} </p>
                                             </div>
                                         </div>
                                     </div>

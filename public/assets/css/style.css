@@ -112,34 +112,32 @@ ul{
     width: 100%;
 
 }
-.timeline-panel{
+.timeline-panel {
+    position: relative;
     width: 90%;
-    float: left;
-    margin-right: 40px;
+    padding: 20px 50px;
     border: 1px solid #d4d4d4;
     border-radius: 7px;
-    padding: 20px 50px;
-    position: relative;
     box-shadow: 0 1px 6px rgba(0,0,0,0.175);
     background-color: #e9ecef;
 }
 
-.timeline-panel:after{
+.timeline-panel::after {
+    content: "";
     position: absolute;
-    top: 27px;
-    left: -14px;
-    display: inline-block;
-    border-top: 14px solid transparent;
-    border-left: 14px solid #e9ecef;
-    border-right: 0 solid #e9ecef;
-    border-bottom: 14px solid transparent;
-    content: " ";
-}
-.timeline-panel-container-inverted .timeline-panel:after {
-    border-left-width: 14px;
-    border-right-width: 0;
+    top: 50%;
     right: -14px;
-    left: auto;
+    border-left: 14px solid #e9ecef;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    transform: translateY(-50%);
+}
+
+.timeline-panel.inverted::after {
+    left: -14px;
+    right: auto;
+    border-left: none;
+    border-right: 14px solid #e9ecef;
 }
 
 
