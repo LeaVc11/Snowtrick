@@ -74,6 +74,7 @@ class CommentController extends AbstractController
 //        dd($comment);
         // Sinon on affiche la page et le formulaire
         return $this->renderForm('comment/new.html.twig', [
+            'comment' => $comment,
             'form' => $form,
         ]);
     }
@@ -99,7 +100,7 @@ class CommentController extends AbstractController
                 ->setUpdatedAt(new \DateTimeImmutable('now'));
             $commentRepository->save($comment, true);
             $this->addFlash('success', 'Votre commentaire a été modifié avec succès!');
-            return $this->redirectToRoute('app_comment', [
+            return $this->redirectToRoute('app_trick_show', [
                 'slug' => $trick->getSlug()]);
         }
 
@@ -109,16 +110,15 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_comment_delete', methods: ['POST'])]
-    public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    #[Route('/{id}/delete', name: 'app_comment_delete', methods: ['GET'])]
+    public function delete(Comment $comment): Response
     {
-        $trick = $comment->getTrick();
-        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
-            $commentRepository->remove($comment, true);
+//        dd($comment);
+        $this->entityManager->remove($comment);
+        $this->entityManager->flush();
             $this->addFlash('success', 'Votre commentaire a été supprimé avec succès!');
-        }
 
-        return $this->redirectToRoute('app_trick_show',
-            ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
+
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }

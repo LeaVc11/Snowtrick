@@ -31,7 +31,7 @@ class MediaToTrickController extends AbstractController
 
     }
     #[Route('/add/image/to/{slug}', name: 'app_add_image_to_trick')]
-    public function __invoke(Request $request,string $slug, ImageRepository $imageRepository): Response
+    public function new(Request $request,string $slug, ImageRepository $imageRepository): Response
     {
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
         if ($trick === null) {

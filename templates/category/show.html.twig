@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Voir les catégories{% endblock %}
 {% block album %}{% endblock %}
 
 {% block content %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
-
+        {% for category in categories  %}
             <div class="col">
                 <div class="card shadow-sm">
                     <div class="card-body">
@@ -35,6 +35,6 @@
 
                 </div>
             </div>
-
+        {% endfor %}
     </div>
 {% endblock %}

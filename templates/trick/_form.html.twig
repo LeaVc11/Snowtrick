@@ -26,28 +26,21 @@
                             <p class="text-primary fw-bold text-decoration-underline"> Description :</p>
                             {{ form_widget(form.description,{'attr':{ 'placeholder':'Description', 'class':'fw-bold mb-4', 'rows':8}}) }}
                             <br>
-                            {{ form_end(form) }}
-                            <div class="d-flex justify-content-center align-items-center mt-3">
-                                <div class="row">
+                        </div>
 
-                                    <div class="col m-6">
-                                        <a href="{{ path('app_trick') }}"
-                                           class="btn btn-sm btn-outline-warning border border-info border-3"><img
-                                                    src="{{ asset('assets/images/logoReturn.png') }}" height="18px"
-                                                    alt="Return"></a>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
+                        {{ form_end(form) }}
+                        <div class="d-flex justify-content-center align-items-center mt-3">
+                            <a href="{{ path('app_trick') }}"
+                               class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
+                                        src="{{ asset('assets/images/logoReturn.png') }}" height="18px"
+                                        alt="Return"></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 
 

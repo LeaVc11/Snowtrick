@@ -3,6 +3,7 @@
 {% block title %}Modifier votre commentaire{% endblock %}
 
 {% block content %}
+    <h1 class="text-dark text-center fw-bold">Modidier un commentaire</h1>
     <section class="container-fluid background-layout-stairs">
         <div class="row justify-content-center">
             <div class="col-md-8 ">
@@ -19,10 +20,12 @@
                                 {{ form_start(form) }}
                                 <div class="d-flex justify-content-center align-items-center mt-3">
                                 </div>
-                                <p class="text-primary fw-bold text-decoration-underline"> Message :</p>
+                                <p class="text-dark fw-bold text-decoration-underline"> Message :</p>
                                 {{ form_widget(form.message,{'attr':{ 'placeholder':'Description', 'class':'fw-bold mb-4', 'rows':8}}) }}
                                 <br>
+
                                 {{ form_end(form) }}
+
                                 <div class="d-flex justify-content-center align-items-center mt-3">
                                     <div class="row">
 

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
   {% block album %}{% endblock %}
-{% block title %}Commentaire{% endblock %}
+{% block title %}Nouveaux Commentaire{% endblock %}
 
 {% block content %}
 
@@ -20,7 +20,7 @@
                                 {{ form_start(form) }}
                                 <div class="d-flex justify-content-center align-items-center mt-3">
                                 </div>
-                                <p class="text-primary fw-bold text-decoration-underline"> Message :</p>
+                                <p class="text-primary fw-bold text-decoration-underline list-style-none"> Message :</p>
                                 {{ form_widget(form.message,{'attr':{ 'placeholder':'Description', 'class':'fw-bold mb-4', 'rows':8}}) }}
                                 <br>
                                 {{ form_end(form) }}
