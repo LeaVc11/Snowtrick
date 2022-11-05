@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,6 +40,15 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery(): Query
+    {
+        return $this->findVisibleQuery()
+            ->getQuery();
+    }
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */
@@ -63,4 +73,5 @@ class CommentRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }
