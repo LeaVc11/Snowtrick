@@ -27,14 +27,21 @@ class TrickController extends AbstractController
         $this->trickRepository = $trickRepository;
     }
 
-    #[Route('/{page<\d+>?1}', name: 'app_trick', methods: ['GET'])]
-    public function index(): Response
+    #[Route('/', name: 'app_trick', methods: ['GET'])]
+    public function index(Request $request, TrickRepository $trickRepository): Response
     {
-        $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
+//        $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
+
+        $page = $request->query->getInt('page', 1);
+        $offset = ($page - 1) * TrickRepository::PAGINATOR_PER_PAGE;
+        $paginator = $trickRepository->getTrickPaginator($offset);
 //        dd($tricks);
 
         return $this->render('trick/index.html.twig', [
-            'tricks' => $tricks
+            'tricks' => $paginator,
+            'page' => $page,
+            'max' => TrickRepository::PAGINATOR_PER_PAGE,
+
         ]);
     }
 

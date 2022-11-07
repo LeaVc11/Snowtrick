@@ -8,7 +8,6 @@ use App\Repository\CommentRepository;
 use App\Repository\TrickRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,16 +29,16 @@ class CommentController extends AbstractController
     }
 
     #[Route('/', name: 'app_comment', methods: ['GET'])]
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request,CommentRepository $commentRepository): Response
     {
+        $page = $request->query->getInt('page', 1);
+        $offset = ($page - 1) * CommentRepository::PAGINATOR_PER_PAGE;
+        $paginator = $commentRepository->getCommentPaginator($offset);
 
-        $comments = $paginator->paginate(
-            $this->commentRepository->findAllVisibleQuery(),
-            $request->query->getInt('page', 10), 10
-
-        );
         return $this->render('comment/index.html.twig', [
-            'comments' => $comments
+            'comments' => $paginator,
+            'page' => $page,
+            'max' => CommentRepository::PAGINATOR_PER_PAGE,
         ]);
     }
 
@@ -56,7 +55,7 @@ class CommentController extends AbstractController
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment, [
             'action' => $this->generateUrl('app_comment_new', [
-                'slug' => $trick->getSlug(),
+                'slug'=> $trick->getSlug(),
                 'trick' => $trick->getId()])]);
         // On associe la requête
         $form->handleRequest($request);
@@ -123,7 +122,7 @@ class CommentController extends AbstractController
 //        dd($comment);
         $this->entityManager->remove($comment);
         $this->entityManager->flush();
-        $this->addFlash('success', 'Votre commentaire a été supprimé avec succès!');
+            $this->addFlash('success', 'Votre commentaire a été supprimé avec succès!');
 
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
