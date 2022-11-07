@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,7 +24,6 @@ class RegisterType extends AbstractType
                     'label' => 'Votre username',
                     'attr' => [
                         'class' => 'form-control-lg'
-
                     ],
                     'constraints' => new Length([
                         'min' => 2,
@@ -34,19 +34,21 @@ class RegisterType extends AbstractType
                 'label' => 'Votre email',
                 'attr' => [
                     'class' => 'form-control-lg'
-
                 ],
                 'constraints' => new Length([
                     'min' => 2,
                     'max' => 55
                 ]),
-
+            ])
+            ->add('file', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Photo de profil'
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Votre mot de passe',
                 'attr' => [
                     'class' => 'form-control-lg'
-
                 ],
                 'required' => true,
 
