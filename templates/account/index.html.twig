@@ -3,26 +3,31 @@
 
 {% block title %}Mon compte - Snowtrick {% endblock %}
 
-{% block content%}
+{% block content %}
     <section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
         <div class=" p-2 p-lg-5">
 
-             <h1 class="text-center text-white fw-bold">Mon compte</h1>
+            <h1 class="text-center text-white fw-bold">Mon compte</h1>
             <br>
-            <p class="text-center fw-bold" >Bienvenue {{( app.user.username)}} dans votre compte.<br/></p>
-            <p class="text-center fw-bold" >fff{{( app.user.image)}}<br/></p>
+            <p class="text-center fw-bold">Bienvenue {{ ( app.user.username) }} dans votre compte.<br/></p>
+
+                    <img src="{{ asset('/upload/profiles/images/'~ app.user.image) }}" alt="picture profil">
             <hr>
 
             <div class="form-groupe m-2 px-5 ">
 
                 <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100 ">
-                    <a href="{{ path('app_account_password') }} " class="text-decoration-none m-3 text-primary fw-bold ">Modifier mon mot de passe</a></p>
+                    <a href="{{ path('app_account_password') }} "
+                       class="text-decoration-none m-3 text-primary fw-bold ">Modifier mon mot de passe</a></p>
                 <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
-                    <a href="{{ path('app_category_new') }}" class="text-decoration-none m-3 text-center text-primary fw-bold">Créer une catégorie</a></p>
+                    <a href="{{ path('app_category_new') }}"
+                       class="text-decoration-none m-3 text-center text-primary fw-bold">Créer une catégorie</a></p>
                 <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
-                    <a href="{{ path('app_category') }}" class="text-decoration-none m-3 text-center text-primary fw-bold">Voir les catégories</a></p>
+                    <a href="{{ path('app_category') }}"
+                       class="text-decoration-none m-3 text-center text-primary fw-bold">Voir les catégories</a></p>
                 <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
-                    <a href="{{ path('app_trick_new') }}" class="text-decoration-none m-3 text-center text-primary fw-bold">Créer un trick</a></p>
+                    <a href="{{ path('app_trick_new') }}"
+                       class="text-decoration-none m-3 text-center text-primary fw-bold">Créer un trick</a></p>
 
             </div>
 
