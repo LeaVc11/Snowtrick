@@ -11,6 +11,8 @@ parameters:
     email.name: 'Snowtrick'
     image_directory: '%kernel.project_dir%/public/upload/tricks/images'
     video_directory: '%kernel.project_dir%/public/upload/tricks/videos'
+    avatar_directory: '%kernel.project_dir%/public/upload/profiles/'
+
 
 services:
     # default configuration for services in *this* file
@@ -40,4 +42,6 @@ services:
         arguments:
             $publicDirectory: '%kernel.project_dir%/public'
             $imgRelativeDirectory: 'upload'
+
+
 

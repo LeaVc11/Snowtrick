@@ -2,7 +2,8 @@
 
 namespace App\Service;
 
-use App\Entity\Media;
+
+use App\Entity\Avatar;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -37,9 +38,12 @@ class FileUploader
 
         return $this->imgRelativeDirectory. '/' . $fileName;
     }
-    public function deleteFile(Media $media)
+    public function deleteAvatarFile(Avatar $avatar)
     {
-
+        $file = $this->publicDirectory . $avatar->getUrl();
+        if(file_exists($file) && $avatar->getUrl() != Avatar::DEFAULT_IMG_URL) {
+            unlink($file);
+        }
     }
 
 

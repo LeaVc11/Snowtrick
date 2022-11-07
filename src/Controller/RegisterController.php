@@ -9,8 +9,6 @@ use App\Service\AlertServiceInterface;
 use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -34,19 +32,19 @@ class RegisterController extends AbstractController
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
+//            $user = $form->getData();
             $password = $encoder->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
-            //upload des images
-
-            $imageFile = $form->get('file')->getData();
-
-            $imageName = uniqid() . '.' . $imageFile->guessExtension();
-            $imageFile->move(
-                $this->getParameter('image_directory'),
-                $imageName
-                );
-            $user->setImage($imageName);
+//            //upload des images
+//
+//            $imageFile = $form->get('file')->getData();
+//
+//            $imageName = uniqid() . '.' . $imageFile->guessExtension();
+//            $imageFile->move(
+//                $this->getParameter('image_directory'),
+//                $imageName
+//                );
+//            $user->setImage($imageName);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 

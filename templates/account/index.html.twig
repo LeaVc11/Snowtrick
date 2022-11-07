@@ -11,11 +11,12 @@
             <br>
             <p class="text-center fw-bold">Bienvenue {{ ( app.user.username) }} dans votre compte.<br/></p>
 
-                    <img src="{{ asset('/upload/profiles/images/'~ app.user.image) }}" alt="picture profil">
             <hr>
 
             <div class="form-groupe m-2 px-5 ">
-
+                <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100 ">
+                    <a href="{{ path('app_account_profil') }} "
+                       class="text-decoration-none m-3 text-primary fw-bold ">Modifier mon avatar</a></p>
                 <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100 ">
                     <a href="{{ path('app_account_password') }} "
                        class="text-decoration-none m-3 text-primary fw-bold ">Modifier mon mot de passe</a></p>

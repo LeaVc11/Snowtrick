@@ -25,9 +25,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
-
     /**
      * @var string The hashed password
      */
@@ -42,6 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
     private $comments;
+
+    #[ORM\Column(length: 255)]
+    private ?string $avatar = null;
 
 
 
@@ -132,18 +132,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Trick>
      */
@@ -207,4 +195,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->user;
     }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
 }
