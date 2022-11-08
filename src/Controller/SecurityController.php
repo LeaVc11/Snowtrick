@@ -2,10 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\AccountType;
 use App\Form\ChangePasswordType;
-use App\Form\RegisterType;
-use App\Service\AvatarFileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,34 +75,5 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/account/profil', name: 'app_account_profil')]
-    public function MyProfile(Request $request, AvatarFileUploader $fileUploader): Response
-    {
-        $user = $this->getUser();
 
-        $form = $this->createForm(RegisterType::class, $user);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $imgFile = $form->get('avatar')->getData();
-            if ($file = $form->get('avatar')->get('file')->getData()) {
-                if($user->getAvatar()->getUrl()) {
-                    $fileUploader->deleteAvatarFile($user->getAvatar());
-                }
-                $imgFileName = $fileUploader->upload($file);
-                $imgFile->setUrl($imgFileName);
-            }
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_account');
-        }
-
-        return $this->render('account/profil.html.twig',[
-            'accountForm' => $form->createView(),
-        ]);
-//        return $this->render('account/password.html.twig', [
-//            'form' => $form->createView(),
-//            'notification' => $notification
-//        ]);
-    }
 }

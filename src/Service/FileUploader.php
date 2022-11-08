@@ -38,13 +38,4 @@ class FileUploader
 
         return $this->imgRelativeDirectory. '/' . $fileName;
     }
-    public function deleteAvatarFile(Avatar $avatar)
-    {
-        $file = $this->publicDirectory . $avatar->getUrl();
-        if(file_exists($file) && $avatar->getUrl() != Avatar::DEFAULT_IMG_URL) {
-            unlink($file);
-        }
-    }
-
-
 }
