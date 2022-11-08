@@ -15,7 +15,12 @@ class UserController extends AbstractController
     {
         return $this->render('account/index.html.twig');
     }
-
+    #[Route('/account/profil', name: 'app_account_profile')]
+    public function myProfile(): Response
+    {
+        $user = $this->getUser();
+        return $this->render('account/index.html.twig');
+//        'user' => $user;
     }
-
+}
 
