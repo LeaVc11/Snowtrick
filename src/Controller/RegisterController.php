@@ -38,23 +38,18 @@ class RegisterController extends AbstractController
             $password = $encoder->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
             //upload des images
-
             $imageFile = $form->get('file')->getData();
-
             $imageName = uniqid() . '.' . $imageFile->guessExtension();
             $imageFile->move(
-                $this->getParameter('image_directory'),
+                $this->getParameter('profiles_directory'),
                 $imageName
                 );
             $user->setImage($imageName);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
-
             $content = "Bonjour " . $user->getUsername() . "<br/>Bienvenue sur .";
             $mailService->send($user->getEmail(), $user->getUsername(), 'Bienvenue ', $content);
-
             $alertService->success('Votre inscription s\'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.');
-
             return $this->redirectToRoute('app_login');
         }
         return $this->render('register/index.html.twig', [
