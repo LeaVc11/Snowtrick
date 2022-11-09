@@ -48,6 +48,30 @@
                 </div>
             </div>
         {% endfor %}
+{#        {%if tricks|length > max%}#}
+{#        <nav aria-label="Page navigation">#}
+{#            <ul class="pagination">#}
+{#                {% if page > 1 %}#}
+{#                <li class="page-item">#}
+{#                    <a class="page-link" href="{{ path('app_trick', {page: page - 1}) }}" aria-label="Previous">#}
+{#                        <span aria-hidden="true">&laquo;</span>#}
+{#                    </a>#}
+{#                </li>#}
+{#                {% endif %}#}
+{#                {% for pageNumber in 1..(tricks|length / max)|round(0, 'ceil') %}#}
+{#                    <li class="page-item"><a class="page-link" href="{{ path('app_trick', {page: pageNumber}) }}">{{ pageNumber }}</a></li>#}
+{#                {% endfor %}#}
+{#                {% if page * max < tricks|length %}#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="{{ path('app_trick', {page: page + 1}) }}" aria-label="Next">#}
+{#                            <span aria-hidden="true">&raquo;</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+
+{#            </ul>#}
+{#        </nav>#}
+{#        {%endif%}#}
     </div>
 
 
