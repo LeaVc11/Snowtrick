@@ -34,8 +34,8 @@ class Trick
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Video::class)]
     private Collection $videos;
 
-    private \DateTimeInterface $createdAt;
-    private \DateTimeInterface $updatedAt;
+//    private \DateTimeInterface $createdAt;
+//    private \DateTimeInterface $updatedAt;
 
     #[ORM\ManyToOne(inversedBy: 'tricks')]
     private ?Category $category = null;
@@ -46,7 +46,8 @@ class Trick
 
     public function __construct()
     {
-
+//        $this->createdAt = new \DateTimeImmutable('now');
+//        $this->updatedAt = new \DateTimeImmutable('now');
         $this->videos = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
@@ -95,29 +96,29 @@ class Trick
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
+//    public function getCreatedAt(): ?\DateTimeImmutable
+//    {
+//        return $this->createdAt;
+//    }
+//
+//    public function setCreatedAt(?\DateTimeImmutable $createdAt): self
+//    {
+//        $this->createdAt = $createdAt;
+//
+//        return $this;
+//    }
+//
+//    public function getUpdatedAt(): ?\DateTimeImmutable
+//    {
+//        return $this->updatedAt;
+//    }
+//
+//    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+//    {
+//        $this->updatedAt = $updatedAt;
+//
+//        return $this;
+//    }
 
     public function getUser(): ?User
     {

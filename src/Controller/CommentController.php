@@ -31,14 +31,14 @@ class CommentController extends AbstractController
     #[Route('/', name: 'app_comment', methods: ['GET'])]
     public function index(Request $request,CommentRepository $commentRepository): Response
     {
-        $page = $request->query->getInt('page', 1);
-        $offset = ($page - 1) * CommentRepository::PAGINATOR_PER_PAGE;
-        $paginator = $commentRepository->getCommentPaginator($offset);
+//        $page = $request->query->getInt('page', 1);
+//        $offset = ($page - 1) * CommentRepository::PAGINATOR_PER_PAGE;
+//        $paginator = $commentRepository->getCommentPaginator($offset);
 
         return $this->render('comment/index.html.twig', [
             'comments' => $paginator,
-            'page' => $page,
-            'max' => CommentRepository::PAGINATOR_PER_PAGE,
+//            'page' => $page,
+//            'max' => CommentRepository::PAGINATOR_PER_PAGE,
         ]);
     }
 
