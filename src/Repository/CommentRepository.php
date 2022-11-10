@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,7 +19,6 @@ use Doctrine\Persistence\ManagerRegistry;
 class CommentRepository extends ServiceEntityRepository
 {
 
-    const PAGINATOR_PER_PAGE = 10;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -42,46 +42,16 @@ class CommentRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function countComments()
+
+    public function getQueryByTrick(Trick $trick): Query
     {
         return $this->createQueryBuilder('c')
-            ->select('count(c.id)')
+            ->andWhere('c.trick = :val')
+            ->setParameter('val', $trick)
             ->getQuery()
-            ->getSingleScalarResult()
-            ;
+
+        ;
     }
-    public function getCommentsForPage(int $page, int $commentsPerPage)
-    {
-        return $this->createQueryBuilder('c')
-            ->orderBy('c.createdAt', 'ASC')
-            ->setMaxResults($commentsPerPage)
-            ->setFirstResult(($page-1)*$commentsPerPage)
-            ->getQuery()
-            ->execute()
-            ;
-    }
-//    /**
-//     * @return Query
-//     */
-//    public function findAllVisibleQuery(): Query
-//    {
-//        return $this->findVisibleQuery()
-//            ->getQuery();
-//    }
-//    /**
-//     * @return Comment[] Returns an array of Comment objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
 //    public function findOneBySomeField($value): ?Comment
 //    {

@@ -1,48 +1,61 @@
-{#{% extends 'base.html.twig' %}#}
-{#  {% block album %}{% endblock %}#}
-{#{% block title %}Commentaire{% endblock %}#}
-
-{#{% block content %}#}
-
-{#    <section id="comment ">#}
-{#        <h2 class="fw-bold text-center"> Commentaires</h2>#}
-{#        <br>#}
-{#        <ul class="timeline">#}
-{#            <li>#}
-{#                <div class="timeline-panel-container ">#}
-
-{#                    <div class="timeline-panel mb-3 ">#}
-{#                        <div class="row">#}
-{#                            <div class="col-2">#}
-{#                                <img src="{{ asset('assets/images/snowboarding.png') }}" class="logo" alt="logo">#}
-
-{#                            </div>#}
-{#                            <div class="col-10">#}
-{#                                <div class="timeline-heading">#}
-
-{#                                    <h5>Message</h5>#}
-{#                                </div>#}
-{#                                <div class="timeline-body">#}
-{#                                    <div class="d-flex justify-content-end align-items-center mt-3">#}
-{#                                        <div class="row">#}
-{#                                            <div class="col-6">#}
-{#                                                <p class="text-muted">{{ comments.createdAt }} </p>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-
-{#                                </div>#}
-{#                            </div>#}
-
-{#                        </div>#}
+<h2 class="fw-bold text-center mb-4"> Commentaires</h2>
+<section id="comment ">
+{#{{ pagination.getTotalItemCount}}#}
 
 
-{#                    </div>#}
-{#                </div>#}
+        {% for comment in pagination %}
+{#{{comment.id}}#}
 
-{#            </li>#}
-{#        </ul>#}
+            <div class="timeline-panel-container ">
 
-{#    </section>#}
+                <div class="timeline-panel m-3 ">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="{{ asset('assets/images/snowboarding.png') }}" class="logo"
+                                 alt="logo">
 
-{#{% endblock %}#}
+                        </div>
+                        <div class="col-5">
+                            <div class="timeline-heading">
+                                <p class="timeline-heading text-decoration-none" >{{ comment.user.username }}</p>
+                            </div>
+
+                            <div class="timeline-body">
+                                <p class="timeline-heading text-decoration-none">{{ comment.message }}</p>
+                                <div class="d-flex justify-content-end align-items-center mt-3">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-body">
+                        <div class="d-flex justify-content-end align-items-center mt-3">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="text-dark text-decoration-none">{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }} </p>
+                                </div>
+                                <div class="col">
+                                    <div class="btn-group text-center m-2 text-uppercase ">
+                                        <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
+                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold">
+                                            <img src="{{ asset('assets/images/logoEdit.png') }}"
+                                                 height="18px"
+                                                 alt="Edit comment"></a>
+                                        <a href=" {{ path('app_comment_delete', {'id': comment.id}) }} "
+                                           class="btn btn-sm btn-outline-warning border border-info border-3"><img
+                                                    src="{{ asset('assets/images/logoDelete.png') }}"
+                                                    height="18px"
+                                                    alt="Delete comment"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    <div class="pagination mb-3">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</section>

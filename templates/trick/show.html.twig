@@ -3,146 +3,64 @@
 {# {% block album %}{% endblock %} #}
 
 {% block content %}
-    <section class="container-fluid background-layout-stairs">
-        <div class="row justify-content-center">
-            <div class="col-md-8 ">
-                <div class="card shadow-lg rounded my-5">
-                    <div class="jumbotron vh-50 card-img-top">
-                        <div class="p-4 p-md-5 mb-2 text-white rounded">
-                            <div class="row justify-content-center mb-3">
-                                {% if trick.images %}
-                                    {% for image in trick.images %}
-                                        <img src="{{ asset('/upload/tricks/images/'~ image) }}" alt="picture trick"
-                                             class="mb-2">
-                                    {% endfor %}
-                                    <br>
-                                {% endif %}
-                                {% if trick.videos %}
-                                    {% for video in trick.videos %}
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/j6uAv1vFP_8"
-                                                title="YouTube video player"
-                                                frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen></iframe>
-                                    {% endfor %}
-                                {% endif %}
+<section class="container-fluid background-layout-stairs">
+    <div class="row justify-content-center">
+        <div class="col-md-8 ">
+            <div class="card shadow-lg rounded my-5">
+                <div class="jumbotron vh-50 card-img-top">
+                    <div class="p-4 p-md-5 mb-2 text-white rounded">
+                        <div class="row justify-content-center mb-3">
+                            {% if trick.images %}
+                                {% for image in trick.images %}
+                                    <img src="{{ asset('/upload/tricks/images/'~ image) }}" alt="picture trick"
+                                         class="mb-2">
+                                {% endfor %}
+                                <br>
+                            {% endif %}
+                            {% if trick.videos %}
+                                {% for video in trick.videos %}
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/j6uAv1vFP_8"
+                                            title="YouTube video player"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                {% endfor %}
+                            {% endif %}
 
-                            </div>
-
-                            <div class="d-flex justify-content-end align-items-center mt-3">
-                                <div class="btn-group ">
-                                    {% if is_granted('ROLE_USER') %}
-                                        <a href="{{ path('app_trick_edit', {'slug': trick.slug }) }}"
-                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
-                                                    src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
-                                                    alt="Modifier trick"></a>
-
-                                        <a href="{{ path('app_trick_delete', {'slug': trick.slug }) }}"
-                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
-                                                    src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
-                                                    alt="Supprimer trick"></a>
-                                        <a href="{{ path('app_comment_new', {'slug': trick.slug }) }}"
-                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
-                                                    src="{{ asset('assets/images/logoCommentaire.png') }}" height="18px"
-                                                    alt="Supprimer trick"></a>
-                                    {% endif %}
-                                    <a href="{{ path('app_trick') }}"
-                                       class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
-                                                src="{{ asset('assets/images/logoReturn.png') }}" height="18px"
-                                                alt="Return"></a>
-                                </div>
-                            </div>
                         </div>
 
+                        <div class="d-flex justify-content-end align-items-center mt-3">
+                            <div class="btn-group ">
+                                {% if is_granted('ROLE_USER') %}
+                                    <a href="{{ path('app_trick_edit', {'slug': trick.slug }) }}"
+                                       class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
+                                                src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
+                                                alt="Modifier trick"></a>
+
+                                    <a href="{{ path('app_trick_delete', {'slug': trick.slug }) }}"
+                                       class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
+                                                src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
+                                                alt="Supprimer trick"></a>
+                                    <a href="{{ path('app_comment_new', {'slug': trick.slug }) }}"
+                                       class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
+                                                src="{{ asset('assets/images/logoCommentaire.png') }}" height="18px"
+                                                alt="Supprimer trick"></a>
+                                {% endif %}
+                                <a href="{{ path('app_trick') }}"
+                                   class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
+                                            src="{{ asset('assets/images/logoReturn.png') }}" height="18px"
+                                            alt="Return"></a>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
-    </section>
-    <h2 class="fw-bold text-center mb-4"> Commentaires</h2>
-    {% if is_granted('ROLE_USER') %}
-        <a href=" {{ path('app_comment_new', {'slug': trick.slug }) }} "
+    </div>
+</section>
 
-    {% else %}
-        <div class="text-center mt-4">
-            <h4 class="card-title"></h4>
-            <p class="text-muted"></p>
-            <a href="{{ path('app_login') }}" role="button" class="btn btn-secondary">Se connecter</a>
-        </div>
-    {% endif %}
-    {% if is_granted('ROLE_USER') %}
-        <section id="comment ">
-            {% if trick.comments %}
-                {% for comment in trick.comments %}
+{{ render(controller('App\\Controller\\CommentController::getCommentsByTrick', {'trick' : trick.id,'request' : request})) }}
 
-                            <div class="timeline-panel-container ">
 
-                                <div class="timeline-panel m-3 ">
-                                    <div class="row">
-                                        <div class="col-2">
-                                            <img src="{{ asset('assets/images/snowboarding.png') }}" class="logo"
-                                                 alt="logo">
-
-                                        </div>
-                                        <div class="col-5">
-                                            <div class="timeline-heading">
-                                                <p class="timeline-heading text-decoration-none" >{{ comment.user.username }}</p>
-                                            </div>
-
-                                            <div class="timeline-body">
-                                                <p class="timeline-heading text-decoration-none">{{ comment.message }}</p>
-                                                <div class="d-flex justify-content-end align-items-center mt-3">
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <div class="d-flex justify-content-end align-items-center mt-3">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <p class="text-dark text-decoration-none">{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }} </p>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="btn-group text-center m-2 text-uppercase ">
-                                                        <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
-                                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold">
-                                                            <img src="{{ asset('assets/images/logoEdit.png') }}"
-                                                                 height="18px"
-                                                                 alt="Edit comment">
-                                                        </a>
-                                                        <a href=" {{ path('app_comment_delete', {'id': comment.id}) }} "
-                                                           class="btn btn-sm btn-outline-warning border border-info border-3"><img
-                                                                    src="{{ asset('assets/images/logoDelete.png') }}"
-                                                                    height="18px"
-                                                                    alt="Delete comment"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                {% endfor %}
-            {% endif %}
-        </section>
-    {% endif %}
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 {% endblock %}

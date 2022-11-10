@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Trick;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickRepository;
@@ -11,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,26 +22,29 @@ class CommentController extends AbstractController
     private EntityManagerInterface $entityManager;
     private CommentRepository $commentRepository;
     private TrickRepository $trickRepository;
+    private PaginatorInterface $paginator;
+    private RequestStack $request;
 
 
-    public function __construct(EntityManagerInterface $entityManager, CommentRepository $commentRepository, TrickRepository $trickRepository)
+    public function __construct(EntityManagerInterface $entityManager, CommentRepository $commentRepository, TrickRepository $trickRepository, PaginatorInterface $paginator, RequestStack $request )
     {
         $this->entityManager = $entityManager;
         $this->commentRepository = $commentRepository;
         $this->trickRepository = $trickRepository;
+        $this->paginator = $paginator;
+        $this->request = $request;
     }
 
-    #[Route('/', name: 'app_comment', methods: ['GET'])]
-    public function index(Request $request, CommentRepository $commentRepository): Response
+    public function getCommentsByTrick( Trick $trick, Request $request ): Response
     {
-        $page = $request->query->getInt('page', 1);
-        $total = $commentRepository->countComments();
-        $comments = $commentRepository->getCommentsForPage($page, CommentRepository::PAGINATOR_PER_PAGE);
-
+        $queryComments = $this->commentRepository->getQueryByTrick($trick);
+        $pagination = $this->paginator->paginate(
+            $queryComments, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
         return $this->render('comment/index.html.twig', [
-            'comments' => $comments,
-            'page' => $page,
-            'total' => $total
+            'pagination' => $pagination,
         ]);
 
     }
