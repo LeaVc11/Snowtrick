@@ -17,35 +17,38 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
-        <img src="{{ asset('assets/images/snowboarder.png') }}" class="logo" alt="logo">
-        <a class="navbar-brand p-2 fw-bold " href="">Snowtricks </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end p-3" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto fw-bold">
-                <li class="nav-item active">
-                    <a class="nav-link text-end" href="{{ path('app_home') }}">Accueil</a>
-                </li>
+            <div class="container-fluid">
+                <img src="{{ asset('assets/images/snowboarder.png') }}" class="logo" alt="logo">
+                <a class="navbar-brand p-2 fw-bold " href="">Snowtricks </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end p-3" id="navbarNav">
+                    <ul class="navbar-nav mr-auto fw-bold">
 
-                <li class="nav-item active">
-                    <a class="nav-link " href="{{ path('app_trick') }}">Figures</a>
-                </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-end" href="{{ path('app_home') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-end " href="{{ path('app_trick') }}">Figures</a>
+                        </li>
 
-            </ul>
-            <div class="navbar-item-custom">
+                    </ul>
+                    <div class="navbar-item-custom text-end">
 
-                {% if app.user %}
-                    <a href="{{ path('app_account') }}">Mon compte <small>({{ app.user.username }} )</small> </a> |
-                    <a href="{{ path('app_logout') }}">Déconnexion</a>
-                {% else %}
-                    <a href="{{ path('app_login') }}" class=" ps-2 ">Connexion </a> |
-                    <a href="{{ path('app_register') }}" class=" p-2">Inscription</a>
-                {% endif %}
+                        {% if app.user %}
+                            <a href="{{ path('app_account') }}">Mon compte <small>({{ app.user.username }} )</small> </a> |
+                            <a href="{{ path('app_logout') }}">Déconnexion</a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" class=" ps-2 ">Connexion </a> |
+                            <a href="{{ path('app_register') }}" class=" p-2">Inscription</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+
+
 </header>
 
 <main role="main">
