@@ -30,17 +30,18 @@ class CommentController extends AbstractController
     }
 
     #[Route('/', name: 'app_comment', methods: ['GET'])]
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request, CommentRepository $commentRepository): Response
     {
+        $page = $request->query->getInt('page', 1);
+        $total = $commentRepository->countComments();
+        $comments = $commentRepository->getCommentsForPage($page, CommentRepository::PAGINATOR_PER_PAGE);
 
-        $comments = $paginator->paginate(
-            $this->commentRepository->findAllVisibleQuery(),
-            $request->query->getInt('page', 10), 10
-
-        );
         return $this->render('comment/index.html.twig', [
-            'comments' => $comments
+            'comments' => $comments,
+            'page' => $page,
+            'total' => $total
         ]);
+
     }
 
     #[Route('/new/trick/{slug}', name: 'app_comment_new', methods: ['GET', 'POST'])]

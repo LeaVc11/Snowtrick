@@ -17,6 +17,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CommentRepository extends ServiceEntityRepository
 {
+
+    const PAGINATOR_PER_PAGE = 10;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
@@ -39,16 +42,32 @@ class CommentRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-    /**
-     * @return Query
-     */
-    public function findAllVisibleQuery(): Query
+    public function countComments()
     {
-        return $this->findVisibleQuery()
-            ->getQuery();
+        return $this->createQueryBuilder('c')
+            ->select('count(c.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
     }
-
+    public function getCommentsForPage(int $page, int $commentsPerPage)
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.createdAt', 'ASC')
+            ->setMaxResults($commentsPerPage)
+            ->setFirstResult(($page-1)*$commentsPerPage)
+            ->getQuery()
+            ->execute()
+            ;
+    }
+//    /**
+//     * @return Query
+//     */
+//    public function findAllVisibleQuery(): Query
+//    {
+//        return $this->findVisibleQuery()
+//            ->getQuery();
+//    }
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */
