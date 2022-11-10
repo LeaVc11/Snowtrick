@@ -8,8 +8,13 @@
     <p>Le panel de figures faisables en l'air augmente de jour en jour à mesure que les freestyleurs progressent. On peut néanmoins classer les tricks en plusieurs catégories.</p>
     <br>
 
+    <a href="#">
+        <div class="btn-rond d-flex justify-content-end align-items-end ">
+            <img src="{{ asset('assets/images/bouton-circulaire-noir-fleche-vers-le-bas.png') }}" alt="logoFlecheBas" class="logo-btn-rond" >
+        </div>
+    </a>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-1">
         {% for trick in tricks %}
             <div class="col">
                 <div class="card shadow-sm">
@@ -48,8 +53,8 @@
         {% endfor %}
     </div>
     <a href="#">
-        <div class="btn-rond d-flex justify-content-end align-items-end mb-3">
-            <img src="{{ asset('assets/images/bouton-fleche-vers-le-haut.png') }}" alt="logoFlecheBas" class="logo btn-rond" >
+        <div class="btn-rond1 d-flex justify-content-end align-items-end mb-4">
+            <img src="{{ asset('assets/images/bouton-fleche-vers-le-haut.png') }}" alt="logoFlecheBas" class="logo-btn-rond1" >
         </div>
     </a>
 
