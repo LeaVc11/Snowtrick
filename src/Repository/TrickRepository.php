@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -46,7 +47,15 @@ class TrickRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getQueryByTrick(Trick $trick): Query
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.trick = :val')
+            ->setParameter('val', $trick)
+            ->getQuery()
 
+            ;
+    }
 
 //    /**
 //     * @return Trick[] Returns an array of Trick objects

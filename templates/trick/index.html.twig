@@ -52,6 +52,9 @@
             </div>
         {% endfor %}
     </div>
+    <div class="pagination mb-3">
+{#   {{ render(controller('App\\Controller\\TrickController::getCommentsByTrick', {'trick' : trick.id,'request' : request})) }}#}
 
+    </div>
 
 {% endblock %}
