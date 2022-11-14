@@ -32,6 +32,7 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        $this->addFlash('success', 'Vous êtes connecté!');
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
@@ -65,15 +66,18 @@ class SecurityController extends AbstractController
 
                 $user->setPassword($password);
                 $this->entityManager->flush();
-                $notification="Votre mot de passe a bien été mis à jour.";
+                $this->addFlash('success', 'Votre mot de passe a bien été mis à jour.');
             }else{
-                $notification = "Votre mot de passe actuel n'est pas le bon";
+                $this->addFlash('danger', 'Votre mot de passe actuel n\'est pas le bon.');
+//                $notification = "Votre mot de passe actuel n'est pas le bon";
             }
+//            $this->addFlash('success', 'Votre mot de passe a bien été mis à jour.');
+
         }
 
         return $this->render('account/password.html.twig', [
             'form' => $form->createView(),
-            'notification' => $notification
+//            'notification' => $notification
         ]);
     }
 }
