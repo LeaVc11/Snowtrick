@@ -34,15 +34,6 @@ class TrickController extends AbstractController
     }
 
     #[Route('/{page<\d+>?1}', name: 'app_trick', methods: ['GET'])]
-    public function index(): Response
-    {
-        $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
-//        dd($tricks);
-
-        return $this->render('trick/index.html.twig', [
-            'tricks' => $tricks
-        ]);
-    }
     public function getPaginatorByTrick( Trick $trick, Request $request ): Response
     {
         $queryTricks = $this->trickRepository->getQueryByPaginator($trick);
@@ -54,8 +45,26 @@ class TrickController extends AbstractController
         return $this->render('trick/index.html.twig', [
             'pagination' => $pagination,
         ]);
-
+//        $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
+////        dd($tricks);
+//
+//        return $this->render('trick/index.html.twig', [
+//            'tricks' => $tricks
+//        ]);
     }
+//    public function getPaginatorByTrick( Trick $trick, Request $request ): Response
+//    {
+//        $queryTricks = $this->trickRepository->getQueryByPaginator($trick);
+//        $pagination = $this->paginator->paginate(
+//            $queryTricks, /* query NOT result */
+//            $request->query->getInt('page', 1), /*page number*/
+//            10 /*limit per page*/
+//        );
+//        return $this->render('trick/index.html.twig', [
+//            'pagination' => $pagination,
+//        ]);
+//
+//    }
 
     #[Route('/new', name: 'app_trick_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
