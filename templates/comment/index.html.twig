@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-5">
                         <div class="timeline-heading">
-                            <p class="timeline-heading text-decoration-none">{{ comment.user.username }}</p>
+                            <p class="timeline-heading text-decoration-none"><span class="m-2 text-uppercase fw-bold">{{ comment.user.username }}</span> |<span class="m-2"> {{ comment.createdAt ? comment.createdAt|date('d-m-Y H:i:s') : '' }}</span> </p>
                         </div>
 
                         <div class="timeline-body">
@@ -37,9 +37,6 @@
                 <div class="timeline-body">
                     <div class="d-flex justify-content-end align-items-center mt-3">
                         <div class="row">
-                            <div class="col">
-                                <p class="text-dark text-decoration-none">{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }} </p>
-                            </div>
                             <div class="col">
                                 <div class="btn-group text-center m-2 text-uppercase ">
                                     <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
