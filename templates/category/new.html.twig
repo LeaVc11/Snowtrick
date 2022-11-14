@@ -10,9 +10,10 @@
                     <div class="jumbotron vh-100card-img-top">
                         <div class="p-1 p-md-4 mb-2 text-white rounded">
                             <div class="row justify-content-center">
-                                <p class="text-primary fw-bold text-decoration-underline"> Nouvelle catégorie :</p>
                                 <br>
                                 {{ form_start(form) }}
+
+                                {{ form_widget(form.name,{'attr': {'placeholder':'Nom de la nouvelle catégorie', 'class':'fw-bold mb-4'}}) }}
                                 {% block form %}
                                 {% endblock %}
                                 {{ form_end(form) }}
