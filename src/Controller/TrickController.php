@@ -7,8 +7,10 @@ use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
@@ -19,12 +21,16 @@ class TrickController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private TrickRepository $trickRepository;
+    private PaginatorInterface $paginator;
+    private RequestStack $request;
 
 
-    public function __construct(EntityManagerInterface $entityManager, TrickRepository $trickRepository)
+    public function __construct(EntityManagerInterface $entityManager, TrickRepository $trickRepository, PaginatorInterface $paginator, RequestStack $request)
     {
         $this->entityManager = $entityManager;
         $this->trickRepository = $trickRepository;
+        $this->paginator = $paginator;
+        $this->request = $request;
     }
 
     #[Route('/{page<\d+>?1}', name: 'app_trick', methods: ['GET'])]
@@ -36,6 +42,19 @@ class TrickController extends AbstractController
         return $this->render('trick/index.html.twig', [
             'tricks' => $tricks
         ]);
+    }
+    public function getPaginatorByTrick( Trick $trick, Request $request ): Response
+    {
+        $queryTricks = $this->trickRepository->getQueryByPaginator($trick);
+        $pagination = $this->paginator->paginate(
+            $queryTricks, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+        return $this->render('trick/index.html.twig', [
+            'pagination' => $pagination,
+        ]);
+
     }
 
     #[Route('/new', name: 'app_trick_new', methods: ['GET', 'POST'])]

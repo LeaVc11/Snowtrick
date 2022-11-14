@@ -43,5 +43,5 @@
         {% endfor %}
     </div>
 
-
+       {{ render(controller('App\\Controller\\TrickController::getPaginatorByTrick', {'trick' : trick.id,'request' : request})) }}
 {% endblock %}
