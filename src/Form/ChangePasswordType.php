@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ChangePasswordType extends AbstractType
 {
@@ -25,6 +26,10 @@ class ChangePasswordType extends AbstractType
             ])
             ->add('old_password', PasswordType::class,[
                 'label' => 'Mon mot de passe actuel',
+                'constraints' =>
+                    new NotBlank([
+                        'message' => 'Veuillez saisir un mot de passe actuel',
+                    ]),
                 'mapped' =>false,
             ])
             ->add('new_password', RepeatedType::class, [
@@ -35,11 +40,19 @@ class ChangePasswordType extends AbstractType
                 'first_options' =>
                     [
                         'label' => 'Votre nouveau mot de passe',
-
+                        'constraints' =>
+                            new NotBlank([
+                                'message' => 'Veuillez saisir un nouveau mot de passe',
+                            ]),
                     ],
+
                 'second_options' =>
                     [
                         'label' => 'Confirmez votre nouveau mot de passe',
+                        'constraints' =>
+                            new NotBlank([
+                                'message' => 'Veuillez saisir votre nouveau mot de passe',
+                            ]),
                     ],
             ])
             ->add('submit', SubmitType::class,

@@ -46,7 +46,6 @@ class RegisterType extends AbstractType
                 'label' => 'Votre mot de passe',
                 'attr' => [
                     'class' => 'form-control-lg'
-
                 ],
                 'required' => true,
 
