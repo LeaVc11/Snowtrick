@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur - Snowtrick {% endblock %}
+
+{% endblock %}
+
+{% block body %}
+	<div class="security-page">
+		<div class="card security-form">
+			<h1 class="card-title">{{ title }}</h1>
+			<div class="card-body">
+				<p>Oups Une erreur est survenue...
+					<br>
+					<a href="{{ path('app_home') }}">
+						Retour à l'accueil
+					</a>
+				</p>
+			</div>
+
+	</div>
+</div>{% endblock %}

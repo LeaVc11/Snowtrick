@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: TrickRepository::class)]
 #[UniqueEntity(fields: ['title'], message: 'Ce trick existe déjà')]
+
 class Trick
 {
     #[ORM\Id]
@@ -20,10 +21,11 @@ class Trick
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Title]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]

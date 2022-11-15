@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès interdit - Snowtrick {% endblock %}
+
+{% block content %}
+	<section class=" d-flex justify-content-center p-5 container">
+		<img src="{{ asset('assets/images/401-Unauthorized.jpg') }}" alt="Responsive image" class="img-fluid">
+
+	</section>
+	<div class="security-page text-center">
+		<div class="card security-form">
+			<div class="card-body">
+				<p>Vous ne pouvez pas accéder à cette page!
+					<br>
+					<a href="{{ path('app_home') }}" class="text-decoration-none m-3 text-primary fw-bold text-center ">Retour à la page
+						d'accueil</a>
+				</p>
+			</div>
+	</div>
+</div>{% endblock %}

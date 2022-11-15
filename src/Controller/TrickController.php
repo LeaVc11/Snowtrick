@@ -32,7 +32,7 @@ class TrickController extends AbstractController
         $this->paginator = $paginator;
         $this->request = $request;
     }
-    public function getCommentsByTrick( Trick $trick, Request $request ): Response
+    public function getTricksByTrick( Trick $trick, Request $request ): Response
     {
         $queryTricks = $this->trickRepository->getQueryByTrick($trick);
         $pagination = $this->paginator->paginate(
@@ -65,6 +65,7 @@ class TrickController extends AbstractController
 //        dd($form->isValid());
         if ($form->isSubmitted() && $form->isValid()) {
             $trick = $form->getData();
+            $errors = $form->getErrors();
 //            dd($trick);
             $this->entityManager->persist($trick);
 

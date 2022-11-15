@@ -25,7 +25,7 @@ class RegisterController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function index(Request $request, UserPasswordHasherInterface $encoder, MailService $mailService, AlertServiceInterface $alertService): Response
     {
-        $notification = null;
+
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
@@ -46,8 +46,9 @@ class RegisterController extends AbstractController
 
             $alertService->success('Votre inscription s\'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.');
 
-            return $this->redirectToRoute('app_home');
-        }
+
+        return $this->redirectToRoute('app_home');
+    }
 
         return $this->render('register/index.html.twig', [
             'form' => $form->createView(),

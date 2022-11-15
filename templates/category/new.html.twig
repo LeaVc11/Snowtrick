@@ -13,9 +13,9 @@
                                 <br>
                                 {{ form_start(form) }}
 
-                                {{ form_widget(form.name,{'attr': {'placeholder':'Nom de la nouvelle catégorie', 'class':'fw-bold mb-4'}}) }}
-                                {% block form %}
-                                {% endblock %}
+                                {{ form_row(form.name,{'attr': {'placeholder':'Nom de la nouvelle catégorie', 'class':'fw-bold mb-4'}}) }}
+
+
                                 {{ form_end(form) }}
                             </div>
                         </div>
