@@ -34,7 +34,9 @@
                                 <div class="col">
                                     <p class="text-dark text-decoration-none">{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }} </p>
                                 </div>
+
                                 <div class="col">
+                                    {% if is_granted('ROLE_USER') %}
                                     <div class="btn-group text-center m-2 text-uppercase ">
                                         <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
                                            class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold">
@@ -47,6 +49,7 @@
                                                     height="18px"
                                                     alt="Delete comment"></a>
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
