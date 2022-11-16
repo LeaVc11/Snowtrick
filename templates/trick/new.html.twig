@@ -1,14 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Nouveau Trick -Snowtrick{% endblock %}
+
 {% block album %}{% endblock %}
 {% block content %}
 
-    {{ form_start(form)}}
+        <h1 class="text-dark text-center fw-bold">Nouveau trick</h1>
 
-    {% block form %}
+        {#    {{ form_start(form)}}#}
+
+{#    {% block form %}#}
         {% include "/trick/_form.html.twig" %}
-    {% endblock %}
+{#    {% endblock %}#}
 
-    {{ form_end(form)}}
+{#    {{ form_end(form)}}#}
 
 {% endblock %}

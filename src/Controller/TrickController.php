@@ -65,16 +65,16 @@ class TrickController extends AbstractController
 //        dd($form->isValid());
         if ($form->isSubmitted() && $form->isValid()) {
             $trick = $form->getData();
-            $errors = $form->getErrors();
 //            dd($trick);
             $this->entityManager->persist($trick);
 
             $this->entityManager->flush();
 
             $this->addFlash('success', 'Nouveau trick a été ajouté avec succès!');
-            return $this->redirectToRoute('app_add_image_to_trick', [
-                'slug' => $trick->getSlug()]);
-        }
+
+        return $this->redirectToRoute('app_add_image_to_trick', [
+            'slug' => $trick->getSlug()]);
+    }
         return $this->render('trick/new.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),

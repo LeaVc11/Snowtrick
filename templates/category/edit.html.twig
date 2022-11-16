@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block album %}{% endblock %}
 {% block title %}Modifier Catégorie du trick{% endblock %}
+
+{% block album %}{% endblock %}
 
 {% block content %}
     <h1 class="text-dark text-center fw-bold">Modifier Catégorie du trick</h1>
@@ -12,11 +13,10 @@
                     <div class="jumbotron vh-100card-img-top">
                         <div class="p-1 p-md-4 mb-2 text-white rounded">
                             <div class="row justify-content-center">
-                                <p class="text-primary fw-bold text-decoration-underline"> Categorie :</p>
+
                                 <br>
                                 {{ form_start(form) }}
-                                {% block form %}
-                                {% endblock %}
+
                                 {{ form_end(form) }}
                             </div>
                         </div>
