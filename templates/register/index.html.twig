@@ -4,27 +4,28 @@
 
 {% block content %}
     <section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
+        {{ include('_message_flash.html.twig') }}
         <div class=" p-2 p-lg-5">
 
-                <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Inscription</h1>
+            <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Inscription</h1>
 
-                {{ form_start(form) }}
+            {{ form_start(form) }}
 
-                <div class="fw-bold mb-2">
-                    {{ form_row(form.username) }}
+            <div class="fw-bold mb-2">
+                {{ form_row(form.username) }}
 
-                    {{ form_row(form.email) }}
+                {{ form_row(form.email) }}
 
-                    {{ form_row(form.password) }}
-                </div>
+                {{ form_row(form.password) }}
+            </div>
             <div class="form-groupe my-3 px-5 ">
                 <button class="button bg-primary text-white  m-2 w-100 rounded-1 border border-primary form-control form-control-lg"
                         type="submit">Valider
                 </button>
             </div>
-                <div class="fw-bold text-center ">
-                    {{ form_end(form) }}
-                </div>
+            <div class="fw-bold text-center ">
+                {{ form_end(form) }}
+            </div>
 
         </div>
     </section>
