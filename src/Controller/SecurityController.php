@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ChangePasswordType;
+use App\Service\AlertServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, AlertServiceInterface $alertService): Response
     {
 
          if ($this->getUser()) {
@@ -30,8 +31,10 @@ class SecurityController extends AbstractController
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
@@ -66,17 +69,13 @@ class SecurityController extends AbstractController
                 $user->setPassword($password);
                 $this->entityManager->flush();
                 $this->addFlash('success', 'Votre mot de passe a bien été mis à jour.');
-            }else{
+            }else {
                 $this->addFlash('danger', 'Votre mot de passe actuel n\'est pas le bon.');
-//                $notification = "Votre mot de passe actuel n'est pas le bon";
             }
-//            $this->addFlash('success', 'Votre mot de passe a bien été mis à jour.');
-
         }
 
         return $this->render('account/password.html.twig', [
             'form' => $form->createView(),
-//            'notification' => $notification
         ]);
     }
 }

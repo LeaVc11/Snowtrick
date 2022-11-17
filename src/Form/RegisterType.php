@@ -26,18 +26,17 @@ class RegisterType extends AbstractType
                     ],
                     'constraints' =>
                             new Length([
-                                'min' => 2,
+                                'min' => 5,
                                 'max' => 30
                             ]),
                 ])
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
-                'invalid_message' => 'Email n\'est pas valide.',
                 'constraints' => new Length
                 (
                     [
-                        'min' => 2,
-                        'max' => 60
+                        'min' => 30,
+                        'max' => 60,
                     ]
                 ),
                 'attr' =>
@@ -47,6 +46,14 @@ class RegisterType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Votre mot de passe',
+                'constraints' => new Length
+                (
+                    [
+                        'min' => 2,
+                        'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères.',
+                        'max' => 60,
+                    ]
+                ),
                 'invalid_message' => 'Le mot de passe n\'est pas le bon',
                 'attr' => [
                     'class' => 'form-control-lg'

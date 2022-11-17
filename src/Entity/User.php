@@ -14,8 +14,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'Cette email existe déjà')]
-#[UniqueEntity(fields: ['username'], message: 'Ce nom d\'utilisateur est déjà pris')]
+//#[UniqueEntity(fields: ['email'], message: 'Cette email n\'est pas bon ')]
+//#[UniqueEntity(fields: ['username'], message: 'Ce nom d\'utilisateur est déjà pris')]
 
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+//    #[Assert\NotBlank]
     private ?string $username = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Trick::class)]
