@@ -49,7 +49,7 @@ class SecurityController extends AbstractController
     #[Route('/account/password', name: 'app_account_password')]
     public function index(Request $request, UserPasswordHasherInterface $encoder): Response
     {
-        $notification = null;
+
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);
 

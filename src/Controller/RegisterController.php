@@ -23,7 +23,7 @@ class RegisterController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function index(Request $request, UserPasswordHasherInterface $encoder, MailService $mailService/*, AlertServiceInterface $alertService*/): Response
+    public function index(Request $request, UserPasswordHasherInterface $encoder, MailService $mailService, AlertServiceInterface $alertService): Response
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -43,9 +43,7 @@ class RegisterController extends AbstractController
             $content = "Bonjour " . $user->getUsername() . "<br/>Bienvenue sur .";
             $mailService->send($user->getEmail(), $user->getUsername(), 'Bienvenue ', $content);
 
-            $alertService->success('Votre inscription s\'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.');
-//        }else{
-//            $alertService->danger('Vous pouvez dès à présent vous connecter à votre compte.');
+           $alertService->success('Votre inscription s\'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.');
 
         return $this->redirectToRoute('app_home');
     }
