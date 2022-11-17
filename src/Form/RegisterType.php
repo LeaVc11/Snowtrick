@@ -22,13 +22,18 @@ class RegisterType extends AbstractType
                 [
                     'label' => 'Votre username',
                     'attr' => [
-                        'class' => 'form-control-lg'
-
+                        'class' => 'form-control-lg',
                     ],
-                    'constraints' => new Length([
-                        'min' => 2,
-                        'max' => 30
-                    ]),
+                    'constraints' =>
+                        [
+                            new NotBlank([
+                                'message' => 'Veuillez saisir un username',
+                            ]),
+                            new Length([
+                                'min' => 2,
+                                'max' => 30
+                            ]),
+                        ]
                 ])
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
@@ -37,7 +42,7 @@ class RegisterType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez saisir un mot de passe',
                     ]),
                     new Length([
                         'min' => 2,
