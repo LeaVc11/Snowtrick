@@ -25,33 +25,30 @@ class RegisterType extends AbstractType
                         'class' => 'form-control-lg',
                     ],
                     'constraints' =>
-                        [
-                            new NotBlank([
-                                'message' => 'Veuillez saisir un username',
-                            ]),
                             new Length([
                                 'min' => 2,
                                 'max' => 30
                             ]),
-                        ]
+
                 ])
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
-                'attr' => [
-                    'class' => 'form-control-lg'
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez saisir un mot de passe',
-                    ]),
-                    new Length([
+                'invalid_message' => 'Email n\'est pas valide.',
+                'constraints' => new Length
+                (
+                    [
                         'min' => 2,
-                        'max' => 55
-                    ]),
-                ]
+                        'max' => 60
+                    ]
+                ),
+                'attr' =>
+                    [
+                        'class' => 'form-control-lg',
+                    ]
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Votre mot de passe',
+                'invalid_message' => 'Le mot de passe n\'est pas le bon',
                 'attr' => [
                     'class' => 'form-control-lg'
                 ],

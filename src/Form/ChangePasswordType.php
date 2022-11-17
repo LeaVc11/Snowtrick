@@ -19,17 +19,15 @@ class ChangePasswordType extends AbstractType
     {
         $builder
             ->add('username', TextType::class,[
-                'disabled' => true
+                'disabled' => true,
+
             ])
             ->add('email', EmailType::class,[
                 'disabled' => true
             ])
             ->add('old_password', PasswordType::class,[
                 'label' => 'Mon mot de passe actuel',
-                'constraints' =>
-                    new NotBlank([
-                        'message' => 'Veuillez saisir un mot de passe actuel',
-                    ]),
+                'invalid_message' => 'Le mot de passe n\'est pas le bon',
                 'mapped' =>false,
             ])
             ->add('new_password', RepeatedType::class, [
@@ -40,19 +38,11 @@ class ChangePasswordType extends AbstractType
                 'first_options' =>
                     [
                         'label' => 'Votre nouveau mot de passe',
-                        'constraints' =>
-                            new NotBlank([
-                                'message' => 'Veuillez saisir un nouveau mot de passe',
-                            ]),
                     ],
 
                 'second_options' =>
                     [
                         'label' => 'Confirmez votre nouveau mot de passe',
-                        'constraints' =>
-                            new NotBlank([
-                                'message' => 'Veuillez saisir votre nouveau mot de passe',
-                            ]),
                     ],
             ])
             ->add('submit', SubmitType::class,
