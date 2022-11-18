@@ -37,30 +37,28 @@ class MediaToTrickController extends AbstractController
         if ($trick === null) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Impossible de trouver ce trick');
         }
-        // On prépare le formulaire
+
         $imageData = new Image();
         $form = $this->createForm(ImageType::class, $imageData);
         $form->handleRequest($request);
-        // Si le formulaire est valide
+
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imageFile */
-//            dd($imageData);
+
             $imageFile= $form->get('fileName')->getData();
-            //Ici il faut copier l'image dans le bon répertoire
-//            dd($imageFile);
+
             $newFilename = uniqid() . '.' . $imageFile->guessExtension();
             $imageFile->move(
                 $this->getParameter('image_directory'),
                 $newFilename
             );
-            // * Un setFilename pour mettre le bon chemin local)
+
             $imageData->setFilename($newFilename);
-            // * Un setTrick($trick);
+
             $imageData->setTrick($trick);
-            // * Sauvegarder l'image en BDD
-//            dd($imageData,$imageFile);
+
             $this->imageRepository->save($imageData, true);
-            // L'image est ajoutéee et on retourne à la page home
+
             return $this->redirectToRoute('app_add_video_to_trick', [
                 'slug' => $trick->getSlug()]);
         }

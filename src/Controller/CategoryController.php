@@ -37,16 +37,12 @@ class CategoryController extends AbstractController
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
-//        dd($form->isValid());
+
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->getData();
-//            dd($trick);
             $name = $category->getName();
-            // On instancie un slugger ascii
             $slugger = new AsciiSlugger();
-            // On récupère le slug saisit dans le formulaire et on le reconvertit
             $slug = $slugger->slug($name);
-            // On remet le slug altéré si nécessaire
             $category->setSlug($slug);
             $this->entityManager->persist($category);
             $this->entityManager->flush();
@@ -59,14 +55,6 @@ class CategoryController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-//    #[Route('/{id}/show/{slug}', name: 'app_category_show', methods: ['GET'])]
-//    public function show(Category $category): Response
-//    {
-//        return $this->render('category/show.html.twig', [
-//            'category' => $category,
-//        ]);
-//    }
     #[Route('/{slug}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {

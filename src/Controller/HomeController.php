@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     public function index(MailService $mailService,TrickRepository $repository ): Response
     {
         $tricks = $repository->findAll();
-        $mailService->send('snowtrick42@gmail.com', "johndoe", "Mon premier mail", "Bonjour");
+        $mailService->send('snowtrick42@gmail.com', "johndoe", "Réinitialiser mon mot de passe", "Bonjour");
         return $this->render('home/index.html.twig', [
             'tricks' => $tricks
         ]);

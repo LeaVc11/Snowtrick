@@ -62,10 +62,10 @@ class TrickController extends AbstractController
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-//        dd($form->isValid());
+
         if ($form->isSubmitted() && $form->isValid()) {
             $trick = $form->getData();
-//            dd($trick);
+
             $this->entityManager->persist($trick);
 
             $this->entityManager->flush();
@@ -93,37 +93,34 @@ class TrickController extends AbstractController
     #[Route('/{slug}/edit', name: 'app_trick_edit')]
     public function edit(Request $request, string $slug): Response
     {
-        // On récupère le slug tu trick et on vérifie qu'il existe
+
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
         if ($trick === null) {
-            //S'il n'existe pas, erreur 404
+
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Impossible de trouver ce trick');
         }
-        // On crée le formulaire
+
         $form = $this->createForm(TrickType::class, $trick);
-        // On associe la requête
+
         $form->handleRequest($request);
-        // Si le formulaire est soumis et est valide
+
         if ($form->isSubmitted() && $form->isValid()) {
-            // On récupère notre objet modifié
+
             $trick = $form->getData();
-            // On instancie un slugger ascii
+
             $slugger = new AsciiSlugger();
-            // On récupère le slug saisit dans le formulaire et on le reconvertit
+
             $slug = $slugger->slug($trick->getSlug());
-            // On remet le slug altéré si nécessaire
+
             $trick->setSlug($slug);
-//            foreach ($images as $image){
-//                $images->getImages($image);
-//            }
-            // On sauvegarde en BDD
+
             $this->entityManager->persist($trick);
             $this->entityManager->flush();
-            // On renvoie l'utilisateur avec le message flash
+
             $this->addFlash('success', "Modifications enregistrées avec succès!");
             return $this->redirectToRoute('app_edit_image_to_trick', ['slug' => $trick->getSlug()]);
         }
-        // Sinon on affiche la page et le formulaire
+
         return $this->renderForm('trick/edit.html.twig', [
             'trick' => $trick,
             'form' => $form,
