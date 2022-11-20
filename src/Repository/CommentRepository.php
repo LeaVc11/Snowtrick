@@ -48,6 +48,7 @@ class CommentRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.trick = :val')
             ->setParameter('val', $trick)
+            ->orderBy('c.id', 'DESC')
             ->getQuery()
 
         ;

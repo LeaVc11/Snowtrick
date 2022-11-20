@@ -7,12 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TrickRepository::class)]
 #[UniqueEntity(fields: ['title'], message: 'Ce trick existe déjà')]
-
 class Trick
 {
     #[ORM\Id]
@@ -34,7 +33,7 @@ class Trick
     #[ORM\ManyToOne(inversedBy: 'tricks')]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Image::class, orphanRemoval:true)]
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $images;
 
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Video::class)]
@@ -55,7 +54,8 @@ class Trick
 
     public function __construct()
     {
-
+        $this->createdAt = new \DateTimeImmutable('now');
+        $this->updatedAt = new \DateTimeImmutable('now');
         $this->videos = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
@@ -76,10 +76,12 @@ class Trick
 
         return $this;
     }
+
     public function __toString(): string
     {
         return $this->title;
     }
+
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -140,7 +142,6 @@ class Trick
         return $this;
     }
 
-
     /**
      * @return Collection<int, Image>
      */
@@ -158,6 +159,7 @@ class Trick
         }
         return $this;
     }
+
     public function removeImage(Image $image): self
     {
         if ($this->images->removeElement($image)) {
@@ -186,6 +188,7 @@ class Trick
 
         return $this;
     }
+
     public function removeVideo(Video $video): self
     {
         if ($this->videos->removeElement($video)) {
@@ -197,11 +200,12 @@ class Trick
         return $this;
     }
 
-    public function getFirstImage() : ?Image
+    public function getFirstImage(): ?Image
     {
         return $this->images->first() ?: null;
     }
-    public function getFirstVideo() : ?Video
+
+    public function getFirstVideo(): ?Video
     {
         return $this->videos->first() ?: null;
     }
@@ -247,4 +251,8 @@ class Trick
         return $this;
     }
 
+    public function isTrickUser(User $user): bool
+    {
+        return $this->user === $user;
+    }
 }

@@ -1,15 +1,8 @@
 <h2 class="fw-bold text-center mb-4"> Commentaires</h2>
 <section id="comment ">
-    {# {{ pagination.getTotalItemCount}} #}
-
-    <h5 class="text-center">Connectez-vous à votre compte afin de laisser un commentaire</h5>
-
-    <div class="d-flex justify-content-center align-items-center mt-3 ">
-        <a href="{{ path('app_login') }}" class=" btn btn-sm btn-secondary border-3 text-white fw-bold text-center p-3">Connexion </a>
-    </div>
 
     {% for comment in pagination %}
-        {# {{comment.id}} #}
+
 
         <div class="timeline-panel-container ">
 

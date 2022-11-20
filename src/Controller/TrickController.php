@@ -32,27 +32,15 @@ class TrickController extends AbstractController
         $this->paginator = $paginator;
         $this->request = $request;
     }
-    public function getTricksByTrick( Trick $trick, Request $request ): Response
-    {
-        $queryTricks = $this->trickRepository->getQueryByTrick($trick);
-        $pagination = $this->paginator->paginate(
-            $queryTricks, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
-        );
-        return $this->render('trick/index.html.twig', [
-            'pagination' => $pagination,
-        ]);
 
-    }
     #[Route('/{page<\d+>?1}', name: 'app_trick', methods: ['GET'])]
     public function index(): Response
     {
         $tricks = $this->entityManager->getRepository(Trick::class)->findAll();
-//        dd($tricks);
 
         return $this->render('trick/index.html.twig', [
-            'tricks' => $tricks
+            'tricks' => $tricks,
+            'user'=> $this->getUser() ? $this->getUser() : null
         ]);
     }
 
@@ -60,10 +48,15 @@ class TrickController extends AbstractController
     public function new(Request $request): Response
     {
         $trick = new Trick();
+//        if ($trick->isTrickUser($this->getUser())){
+//
+//        }
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $trick->setUser($this->getUser());
             $trick = $form->getData();
 
             $this->entityManager->persist($trick);

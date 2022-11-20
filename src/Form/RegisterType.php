@@ -26,7 +26,7 @@ class RegisterType extends AbstractType
                     ],
                     'constraints' =>
                             new Length([
-                                'min' => 5,
+                                'min' => 4,
                                 'max' => 30
                             ]),
                 ])
@@ -35,7 +35,7 @@ class RegisterType extends AbstractType
                 'constraints' => new Length
                 (
                     [
-                        'min' => 30,
+                        'min' => 15,
                         'max' => 60,
                     ]
                 ),
