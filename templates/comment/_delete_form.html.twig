@@ -1,0 +1,8 @@
+<form method="post"
+      action="{{ path('app_comment_delete', {'id': comment.id}) }}" class="btn btn-sm btn-outline-warning border border-info border-3"><img
+            src="{{ asset('assets/images/logoDelete.png') }}"
+            height="18px"
+            alt="Delete comment">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+
+</form>

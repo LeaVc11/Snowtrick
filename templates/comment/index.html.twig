@@ -1,0 +1,62 @@
+<h2 class="fw-bold text-center mb-4"> Commentaires</h2>
+<section id="comment ">
+
+    <p class="fw-bold">{{ pagination.getTotalItemCount}} commentaires</p>
+    {% for comment in pagination %}
+
+
+        <div class="timeline-panel-container ">
+
+            <div class="timeline-panel m-3 ">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="{{ asset('assets/images/snowboarding.png') }}" class="logo"
+                             alt="logo">
+
+                    </div>
+                    <div class="col-5">
+                        <div class="timeline-heading">
+                            <p class="timeline-heading text-decoration-none">{{ comment.user.username }}</p>
+                            <p class="text-dark text-decoration-none">{{ comment.createdAt ? comment.createdAt|date('d-m-Y H:i:s') : '' }} </p>
+
+                        </div>
+
+                        <div class="timeline-body">
+                            <p class="timeline-heading text-decoration-none">{{ comment.message }}</p>
+                            <div class="d-flex justify-content-end align-items-center mt-3">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-body">
+                    <div class="d-flex justify-content-end align-items-center mt-3">
+                        <div class="row">
+
+                            <div class="col">
+                                {% if is_granted('ROLE_USER') %}
+                                    <div class="btn-group text-center m-2 text-uppercase ">
+                                        <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
+                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold">
+                                            <img src="{{ asset('assets/images/logoEdit.png') }}"
+                                                 height="18px"
+                                                 alt="Edit comment"></a>
+                                        <a href=" {{ path('app_comment_delete', {'id': comment.id}) }} "
+                                           class="btn btn-sm btn-outline-warning border border-info border-3"><img
+                                                    src="{{ asset('assets/images/logoDelete.png') }}"
+                                                    height="18px"
+                                                    alt="Delete comment"></a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="pagination mb-3">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</section>

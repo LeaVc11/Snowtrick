@@ -1,0 +1,13 @@
+{#<a href="#}{#{{ path('app_category_delete', ) }}#}{#"#}
+{#   class="btn btn-sm btn-outline-secondary"><img#}
+{#            src="{{ asset('assets/images/logoDelete.png') }}" height="18px"#}
+{#            alt="Supprimer category"></a>#}
+
+<form method="post"
+      action="{{ path('app_category_delete', {'id': category.id}) }}" class="btn btn-sm btn-outline-warning border border-info border-3"><img
+            src="{{ asset('assets/images/logoDelete.png') }}"
+            height="18px"
+            alt="Delete comment">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+
+</form>

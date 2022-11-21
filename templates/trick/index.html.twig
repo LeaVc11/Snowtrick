@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block album %}{% endblock %}
+
+{% block content %}
+    <h1 class="fw-bold text-center"> Tricks</h1>
+    <br>
+    <p>Le panel de figures faisables en l'air augmente de jour en jour à mesure que les freestyleurs progressent. On peut néanmoins classer les tricks en plusieurs catégories.</p>
+    <br>
+    <div class="row row-cols-1  row-cols-md-3 g-3 mb-5">
+        {% for trick in tricks %}
+            <div class="col">
+                <div class="card shadow-sm text-white bg-secondary mb-3">
+                    {% if trick.images %}
+                        <img src="{{ asset('/upload/tricks/images/'~ trick.firstImage) }}" alt="picture trick">
+                    {% endif %}
+
+                    <div class="card-body">
+
+                        <p class="card-text fw-bold text-center text-uppercase">{{ trick.title }}</p>
+                        <p class="card-text text-center">{{ trick.slug }}</p>
+                        <p class="card-text">{{ trick.description }}</p>
+
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="btn-group text-center m-2 text-uppercase ">
+                                        <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"
+                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-white fw-bold">{{ trick.title }}
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="btn-group text-center">
+
+                                {% if is_granted('ROLE_USER') %}
+                                    <a href="{{ path('app_trick_edit', {'slug': trick.slug }) }}"
+                                       class="btn btn-sm btn-outline-warning border border-info border-3 "><img
+                                                src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
+                                                alt="Modifier trick"></a>
+
+                                    <a href="{{ path('app_trick_delete', {'slug': trick.slug }) }}"
+                                       class="btn btn-sm btn-outline-warning border border-info border-3 "><img
+                                                src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
+                                                alt="Supprimer trick"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

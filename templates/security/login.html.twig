@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion - Snowtrick{% endblock %}
+
+{% block content %}
+
+    <form method="post">
+        <section class="d-flex  justify-content-end p-5 container-fluid" id="picture">
+            <div class=" p-2 p-lg-5">
+
+                <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Connexion</h1>
+
+                <label for="inputEmail" class="fw-bold mb-2">Votre email</label>
+                <input type="email" name="email" id="inputEmail"
+                       class="form-control mb-2"
+                       required autofocus>
+                <label for="inputPassword" class="fw-bold mb-2">Votre mot de passe </label>
+                <input type="password" name="password" id="inputPassword" class="form-control mb-2"
+                       autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <div class="form-groupe m-2 px-5 ">
+                    <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100 ">
+                        <a href="{{ path('app_reset_password') }} " class="text-decoration-none m-3 text-primary fw-bold ">Mot de passe oublié </a></p>
+                    <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
+                        <a href="{{ path('app_register') }}" class="text-decoration-none m-3 text-center text-primary fw-bold">Créer un compte</a></p>
+                    <button class="button bg-primary text-white  m-1 w-100 rounded-1 border border-primary form-control form-control-lg"
+                            type="submit">Se connecter
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+    </form>
+{% endblock %}

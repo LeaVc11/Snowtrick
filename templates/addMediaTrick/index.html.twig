@@ -1,0 +1,24 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter les médias' - Snowtrick{% endblock %}
+
+{% block content %}
+    <section class=" d-flex justify-content-end p-5 container-fluid" id="picture">
+        <div class=" p-2 p-lg-5">
+
+            {{ form_start(form) }}
+            <h1 class="text-white text-center m-2 h3 mb-3 fw-bold">Ajouter une image</h1>
+            {{ form_widget(form.fileName,{'attr': {'placeholder':'Image', 'class':'fw-bold'}}) }}
+            <br>
+{#            {{ form_widget(form.link,{'attr': {'placeholder':'Image', 'class':'fw-bold'}}) }}#}
+{#            <br>#}
+            {{ form_end(form) }}
+            <div class="form-groupe m-2 px-5 ">
+                <p class="text-center rounded-1 border border-secondary form-control-sm m-2 w-100">
+                    <a href="{{ path('app_add_video_to_trick') }}" class="text-decoration-none m-3 text-center text-primary fw-bold">Créer un Trick</a></p>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

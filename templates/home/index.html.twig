@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{#{% block album %}{% endblock %}#}
+
+{% block content %}
+    <h1 class="text-center">Bienvenue</h1>
+
+    <h2 class="text-center">La communauté pour découvrir - Le Snowboard</h2>
+    <br>
+    <div id="myCarousel" class="carousel slide " data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active ">
+                <svg  width="100%" height="100%"  >
+                    <rect width="100%" height="100%" fill="#777"/></svg>
+                <div class="container  ">
+                    <div class="carousel-caption">
+
+                        <img src="{{ asset('/assets/images/trick/Japan 2.jpg') }}" alt="picture trick" class="text-center ">
+
+                        <h1 class="text-dark mt-4 ">Trick - Japan</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img " width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="#777"/></svg>
+                <div class="container">
+                    <div class="carousel-caption">
+                        <img src="{{ asset('/assets/images/trick/Sad-2.jpg') }}" alt="picture trick" class=" w-55 h-55text-center">
+
+                        <h1 class="text-dark mt-4 ">Trick - Sad</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img " width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="#777"/></svg>
+                <div class="container">
+                    <div class="carousel-caption">
+                        <img src="{{ asset('/assets/images/trick/Mute-2.jpg') }}" alt="picture trick" class="text-center">
+
+                        <h1 class="text-dark mt-4 ">Trick - Mute</h1>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon fw-bold" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <p>SnowTricks est un site communautaire qui parle de snowboard.
+        Ce site vous permettra de partager votre passion sur le snowboard en rédigeant des articles sur les différentes
+        figures pouvant être réalisées.
+        Mais également de montrer, de faire découvrir ce sport.
+        <br>
+        Ci-dessous, vous pouvez trouver la liste des différentes figures écrites par les membres inscrits.</p>
+
+    <p>Que ce soit pour le partage ou la découverte (ou bien même les deux) :
+        <a href="{{ path('app_register') }}"
+           class=" p-2">Inscrivez-vous</a></p>
+
+    <br>
+    <div class="row row-cols-1  row-cols-md-3 g-3 mb-5">
+        {% for trick in tricks %}
+            <div class="col">
+                <div class="card shadow-sm text-white bg-secondary mb-3">
+                    {% if trick.images %}
+                        <img src="{{ asset('/upload/tricks/images/'~ trick.firstImage) }}" alt="picture trick">
+                    {% endif %}
+
+                    <div class="card-body">
+
+                        <p class="card-text fw-bold text-center text-uppercase">{{ trick.title }}</p>
+                        <p class="card-text text-center">{{ trick.slug }}</p>
+                        <p class="card-text">{{ trick.description }}</p>
+
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="btn-group text-center m-2 text-uppercase ">
+                                        <a href="{{ path('app_trick_show', {'slug': trick.slug }) }}"
+                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-white fw-bold">{{ trick.title }}
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="btn-group text-center">
+
+                                {% if is_granted('ROLE_USER') %}
+                                    <a href="{{ path('app_trick_edit', {'slug': trick.slug }) }}"
+                                       class="btn btn-sm btn-outline-warning border border-info border-3 "><img
+                                                src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
+                                                alt="Modifier trick"></a>
+
+                                    <a href="{{ path('app_trick_delete', {'slug': trick.slug }) }}"
+                                       class="btn btn-sm btn-outline-warning border border-info border-3 "><img
+                                                src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
+                                                alt="Supprimer trick"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page non trouvé - Snowtrick {% endblock %}
+
+{% block content %}
+
+    <section class=" d-flex justify-content-center p-5 container">
+        <img src="{{ asset('assets/images/error404.png') }}" alt="Responsive image" class="img-fluid">
+
+    </section>
+
+    <p class="text-dark text-center fw-bold"> <a href="{{ path('app_home') }}" class="text-decoration-none m-3 text-primary fw-bold text-center ">Retour à la page
+            d'accueil</a></p>
+
+{% endblock %}
