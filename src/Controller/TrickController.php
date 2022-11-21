@@ -48,23 +48,14 @@ class TrickController extends AbstractController
     public function new(Request $request): Response
     {
         $trick = new Trick();
-//        if ($trick->isTrickUser($this->getUser())){
-//
-//        }
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $trick->setUser($this->getUser());
             $trick = $form->getData();
-
             $this->entityManager->persist($trick);
-
             $this->entityManager->flush();
-
             $this->addFlash('success', 'Nouveau trick a été ajouté avec succès!');
-
         return $this->redirectToRoute('app_add_image_to_trick', [
             'slug' => $trick->getSlug()]);
     }
@@ -86,34 +77,22 @@ class TrickController extends AbstractController
     #[Route('/{slug}/edit', name: 'app_trick_edit')]
     public function edit(Request $request, string $slug): Response
     {
-
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
         if ($trick === null) {
-
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Impossible de trouver ce trick');
         }
-
         $form = $this->createForm(TrickType::class, $trick);
-
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $trick = $form->getData();
-
             $slugger = new AsciiSlugger();
-
             $slug = $slugger->slug($trick->getSlug());
-
             $trick->setSlug($slug);
-
             $this->entityManager->persist($trick);
             $this->entityManager->flush();
-
             $this->addFlash('success', "Modifications enregistrées avec succès!");
             return $this->redirectToRoute('app_edit_image_to_trick', ['slug' => $trick->getSlug()]);
         }
-
         return $this->renderForm('trick/edit.html.twig', [
             'trick' => $trick,
             'form' => $form,

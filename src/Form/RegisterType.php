@@ -54,7 +54,6 @@ class RegisterType extends AbstractType
                         'max' => 60,
                     ]
                 ),
-                'invalid_message' => 'Le mot de passe n\'est pas le bon',
                 'attr' => [
                     'class' => 'form-control-lg'
                 ],
