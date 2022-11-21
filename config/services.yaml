@@ -29,13 +29,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Service\MailService:
-        arguments:
-            $mailjetApiKey: '%mailjet.api.key%'
-            $mailjetApiKeySecret: '%mailjet.api.key.secret%'
-            $mailjetApiVersion: '%mailjet.api.version%'
-            $emailFrom: '%email.from%'
-            $emailName: '%email.name%'
+    App\Mailer\MailerInterface:
+        alias: App\Mailer\Mailer
+
     App\Service\FileUploader:
         arguments:
             $publicDirectory: '%kernel.project_dir%/public'

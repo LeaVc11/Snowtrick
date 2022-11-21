@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Service;
+namespace App\Mailer;
 
 use Mailjet\Client;
 use Mailjet\Resources;
+use App\Mailer\MailerInterface;
 
-class MailService
+
+class Mailer implements MailerInterface
 {
 
     public function __construct(
@@ -18,7 +20,7 @@ class MailService
     {
 
     }
-    public function send(string $toEmail, string $toName, string $subject, string $content): ?bool
+    public function send(string $toEmail, string$toName, string$subject, string$content)
     {
         $mj = new Client($this->mailjetApiKey, $this->mailjetApiKeySecret, true, ['version' => $this->mailjetApiVersion]);
         $body = [

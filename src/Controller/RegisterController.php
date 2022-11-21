@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
+use App\Mailer\MailerInterface;
 use App\Service\AlertServiceInterface;
-use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +23,7 @@ class RegisterController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function index(Request $request, UserPasswordHasherInterface $encoder, MailService $mailService, AlertServiceInterface $alertService): Response
+    public function index(Request $request, UserPasswordHasherInterface $encoder, MailerInterface $mailer, AlertServiceInterface $alertService): Response
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -41,7 +41,7 @@ class RegisterController extends AbstractController
             $this->entityManager->flush();
 
             $content = "Bonjour " . $user->getUsername() . "<br/>Bienvenue sur .";
-            $mailService->send($user->getEmail(), $user->getUsername(), 'Bienvenue ', $content);
+            $mailer->send($user->getEmail(), $user->getUsername(), 'Bienvenue ', $content);
 
            $alertService->success('Votre inscription s\'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.');
 
