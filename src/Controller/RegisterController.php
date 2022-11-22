@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
-use App\Service\AlertServiceInterface;
+use App\Service\Interface;
 use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +36,13 @@ class RegisterController extends AbstractController
             $password = $encoder->hashPassword($user, $user->getPassword());
 
             $user->setPassword($password);
-
+            $imageFile = $form->get('file')->getData();
+            $imageName = uniqid() . '.' . $imageFile->guessExtension();
+            $imageFile->move(
+                $this->getParameter('profiles_directory'),
+                $imageName
+            );
+            $user->setImage($imageName);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
