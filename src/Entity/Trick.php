@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['title'], message: 'Ce trick existe déjà')]
 class Trick
 {
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable('now');

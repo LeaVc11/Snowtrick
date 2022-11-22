@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
+use App\Service\AlertServiceInterface;
 use App\Service\Interface;
 use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
