@@ -36,7 +36,13 @@ class RegisterController extends AbstractController
             $password = $encoder->hashPassword($user, $user->getPassword());
 
             $user->setPassword($password);
-
+            $imageFile = $form->get('file')->getData();
+            $imageName = uniqid() . '.' . $imageFile->guessExtension();
+            $imageFile->move(
+                $this->getParameter('profiles_directory'),
+                $imageName
+            );
+            $user->setImage($imageName);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
