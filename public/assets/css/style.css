@@ -83,6 +83,52 @@ body {
     margin-top: 25px;
 
 }
+.btn-rond {
+    width: 50px;
+    height:50px;
+    position:absolute;
+    left: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 orange;
+    background: white;
+    animation: pulse 1.3s infinite;
+}
+@keyframes pulse {
+    to{
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.01);
+    }
+}
+.logo-btn-rond{
+    width: 50px;
+}
+.btn-rond1 {
+    width: 50px;
+    height:50px;
+    left: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 orange;
+    background: white;
+    animation: pulse 1.3s infinite;
+}
+@keyframes pulse {
+    to{
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.01);
+    }
+}
+.logo-btn-rond1{
+    width: 50px;
+}
+.footer-custom {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #dfeaff;
+    padding-top: 25px;
+    margin-top: 25px;
+}
 
 
 .logo {

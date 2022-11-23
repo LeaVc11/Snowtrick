@@ -1,7 +1,11 @@
-<h2 class="fw-bold text-center mb-4"> Commentaires</h2>
-<section id="comment ">
-
-    <p class="fw-bold">{{ pagination.getTotalItemCount}} commentaires</p>
+<h2 class="fw-bold text-center mb-4" id="Comment" > Commentaires</h2>
+<section >
+    <a href="#finish">
+        <div class="btn-rond d-flex justify-content-end align-items-end ">
+            <img src="{{ asset('assets/images/logoFlecheBas.png') }}" alt="logoFlecheBas" class="logo-btn-rond" >
+        </div>
+    </a>
+    <p class="fw-bold" >{{ pagination.getTotalItemCount}} commentaires</p>
     {% for comment in pagination %}
 
 
@@ -14,16 +18,17 @@
                              alt="logo">
 
                     </div>
-                    <div class="col-5">
+                    <div class="col-md-5">
                         <div class="timeline-heading">
-                            <p class="timeline-heading text-decoration-none">{{ comment.user.username }}</p>
-                            <p class="text-dark text-decoration-none">{{ comment.createdAt ? comment.createdAt|date('d-m-Y H:i:s') : '' }} </p>
-
+                            <img src="{{ asset('/upload/profiles/images/' ~app.user.image) }}" alt="picture profil"
+                                 class="profile-picture mb-2 " style="width:10%">
+                            <p class="timeline-heading text-decoration-none fw-bold" >{{ comment.user.username }}</p>
                         </div>
 
                         <div class="timeline-body">
                             <p class="timeline-heading text-decoration-none">{{ comment.message }}</p>
                             <div class="d-flex justify-content-end align-items-center mt-3">
+
                             </div>
 
                         </div>
@@ -54,9 +59,17 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
 
+    {% endfor %}
+    <a href="#Comment" id="finish">
+        <div class="btn-rond1 d-flex justify-content-end align-items-end my-4" >
+            <img src="{{ asset('assets/images/logoFlecheHaut.png') }}" alt="logoFlecheHaut" class="logo-btn-rond1" >
+        </div>
+    </a>
     <div class="pagination mb-3">
         {{ knp_pagination_render(pagination) }}
     </div>
+
+
+
 </section>

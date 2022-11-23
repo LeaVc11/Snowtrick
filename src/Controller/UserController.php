@@ -14,4 +14,5 @@ class UserController extends AbstractController
         $this->addFlash('success', 'Vous êtes maintenant connecté sur votre espace compte!');
         return $this->render('account/index.html.twig');
     }
+
 }

@@ -67,7 +67,7 @@
 
         <h5 class=" text-center text-uppercase fw-bold">{{ trick.user.username }}</h5>
 
-        <p class=" text-center text-dark text-decoration-none fw-bold">{{ trick.createdAt ? trick.createdAt|date('d-m-Y H:i:s') : '' }} </p>
+{#        <p class=" text-center text-dark text-decoration-none fw-bold">{{ trick.createdAt ? trick.createdAt|date('d-m-Y H:i:s') : '' }} </p>#}
 
         <hr>
     </section>
@@ -79,7 +79,7 @@
                class=" btn btn-sm btn-secondary border-3 text-white fw-bold text-center p-3">Connexion </a>
         </div>
     {% endif %}
-    {{ render(controller('App\\Controller\\CommentController::getCommentsByTrick', {'trick' : trick.id,'request' : request})) }}
 
+    {{ render(controller('App\\Controller\\CommentController::getCommentsByTrick', {'trick' : trick.id,'request' : request})) }}
 
 {% endblock %}
