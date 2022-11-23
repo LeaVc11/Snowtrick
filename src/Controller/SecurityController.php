@@ -42,7 +42,7 @@ class SecurityController extends AbstractController
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-//        $this->addFlash('success', 'Votre mot de passe a bien été mis à jour.');
+
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
     #[Route('/account/password', name: 'app_account_password')]
@@ -55,11 +55,11 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $old_pwd = $form->get('old_password')->getData();
-            /*    dd($old_pwd);*/
+
             if ($encoder->isPasswordValid($user, $old_pwd)) {
-                /*  die('ok)');*/
+
                 $new_pwd = $form->get('new_password')->getData();
-                /*dd($new_pwd);*/
+
                 $password=$encoder->hashPassword($user,$new_pwd);
 
                 $user->setPassword($password);
