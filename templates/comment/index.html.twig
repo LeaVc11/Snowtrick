@@ -21,10 +21,9 @@
                     <div class="col-md-5">
 
                         <div class="timeline-heading">
-                            {% if not is_granted('ROLE_USER') %}
                             <img src="{{ asset('/upload/profiles/images/' ~comment.user.image) }}" alt="picture profil"
                                  class="profile-picture mb-2 " style="width:10%">
-                            {% endif %}
+
                             <p class="timeline-heading text-decoration-none fw-bold" >{{ comment.user.username }}</p>
                         </div>
                         <div class="timeline-body">
@@ -41,7 +40,7 @@
                         <div class="row">
 
                             <div class="col">
-                                {% if is_granted('ROLE_USER') %}
+                                {% if comment.user == app.user %}
                                     <div class="btn-group text-center m-2 text-uppercase ">
                                         <a href="{{ path('app_comment_edit', {'id': comment.id}) }}"
                                            class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold">

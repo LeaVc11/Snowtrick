@@ -94,7 +94,7 @@ class CommentController extends AbstractController
     #[Route('/{id}/show', name: 'app_comment_show', methods: ['GET'])]
     public function show(Comment $comment): Response
     {
-        return $this->render('comment/show.html.twig', [
+        return $this->render('trick/show.html.twig', [
             'comment' => $comment,
         ]);
     }
