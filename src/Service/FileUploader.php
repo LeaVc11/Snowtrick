@@ -37,10 +37,4 @@ class FileUploader
 
         return $this->imgRelativeDirectory. '/' . $fileName;
     }
-    public function deleteFile(Media $media)
-    {
-
-    }
-
-
 }
