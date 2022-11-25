@@ -32,13 +32,8 @@ class MediaToTrickController extends AbstractController
 
     }
     #[Route('/add/image/to/{slug}', name: 'app_add_image_to_trick')]
-    public function new(Request $request,string $slug): Response
+    public function new(Request $request,Trick $trick): Response
     {
-        $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
-        if ($trick === null) {
-            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Impossible de trouver ce trick');
-        }
-
         $imageData = new Image();
         $form = $this->createForm(ImageType::class, $imageData);
         $form->handleRequest($request);
@@ -71,9 +66,7 @@ class MediaToTrickController extends AbstractController
     #[Route('/edit/image/to/{slug}', name: 'app_edit_image_to_trick')]
     public function edit(Request $request, Trick $trick): Response
     {
-        if ($trick === null) {
-            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Impossible de trouver ce trick');
-        }
+
         $imageData = new Image();
         $form = $this->createForm(ImageType::class, $imageData);
         $form->handleRequest($request);
