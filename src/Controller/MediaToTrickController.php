@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Image;
+use App\Entity\Trick;
 use App\Entity\Video;
 use App\Form\ImageType;
 use App\Form\VideoType;
@@ -68,7 +69,7 @@ class MediaToTrickController extends AbstractController
     }
 
     #[Route('/edit/image/to/{slug}', name: 'app_edit_image_to_trick')]
-    public function edit(Request $request,string $slug): Response
+    public function edit(Request $request, Trick $trick): Response
     {
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
         if ($trick === null) {
