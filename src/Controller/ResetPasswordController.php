@@ -83,7 +83,7 @@ class ResetPasswordController extends AbstractController
             $reset_password->getUser()->setPassword($password);
             $this->entityManager->flush();
 
-            $this->addFlash('notice', 'Votre mot de passe a bien été mis à jour.');
+            $this->addFlash('success', 'Votre mot de passe a bien été mis à jour.');
             return $this->redirectToRoute('app_login');
         }
         return $this->render('reset_password/update.html.twig', [
