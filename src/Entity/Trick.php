@@ -14,9 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['title'], message: 'Ce trick existe déjà')]
 class Trick
 {
-    private ?\DateTimeImmutable $createdAt = null;
-    private ?\DateTimeImmutable $updatedAt = null;
-
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable('now');
@@ -48,6 +45,12 @@ class Trick
 
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Video::class)]
     private Collection $videos;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'tricks')]
     private ?Category $category = null;
@@ -108,15 +111,19 @@ class Trick
     {
         return $this->createdAt;
     }
+
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
+
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
+
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;

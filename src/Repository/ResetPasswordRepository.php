@@ -38,4 +38,5 @@ class ResetPasswordRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
 }

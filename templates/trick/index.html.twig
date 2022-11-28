@@ -3,10 +3,15 @@
 {% block album %}{% endblock %}
 
 {% block content %}
-    <h1 class="fw-bold text-center"> Tricks</h1>
+    <h1 class="fw-bold text-center" id="Trick"> Tricks</h1>
     <br>
     <p>Le panel de figures faisables en l'air augmente de jour en jour à mesure que les freestyleurs progressent. On peut néanmoins classer les tricks en plusieurs catégories.</p>
     <br>
+        <a href="#finish">
+            <div class="btn-rond d-flex justify-content-end align-items-end ">
+                <img src="{{ asset('assets/images/logoFlecheBas.png') }}" alt="logoFlecheBas" class="logo-btn-rond" >
+            </div>
+        </a>
     <div class="row row-cols-1  row-cols-md-3 g-3 mb-5">
         {% for trick in tricks %}
             <div class="col">
@@ -34,7 +39,7 @@
                             </div>
                             <div class="btn-group text-center">
 
-                                {% if is_granted('ROLE_USER') %}
+                                {% if trick.user == app.user %}
                                     <a href="{{ path('app_trick_edit', {'slug': trick.slug }) }}"
                                        class="btn btn-sm btn-outline-warning border border-info border-3 "><img
                                                 src="{{ asset('assets/images/logoEdit.png') }}" height="18px"
@@ -53,5 +58,9 @@
             </div>
         {% endfor %}
     </div>
-
+    <a href="#Trick" id="finish">
+        <div class="btn-rond1 d-flex justify-content-end align-items-end my-4" >
+            <img src="{{ asset('assets/images/logoFlecheHaut.png') }}" alt="logoFlecheHaut" class="logo-btn-rond1" >
+        </div>
+    </a>
 {% endblock %}
