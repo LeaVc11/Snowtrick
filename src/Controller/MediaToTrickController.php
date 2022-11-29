@@ -54,7 +54,7 @@ class MediaToTrickController extends AbstractController
             $imageData->setTrick($trick);
 
             $this->imageRepository->save($imageData, true);
-
+            $this->addFlash('success', "L'image a été ajouté!");
             return $this->redirectToRoute('app_add_video_to_trick', [
                 'slug' => $trick->getSlug()]);
         }
@@ -81,6 +81,7 @@ class MediaToTrickController extends AbstractController
             $imageData->setFilename($newFilename);
             $imageData->setTrick($trick);
             $this->imageRepository->save($imageData, true);
+            $this->addFlash('success', "La vidéo a été ajouté!");
             return $this->redirectToRoute('app_add_video_to_trick', [
                 'slug' => $trick->getSlug()]);
         }
