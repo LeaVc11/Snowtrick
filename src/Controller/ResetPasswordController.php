@@ -59,6 +59,12 @@ class ResetPasswordController extends AbstractController
         return $this->render('reset_password/index.html.twig');
     }
 
+    /**
+     * @param Request $request
+     * @param $token
+     * @param UserPasswordHasherInterface $encoder
+     * @return Response
+     */
     #[Route('/edit/password/{token}', name: 'app_update_password')]
     public function update(Request $request, $token, UserPasswordHasherInterface $encoder): Response
     {
