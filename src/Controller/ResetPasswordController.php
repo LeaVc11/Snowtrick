@@ -60,7 +60,7 @@ class ResetPasswordController extends AbstractController
     }
 
     #[Route('/edit/password/{token}', name: 'app_update_password')]
-    public function update(Request $request, int $token, UserPasswordHasherInterface $encoder): Response
+    public function update(Request $request, $token, UserPasswordHasherInterface $encoder): Response
     {
         $reset_password = $this->entityManager->getRepository(ResetPassword::class)->findOneByToken($token);
 
