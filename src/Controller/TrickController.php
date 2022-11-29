@@ -102,7 +102,7 @@ class TrickController extends AbstractController
     #[Route('/{slug}/delete', name: 'app_trick_delete')]
     public function delete(Trick $trick): Response
     {
-//        $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
+
         $this->entityManager->remove($trick);
         $this->entityManager->flush();
 
