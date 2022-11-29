@@ -17,15 +17,19 @@
                 {{ form_row(form.email) }}
 
                 {{ form_row(form.password) }}
+                {{ form_row(form.file) }}
+
+
+
+
             </div>
+
             <div class="form-groupe my-3 px-5 ">
                 <button class="button bg-primary text-white  m-2 w-100 rounded-1 border border-primary form-control form-control-lg"
                         type="submit">Valider
                 </button>
             </div>
-            <div class="fw-bold text-center ">
-                {{ form_end(form) }}
-            </div>
+            {{ form_end(form) }}
 
         </div>
     </section>

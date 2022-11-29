@@ -41,10 +41,6 @@
                                            class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
                                                     src="{{ asset('assets/images/logoDelete.png') }}" height="18px"
                                                     alt="Supprimer trick"></a>
-                                        <a href="{{ path('app_comment_new', {'slug': trick.slug }) }}"
-                                           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
-                                                    src="{{ asset('assets/images/logoCommentaire.png') }}" height="18px"
-                                                    alt="Supprimer trick"></a>
                                     {% endif %}
                                     <a href="{{ path('app_trick') }}"
                                        class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
@@ -67,7 +63,10 @@
         <h5 class="text-center text-uppercase fw-bold">{{ trick.category }}</h5>
         <br>
         <h5 class=" text-center text-uppercase fw-bold">{{ trick.user.username }}</h5>
-
+        <a href="{{ path('app_comment_new', {'slug': trick.slug }) }}"
+           class="btn btn-sm btn-outline-warning border border-info border-3 text-dark fw-bold"><img
+                    src="{{ asset('assets/images/logoCommentaire.png') }}" height="18px"
+                    alt="Ajouter commentaire" class="m-2">Ajouter un commentaire</a>
         <hr>
     </section>
     {% if not is_granted('ROLE_USER') %}
