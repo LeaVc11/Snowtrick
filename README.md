@@ -17,4 +17,7 @@ symfony serve
 
 Run the command `symfony server`.
 
-
+```Terminal
+composer install
+symfony console doctrine:database:create
+symfony console doctrine:schema:update --force
